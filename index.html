@@ -3,28 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meaningful Baby Names & Meanings | A to Z Directory</title>
+    <title>Meaningful Baby Names & Meanings</title>
     <!-- Tailwind CSS for modern responsive styling -->
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col font-sans">
 
     <!-- Header -->
-    <header class="bg-white shadow-sm border-b border-slate-100 py-6 sticky top-0 z-50">
-        <div class="max-w-5xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div>
-                <h1 class="text-2xl md:text-3xl font-bold text-indigo-600">BabyNameFinder</h1>
-                <p class="text-slate-500 text-sm mt-0.5">Explore meaningful names from A to Z with origins and definitions.</p>
-            </div>
-            <div class="flex items-center gap-2">
-                <button onclick="switchTab('all')" id="allTabBtn" class="px-4 py-2 rounded-xl text-sm font-semibold bg-indigo-600 text-white shadow-sm transition-all">All Names</button>
-                <button onclick="switchTab('favorites')" id="favTabBtn" class="px-4 py-2 rounded-xl text-sm font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all">❤️ Favorites (<span id="favCount">0</span>)</button>
-            </div>
+    <header class="bg-white shadow-sm border-b border-slate-100 py-6">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h1 class="text-3xl font-bold text-indigo-600">BabyNameFinder</h1>
+            <p class="text-slate-500 mt-1">Discover meaningful names, origins, and inspirations from A to Z.</p>
         </div>
     </header>
 
     <!-- Main Content -->
-    <main class="flex-grow max-w-5xl w-full mx-auto px-4 py-8">
+    <main class="flex-grow max-w-4xl w-full mx-auto px-4 py-8">
         
         <!-- Search and Filters Section -->
         <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 mb-8 space-y-4">
@@ -32,7 +26,7 @@
                 <input 
                     type="text" 
                     id="searchInput" 
-                    placeholder="Search by name, meaning, or alphabet (e.g., 'Aarav', 'Peace', 'Z')..." 
+                    placeholder="Search by name, meaning, or origin (e.g., 'Aarav', 'Peace')..." 
                     class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-700"
                     oninput="filterNames()"
                 >
@@ -40,44 +34,37 @@
             
             <div class="flex flex-wrap gap-3 items-center justify-between">
                 <div class="flex flex-wrap gap-2">
-                    <button onclick="setGenderFilter('all')" class="gender-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-indigo-50 text-indigo-700 border border-indigo-200 transition-all">All Genders</button>
-                    <button onclick="setGenderFilter('Boy')" class="gender-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all">Boys</button>
-                    <button onclick="setGenderFilter('Girl')" class="gender-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all">Girls</button>
-                    <button onclick="setGenderFilter('Unisex')" class="gender-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all">Unisex</button>
+                    <button onclick="setGenderFilter('all')" class="filter-btn px-4 py-2 rounded-lg text-sm font-medium bg-indigo-600 text-white transition-all">All</button>
+                    <button onclick="setGenderFilter('Boy')" class="filter-btn px-4 py-2 rounded-lg text-sm font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all">Boys</button>
+                    <button onclick="setGenderFilter('Girl')" class="filter-btn px-4 py-2 rounded-lg text-sm font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all">Girls</button>
+                    <button onclick="setGenderFilter('Unisex')" class="filter-btn px-4 py-2 rounded-lg text-sm font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all">Unisex</button>
                 </div>
                 
                 <div class="text-sm text-slate-500">
                     Showing <span id="nameCount">0</span> names
                 </div>
             </div>
-
-            <!-- Alphabet Quick Filter Strip -->
-            <div id="alphabetBar" class="flex flex-wrap gap-1 pt-2 border-t border-slate-100">
-                <button onclick="filterByLetter('all')" class="letter-btn px-2.5 py-1 rounded text-xs font-bold bg-indigo-600 text-white">All</button>
-                <!-- JS will inject A-Z buttons here -->
-            </div>
         </div>
 
         <!-- Names Grid -->
-        <div id="namesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div id="namesGrid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <!-- Dynamic Cards Populated via JS -->
         </div>
 
         <!-- Empty State -->
-        <div id="emptyState" class="hidden text-center py-16">
-            <p class="text-slate-400 text-lg">No matching baby names found. Try searching for something else or clearing filters.</p>
+        <div id="emptyState" class="hidden text-center py-12">
+            <p class="text-slate-400 text-lg">No matching names found. Try a different search term.</p>
         </div>
 
     </main>
 
     <!-- Footer -->
     <footer class="bg-white border-t border-slate-100 py-6 text-center text-sm text-slate-400">
-        <p>&copy; 2026 BabyNameFinder. Built with care for parents.</p>
+        <p>&copy; 2026 BabyNameFinder. Built with care.</p>
     </footer>
 
-    <!-- JavaScript Database & Application Logic -->
+    <!-- JavaScript Data & Logic -->
     <script>
-        // Comprehensive A-Z curated name dataset
         const babyNames = [
             // A
             { name: "Aarav", gender: "Boy", origin: "Sanskrit", meaning: "Peaceful, calm, or wise" },
@@ -96,10 +83,6 @@
             { name: "Bhavya", gender: "Girl", origin: "Sanskrit", meaning: "Grand, splendid, or auspicious" },
             { name: "Bodhi", gender: "Boy", origin: "Sanskrit", meaning: "Enlightenment, awakening" },
             { name: "Bhumika", gender: "Girl", origin: "Sanskrit", meaning: "Earth, foundation, or role" },
-            { name: "Barun", gender: "Boy", origin: "Sanskrit", meaning: "Lord of the water" },
-            { name: "Bani", gender: "Girl", origin: "Sanskrit", meaning: "Speech or Goddess Saraswati" },
-            { name: "Basant", gender: "Boy", origin: "Sanskrit", meaning: "Spring season" },
-            { name: "Belinda", gender: "Girl", origin: "Germanic", meaning: "Bright or beautiful serpent" },
             { name: "Bilal", gender: "Boy", origin: "Arabic", meaning: "Moisture, freshness, companion of Prophet" },
             { name: "Brinda", gender: "Girl", origin: "Sanskrit", meaning: "Tulsi plant or sacred basil" },
 
@@ -109,11 +92,7 @@
             { name: "Chetan", gender: "Boy", origin: "Sanskrit", meaning: "Conscious spirit, life, or alert" },
             { name: "Chitra", gender: "Girl", origin: "Sanskrit", meaning: "Picture, bright, or a Nakshatra" },
             { name: "Chirag", gender: "Boy", origin: "Persian", meaning: "Lamp or guiding light" },
-            { name: "Chhavi", gender: "Girl", origin: "Sanskrit", meaning: "Reflection, image, or radiance" },
             { name: "Chinmay", gender: "Boy", origin: "Sanskrit", meaning: "Full of knowledge and pure consciousness" },
-            { name: "Ciana", gender: "Girl", origin: "Italian", meaning: "God is gracious" },
-            { name: "Cyrus", gender: "Boy", origin: "Persian", meaning: "Sun or throne" },
-            { name: "Calista", gender: "Girl", origin: "Greek", meaning: "Most beautiful" },
 
             // D
             { name: "Darsh", gender: "Boy", origin: "Sanskrit", meaning: "Sight, vision, or Lord Krishna" },
@@ -121,11 +100,7 @@
             { name: "Daksh", gender: "Boy", origin: "Sanskrit", meaning: "Capable, talented, or sincere" },
             { name: "Dhriti", gender: "Girl", origin: "Sanskrit", meaning: "Courage, patience, or determination" },
             { name: "Devansh", gender: "Boy", origin: "Sanskrit", meaning: "Part of God, divine share" },
-            { name: "Damini", gender: "Girl", origin: "Sanskrit", meaning: "Lightning" },
-            { name: "Divit", gender: "Boy", origin: "Sanskrit", meaning: "Immortal or divine" },
-            { name: "Deepika", gender: "Girl", origin: "Sanskrit", meaning: "Little lamp, light" },
             { name: "Dhruv", gender: "Boy", origin: "Sanskrit", meaning: "The pole star, firm, steadfast" },
-            { name: "Disha", gender: "Girl", origin: "Sanskrit", meaning: "Direction or quarter" },
 
             // E
             { name: "Eshaan", gender: "Boy", origin: "Sanskrit", meaning: "Lord Shiva, northeast direction" },
@@ -133,23 +108,13 @@
             { name: "Eklavya", gender: "Boy", origin: "Sanskrit", meaning: "A dedicated and devoted student" },
             { name: "Elina", gender: "Girl", origin: "Greek", meaning: "Pure, intelligent, or bright light" },
             { name: "Ekansh", gender: "Boy", origin: "Sanskrit", meaning: "Whole, complete, or undivided" },
-            { name: "Enakshi", gender: "Girl", origin: "Sanskrit", meaning: "Dear-eyed or possessing deer-like eyes" },
-            { name: "Eashan", gender: "Boy", origin: "Sanskrit", meaning: "The sun or Lord Vishnu" },
-            { name: "Elva", gender: "Girl", origin: "Norse", meaning: "White or elf ruler" },
-            { name: "Edha", gender: "Girl", origin: "Sanskrit", meaning: "Sacred, wealth, or strength" },
-            { name: "Evan", gender: "Boy", origin: "Welsh", meaning: "Young fighter or God is gracious" },
 
             // F
             { name: "Farhan", gender: "Boy", origin: "Arabic", meaning: "Happy, joyful, or cheerful" },
             { name: "Falguni", gender: "Girl", origin: "Sanskrit", meaning: "Born in the Hindu month of Falgun" },
             { name: "Faizan", gender: "Boy", origin: "Arabic", meaning: "Ruler, grace, or abundance" },
             { name: "Fiza", gender: "Girl", origin: "Arabic", meaning: "Nature, breeze, or atmospheric air" },
-            { name: "Fardeen", gender: "Boy", origin: "Persian", meaning: "Radiant, unique, or glorious" },
             { name: "Farah", gender: "Girl", origin: "Arabic", meaning: "Joy and happiness" },
-            { name: "Faiyaz", gender: "Boy", origin: "Arabic", meaning: "Artistic, successful, or generous" },
-            { name: "Felicia", gender: "Girl", origin: "Latin", meaning: "Lucky, successful, or happy" },
-            { name: "Feroz", gender: "Boy", origin: "Persian", meaning: "Turquoise or victorious" },
-            { name: "Flora", gender: "Girl", origin: "Latin", meaning: "Goddess of flowers" },
 
             // G
             { name: "Gaurav", gender: "Boy", origin: "Sanskrit", meaning: "Pride, honor, or respect" },
@@ -157,35 +122,20 @@
             { name: "Gatik", gender: "Boy", origin: "Sanskrit", meaning: "Fast moving, progressive, or fast" },
             { name: "Garima", gender: "Girl", origin: "Sanskrit", meaning: "Warmth, dignity, or depth" },
             { name: "Girish", gender: "Boy", origin: "Sanskrit", meaning: "Lord of mountains, Lord Shiva" },
-            { name: "Geet", gender: "Girl", origin: "Sanskrit", meaning: "Song or melody" },
-            { name: "Gyan", gender: "Boy", origin: "Sanskrit", meaning: "Knowledge, wisdom" },
-            { name: "Gulika", gender: "Girl", origin: "Sanskrit", meaning: "Pearl" },
-            { name: "Gautam", gender: "Boy", origin: "Sanskrit", meaning: "Lord Buddha, remover of darkness" },
-            { name: "Grishma", gender: "Girl", origin: "Sanskrit", meaning: "Heat, summer season" },
 
             // H
             { name: "Harsh", gender: "Boy", origin: "Sanskrit", meaning: "Happiness, joy, or delight" },
             { name: "Hiya", gender: "Girl", origin: "Sanskrit", meaning: "Heart or soul" },
             { name: "Hriday", gender: "Boy", origin: "Sanskrit", meaning: "Heart" },
             { name: "Himani", gender: "Girl", origin: "Sanskrit", meaning: "Glacier or Goddess Parvati" },
-            { name: "Hitesh", gender: "Boy", origin: "Sanskrit", meaning: "Lord of goodness, well-wisher" },
-            { name: "Harini", gender: "Girl", origin: "Sanskrit", meaning: "Deer or beautiful like a deer" },
             { name: "Hridhaan", gender: "Boy", origin: "Sanskrit", meaning: "One with a pure heart" },
-            { name: "Hansika", gender: "Girl", origin: "Sanskrit", meaning: "Swan or someone like a swan" },
-            { name: "Hemant", gender: "Boy", origin: "Sanskrit", meaning: "Early winter season" },
-            { name: "Hira", gender: "Girl", origin: "Arabic/Sanskrit", meaning: "Diamond" },
 
             // I
             { name: "Ishaan", gender: "Boy", origin: "Sanskrit", meaning: "Sun or Lord Shiva" },
             { name: "Ira", gender: "Girl", origin: "Sanskrit", meaning: "Earth, Goddess Saraswati" },
             { name: "Ivaan", gender: "Boy", origin: "Sanskrit", meaning: "God's gracious gift or majestic" },
             { name: "Ishita", gender: "Girl", origin: "Sanskrit", meaning: "Mastery, desired, or greatness" },
-            { name: "Indrajit", gender: "Boy", origin: "Sanskrit", meaning: "Conqueror of Indra" },
             { name: "Inaya", gender: "Girl", origin: "Arabic", meaning: "Empathy, gift from God, or care" },
-            { name: "Ilesh", gender: "Boy", origin: "Sanskrit", meaning: "Lord of the earth" },
-            { name: "Ipsita", gender: "Girl", origin: "Sanskrit", meaning: "Desired or wished for" },
-            { name: "Iqbal", gender: "Boy", origin: "Arabic", meaning: "Fortune, prosperity" },
-            { name: "Ishani", gender: "Girl", origin: "Sanskrit", meaning: "Consort of Shiva, Goddess Durga" },
 
             // J
             { name: "Jai", gender: "Boy", origin: "Sanskrit", meaning: "Victory, triumph" },
@@ -193,11 +143,6 @@
             { name: "Jatin", gender: "Boy", origin: "Sanskrit", meaning: "One who has matted hair, ascetic" },
             { name: "Jahnavi", gender: "Girl", origin: "Sanskrit", meaning: "River Ganga" },
             { name: "Jayant", gender: "Boy", origin: "Sanskrit", meaning: "Victorious" },
-            { name: "Juhi", gender: "Girl", origin: "Sanskrit", meaning: "A flowering jasmine plant" },
-            { name: "Jivansh", gender: "Boy", origin: "Sanskrit", meaning: "A part of life" },
-            { name: "Jyotsna", gender: "Girl", origin: "Sanskrit", meaning: "Moonlight" },
-            { name: "Jashn", gender: "Boy", origin: "Persian", meaning: "Celebration or festival" },
-            { name: "Janaki", gender: "Girl", origin: "Sanskrit", meaning: "Daughter of Janaka, Goddess Sita" },
 
             // K
             { name: "Kian", gender: "Boy", origin: "Persian", meaning: "Ancient king or grace of God" },
@@ -205,23 +150,12 @@
             { name: "Kabir", gender: "Boy", origin: "Arabic", meaning: "Great, powerful, famous mystic saint" },
             { name: "Kashvi", gender: "Girl", origin: "Sanskrit", meaning: "Shining, bright, or glowing" },
             { name: "Krish", gender: "Boy", origin: "Sanskrit", meaning: "Short form of Lord Krishna" },
-            { name: "Kriti", gender: "Girl", origin: "Sanskrit", meaning: "Creation, work of art" },
-            { name: "Kairav", gender: "Boy", origin: "Sanskrit", meaning: "White lotus flower" },
-            { name: "Kanika", gender: "Girl", origin: "Sanskrit", meaning: "Atom, molecule, or small particle" },
-            { name: "Kartik", gender: "Boy", origin: "Sanskrit", meaning: "A Hindu calendar month, son of Shiva" },
-            { name: "Komal", gender: "Girl", origin: "Sanskrit", meaning: "Soft, tender, or delicate" },
 
             // L
             { name: "Laksh", gender: "Boy", origin: "Sanskrit", meaning: "Target, aim, or destination" },
             { name: "Laasya", gender: "Girl", origin: "Sanskrit", meaning: "Graceful dance performed by Goddess Parvati" },
-            { name: "Lohit", gender: "Boy", origin: "Sanskrit", meaning: "Red, made of copper, Mars" },
-            { name: "Lalita", gender: "Girl", origin: "Sanskrit", meaning: "Beautiful, elegant, or playful" },
             { name: "Lalit", gender: "Boy", origin: "Sanskrit", meaning: "Attractive, beautiful, elegant" },
             { name: "Lavanya", gender: "Girl", origin: "Sanskrit", meaning: "Grace, beauty, or loveliness" },
-            { name: "Lochan", gender: "Boy", origin: "Sanskrit", meaning: "Eye" },
-            { name: "Likhitha", gender: "Girl", origin: "Sanskrit", meaning: "Written or script" },
-            { name: "Lucian", gender: "Boy", origin: "Latin", meaning: "Light" },
-            { name: "Luna", gender: "Girl", origin: "Latin", meaning: "Moon" },
 
             // M
             { name: "Madhav", gender: "Boy", origin: "Sanskrit", meaning: "Sweet like honey, Lord Krishna" },
@@ -229,11 +163,6 @@
             { name: "Manan", gender: "Boy", origin: "Sanskrit", meaning: "Deep thinking, contemplation" },
             { name: "Meera", gender: "Girl", origin: "Sanskrit", meaning: "Prosperous, ocean, or devoted follower" },
             { name: "Mihir", gender: "Boy", origin: "Sanskrit", meaning: "The sun" },
-            { name: "Manvi", gender: "Girl", origin: "Sanskrit", meaning: "Human, girl with good qualities" },
-            { name: "Moksh", gender: "Boy", origin: "Sanskrit", meaning: "Salvation, liberation" },
-            { name: "Mythili", gender: "Girl", origin: "Sanskrit", meaning: "Sita, princess of Mithila" },
-            { name: "Mitul", gender: "Boy", origin: "Sanskrit", meaning: "Balanced, measured friend" },
-            { name: "Mahika", gender: "Girl", origin: "Sanskrit", meaning: "Dew drops" },
 
             // N
             { name: "Naksh", gender: "Boy", origin: "Sanskrit", meaning: "Moon, feature, or sketch" },
@@ -241,23 +170,12 @@
             { name: "Neel", gender: "Boy", origin: "Sanskrit", meaning: "Blue color, sapphire" },
             { name: "Nisha", gender: "Girl", origin: "Sanskrit", meaning: "Night" },
             { name: "Naman", gender: "Boy", origin: "Sanskrit", meaning: "Salutation, bowing down" },
-            { name: "Nandini", gender: "Girl", origin: "Sanskrit", meaning: "Delightful, sacred cow, daughter" },
-            { name: "Nischal", gender: "Boy", origin: "Sanskrit", meaning: "Calm, steady, or unwavering" },
-            { name: "Niharika", gender: "Girl", origin: "Sanskrit", meaning: "Nebula, dewdrops" },
-            { name: "Nirav", gender: "Boy", origin: "Sanskrit", meaning: "Quiet, silent, or calm" },
-            { name: "Nitya", gender: "Girl", origin: "Sanskrit", meaning: "Eternal, constant" },
 
             // O
             { name: "Ojas", gender: "Boy", origin: "Sanskrit", meaning: "Vigour, energy, brilliance" },
             { name: "Oviya", gender: "Girl", origin: "Tamil", meaning: "Artist, beautiful drawing" },
             { name: "Omkar", gender: "Boy", origin: "Sanskrit", meaning: "The sacred sound 'Om'" },
-            { name: "Ojal", gender: "Girl", origin: "Sanskrit", meaning: "Vision, brightness, radiant" },
-            { name: "Om", gender: "Boy", origin: "Sanskrit", meaning: "Sacred primal sound of the universe" },
-            { name: "Oorja", gender: "Girl", origin: "Sanskrit", meaning: "Energy, strength, vitality" },
             { name: "Orion", gender: "Boy", origin: "Greek", meaning: "Constellation of stars, hunter" },
-            { name: "Oana", gender: "Girl", origin: "Hebrew", meaning: "God is gracious" },
-            { name: "Onkar", gender: "Boy", origin: "Sanskrit", meaning: "Creator of the divine word" },
-            { name: "Ophelia", gender: "Girl", origin: "Greek", meaning: "Help or wise guidance" },
 
             // P
             { name: "Pranav", gender: "Boy", origin: "Sanskrit", meaning: "Sacred syllable Om, holy sound" },
@@ -265,23 +183,12 @@
             { name: "Parth", gender: "Boy", origin: "Sanskrit", meaning: "King Arjuna, Earth" },
             { name: "Pihu", gender: "Girl", origin: "Sanskrit", meaning: "Chirping of birds, sweet sound" },
             { name: "Piyush", gender: "Boy", origin: "Sanskrit", meaning: "Nectar, milk" },
-            { name: "Pooja", gender: "Girl", origin: "Sanskrit", meaning: "Worship, prayer" },
-            { name: "Purab", gender: "Boy", origin: "Sanskrit", meaning: "The East direction" },
-            { name: "Pavitra", gender: "Girl", origin: "Sanskrit", meaning: "Pure, holy" },
-            { name: "Pratyush", gender: "Boy", origin: "Sanskrit", meaning: "Dawn, sun rays" },
-            { name: "Pallavi", gender: "Girl", origin: "Sanskrit", meaning: "New leaves, budding shoot" },
 
             // Q
             { name: "Qadir", gender: "Boy", origin: "Arabic", meaning: "Powerful, capable, dynamic" },
             { name: "Quincy", gender: "Boy", origin: "Latin", meaning: "Born fifth" },
             { name: "Qasim", gender: "Boy", origin: "Arabic", meaning: "Distributor, generous" },
-            { name: "Queenie", gender: "Girl", origin: "English", meaning: "Queen" },
-            { name: "Qismat", gender: "Girl", origin: "Arabic", meaning: "Destiny, fate, fortune" },
-            { name: "Quilla", gender: "Girl", origin: "Latin", meaning: "Feather" },
-            { name: "Qudrat", gender: "Unisex", origin: "Arabic", meaning: "Nature, power, might" },
             { name: "Quinn", gender: "Unisex", origin: "Irish", meaning: "Wise, intelligence" },
-            { name: "Q //'Q //' (Placeholder)", gender: "Boy", origin: "Arabic", meaning: " Steadfast and firm" },
-            { name: "Qurat", gender: "Girl", origin: "Arabic", meaning: "Delight of the eyes" },
 
             // R
             { name: "Reyansh", gender: "Boy", origin: "Sanskrit", meaning: "Ray of light, part of Vishnu" },
@@ -289,171 +196,87 @@
             { name: "Rohan", gender: "Boy", origin: "Sanskrit", meaning: "Ascending, growing, healing" },
             { name: "Roshni", gender: "Girl", origin: "Sanskrit", meaning: "Light, brightness" },
             { name: "Rudra", gender: "Boy", origin: "Sanskrit", meaning: "Fierce storm god, Lord Shiva" },
-            { name: "Radhika", gender: "Girl", origin: "Sanskrit", meaning: "Successful, beloved of Krishna" },
-            { name: "Raghav", gender: "Boy", origin: "Sanskrit", meaning: "Descendant of Raghu, Lord Rama" },
-            { name: "Rachana", gender: "Girl", origin: "Sanskrit", meaning: "Creation, arrangement" },
-            { name: "Rishabh", gender: "Boy", origin: "Sanskrit", meaning: "Superior, moral excellence" },
-            { name: "Ritika", gender: "Girl", origin: "Sanskrit", meaning: "Movement, brass, stream" },
 
             // S
-            { name: "Vihaan", gender: "Boy", origin: "Sanskrit", meaning: "Dawn, morning, ray of sunshine" }, // Adjusted mapping
+            { name: "Vihaan", gender: "Boy", origin: "Sanskrit", meaning: "Dawn, morning, ray of sunshine" },
             { name: "Saanvi", gender: "Girl", origin: "Sanskrit", meaning: "Goddess Lakshmi, followed" },
             { name: "Shaurya", gender: "Boy", origin: "Sanskrit", meaning: "Bravery, heroism, courage" },
             { name: "Siya", gender: "Girl", origin: "Sanskrit", meaning: "Goddess Sita, white moonlight" },
             { name: "Samarth", gender: "Boy", origin: "Sanskrit", meaning: "Powerful, capable, competent" },
-            { name: "Sneha", gender: "Girl", origin: "Sanskrit", meaning: "Affection, love, friendship" },
-            { name: "Shivansh", gender: "Boy", origin: "Sanskrit", meaning: "A portion of Lord Shiva" },
-            { name: "Shreya", gender: "Girl", origin: "Sanskrit", meaning: "Auspicious, fortunate, beautiful" },
-            { name: "Siddharth", gender: "Boy", origin: "Sanskrit", meaning: "One who has accomplished his goal" },
-            { name: "Sanya", gender: "Girl", origin: "Sanskrit", meaning: "Born on Saturday, radiant" },
 
             // T
             { name: "Tejas", gender: "Boy", origin: "Sanskrit", meaning: "Radiance, brilliance, sharpness" },
             { name: "Tanvi", gender: "Girl", origin: "Sanskrit", meaning: "Delicate, beautiful, slender" },
             { name: "Tanish", gender: "Boy", origin: "Sanskrit", meaning: "Ambition, aspiration" },
             { name: "Trisha", gender: "Girl", origin: "Sanskrit", meaning: "Wish, desire, thirst" },
-            { name: "Tavish", gender: "Boy", origin: "Sanskrit", meaning: "Strong, energetic, brave" },
-            { name: "Tara", gender: "Girl", origin: "Sanskrit", meaning: "Star, eye pupil, goddess" },
-            { name: "Tushar", gender: "Boy", origin: "Sanskrit", meaning: "Snow, frost, ice" },
-            { name: "Tulika", gender: "Girl", origin: "Sanskrit", meaning: "Paintbrush, small brush" },
-            { name: "Tariq", gender: "Boy", origin: "Arabic", meaning: "Morning star, visitor" },
-            { name: "Tanya", gender: "Girl", origin: "Russian", meaning: "Fairy queen, praise-worthy" },
 
             // U
             { name: "Utkarsh", gender: "Boy", origin: "Sanskrit", meaning: "Excellence, progress, prosperity" },
             { name: "Urvi", gender: "Girl", origin: "Sanskrit", meaning: "Earth, broad, wide" },
             { name: "Uday", gender: "Boy", origin: "Sanskrit", meaning: "Rising, sunrise" },
-            { name: "Upasana", gender: "Girl", origin: "Sanskrit", meaning: "Worship, devotion, meditation" },
             { name: "Umang", gender: "Boy", origin: "Sanskrit", meaning: "Enthusiasm, zeal, excitement" },
-            { name: "Unnati", gender: "Girl", origin: "Sanskrit", meaning: "Progress, growth, advancement" },
-            { name: "Ujwal", gender: "Boy", origin: "Sanskrit", meaning: "Bright, radiant, clear" },
-            { name: "Uma", gender: "Girl", origin: "Sanskrit", meaning: "Goddess Parvati, flax" },
-            { name: "Utpal", gender: "Boy", origin: "Sanskrit", meaning: "Water lily, blue lotus" },
-            { name: "Utkrishta", gender: "Girl", origin: "Sanskrit", meaning: "Best, excellent" },
 
             // V
             { name: "Vivaan", gender: "Boy", origin: "Sanskrit", meaning: "Full of life, lively" },
             { name: "Vanya", gender: "Girl", origin: "Sanskrit", meaning: "Gracious gift of God, forest" },
             { name: "Vedant", gender: "Boy", origin: "Sanskrit", meaning: "Ultimate wisdom, Hindu philosophy" },
             { name: "Vidhi", gender: "Girl", origin: "Sanskrit", meaning: "Destiny, Goddess of fate" },
-            { name: "Varun", gender: "Boy", origin: "Sanskrit", meaning: "God of water, lord of the sea" },
-            { name: "Vrishti", gender: "Girl", origin: "Sanskrit", meaning: "Rain" },
-            { name: "Viraaj", gender: "Boy", origin: "Sanskrit", meaning: "Splendor, brilliance, king" },
-            { name: "Vasudha", gender: "Girl", origin: "Sanskrit", meaning: "Earth, giver of wealth" },
-            { name: "Vansh", gender: "Boy", origin: "Sanskrit", meaning: "Lineage, coming generation, dynasty" },
-            { name: "Vaishnavi", gender: "Girl", origin: "Sanskrit", meaning: "Worshipper of Lord Vishnu" },
 
             // W
             { name: "Waman", gender: "Boy", origin: "Sanskrit", meaning: "Short, fifth avatar of Lord Vishnu" },
             { name: "Warda", gender: "Girl", origin: "Arabic", meaning: "Rose" },
             { name: "Wajahat", gender: "Boy", origin: "Arabic", meaning: "Dignity, handsome appearance" },
-            { name: "Waziha", gender: "Girl", origin: "Arabic", meaning: "Clear, bright, distinct" },
-            { name: "Waris", gender: "Boy", origin: "Arabic", meaning: "Heir, inheritor" },
-            { name: "Wamika", gender: "Girl", origin: "Sanskrit", meaning: "An epithet of Goddess Durga" },
-            { name: "Wileen", gender: "Unisex", origin: "Germanic", meaning: "Resolute protector" },
-            { name: "Wafa", gender: "Girl", origin: "Arabic", meaning: "Loyalty, faithfulness" },
-            { name: "Wazir", gender: "Boy", origin: "Arabic", meaning: "Minister, vizier" },
-            { name: "Winona", gender: "Girl", origin: "Native American", meaning: "Firstborn daughter" },
 
             // X
             { name: "Xavier", gender: "Boy", origin: "Basque/Spanish", meaning: "Bright, new house" },
             { name: "Xanthe", gender: "Girl", origin: "Greek", meaning: "Yellow, golden" },
             { name: "Xander", gender: "Boy", origin: "Greek", meaning: "Defender of mankind" },
-            { name: "Xenia", gender: "Girl", origin: "Greek", meaning: "Hospitality, welcoming" },
-            { name: "Xavion", gender: "Boy", origin: "Modern", meaning: "Bright, fighter" },
-            { name: "Xiomara", gender: "Girl", origin: "Spanish", meaning: "Famous in battle" },
-            { name: "Xyler", gender: "Boy", origin: "Modern", meaning: "Woodworker" },
-            { name: "Xyla", gender: "Girl", origin: "Greek", meaning: "Dwellers of the woods" },
-            { name: "Xerxes", gender: "Boy", origin: "Persian", meaning: "Hero among heroes, king" },
-            { name: "Xyla", gender: "Girl", origin: "Latin", meaning: "From the forest" },
 
             // Y
             { name: "Yash", gender: "Boy", origin: "Sanskrit", meaning: "Fame, success, glory" },
             { name: "Yamini", gender: "Girl", origin: "Sanskrit", meaning: "Night" },
             { name: "Yuvan", gender: "Boy", origin: "Sanskrit", meaning: "Youthful, healthy, strong" },
-            { name: "Yashvi", gender: "Girl", origin: "Sanskrit", meaning: "Fame, success" },
             { name: "Yug", gender: "Boy", origin: "Sanskrit", meaning: "Era, generation, cycle of time" },
-            { name: "Yukta", gender: "Girl", origin: "Sanskrit", meaning: "Skillful, attentive, united" },
-            { name: "Yajat", gender: "Boy", origin: "Sanskrit", meaning: "Sacred, holy, Lord Shiva" },
-            { name: "Yuvika", gender: "Girl", origin: "Sanskrit", meaning: "Young woman" },
-            { name: "Yashvardhan", gender: "Boy", origin: "Sanskrit", meaning: "One who increases fame" },
-            { name: "Yara", gender: "Girl", origin: "Arabic", meaning: "Small butterfly, water sprite" },
 
             // Z
             { name: "Zayn", gender: "Boy", origin: "Arabic", meaning: "Beauty, grace, handsome" },
             { name: "Zoya", gender: "Girl", origin: "Arabic/Russian", meaning: "Alive, loving, radiant, life" },
             { name: "Zubin", gender: "Boy", origin: "Persian", meaning: "Spear, one who brings honor" },
-            { name: "Zara", gender: "Girl", origin: "Arabic", meaning: "Blooming flower, princess" },
-            { name: "Zaki", gender: "Boy", origin: "Arabic", meaning: "Pure, intelligent, bright" },
-            { name: "Zivah", gender: "Girl", origin: "Hebrew", meaning: "Brightness, radiance of God" },
-            { name: "Zoravar", gender: "Boy", origin: "Punjabi", meaning: "Brave, powerful" },
-            { name: "Zaina", gender: "Girl", origin: "Arabic", meaning: "Beautiful, lovely" },
-            { name: "Zaid", gender: "Boy", origin: "Arabic", meaning: "Growth, abundance" },
-            { name: "Zia", gender: "Girl", origin: "Arabic", meaning: "Light, splendor, glow" }
+            { name: "Zara", gender: "Girl", origin: "Arabic", meaning: "Blooming flower, princess" }
         ];
 
         let currentGender = 'all';
-        let currentLetter = 'all';
-        let currentTab = 'all';
-        let favorites = JSON.parse(localStorage.getItem('baby_favorites')) || [];
 
-        // Initialize Alphabet Navigation Bar
-        function initAlphabetBar() {
-            const bar = document.getElementById('alphabetBar');
-            const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-            
-            alphabet.forEach(letter => {
-                const btn = document.createElement('button');
-                btn.className = "letter-btn px-2.5 py-1 rounded text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all";
-                btn.textContent = letter;
-                btn.onclick = () => filterByLetter(letter);
-                bar.appendChild(btn);
-            });
-        }
-
-        function renderNames(list) {
+        function renderNames(filteredList) {
             const grid = document.getElementById('namesGrid');
             const emptyState = document.getElementById('emptyState');
             const countSpan = document.getElementById('nameCount');
             
             grid.innerHTML = '';
-            countSpan.textContent = list.length;
-            document.getElementById('favCount').textContent = favorites.length;
+            countSpan.textContent = filteredList.length;
 
-            if (list.length === 0) {
+            if (filteredList.length === 0) {
                 emptyState.classList.remove('hidden');
                 return;
             } else {
                 emptyState.classList.add('hidden');
             }
 
-            list.forEach(item => {
+            filteredList.forEach(item => {
                 const card = document.createElement('div');
-                card.className = "bg-white p-5 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-all flex flex-col justify-between relative group";
+                card.className = "bg-white p-5 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow flex flex-col justify-between";
                 
                 const badgeColor = item.gender === 'Boy' ? 'bg-blue-50 text-blue-600' : item.gender === 'Girl' ? 'bg-pink-50 text-pink-600' : 'bg-purple-50 text-purple-600';
-                const isFav = favorites.some(fav => fav.name === item.name);
-                const heartClass = isFav ? "text-red-500 fill-red-500" : "text-slate-300 hover:text-red-400";
 
                 card.innerHTML = `
                     <div>
                         <div class="flex justify-between items-start mb-2">
-                            <div>
-                                <span class="text-xs font-bold text-indigo-500 uppercase tracking-wider">${item.name[0]}</span>
-                                <h3 class="text-xl font-bold text-slate-800">${item.name}</h3>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <span class="text-xs px-2.5 py-1 rounded-full font-medium ${badgeColor}">${item.gender}</span>
-                                <button onclick="toggleFavorite('${item.name}')" class="p-1 rounded-full bg-slate-50 hover:bg-slate-100 transition-colors">
-                                    <svg class="w-5 h-5 ${heartClass} transition-colors" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                                    </svg>
-                                </button>
-                            </div>
+                            <h3 class="text-xl font-bold text-slate-800">${item.name}</h3>
+                            <span class="text-xs px-2.5 py-1 rounded-full font-medium ${badgeColor}">${item.gender}</span>
                         </div>
-                        <p class="text-slate-600 text-sm mb-4">${item.meaning}</p>
+                        <p class="text-slate-600 text-sm mb-3">${item.meaning}</p>
                     </div>
-                    <div class="text-xs text-slate-400 border-t border-slate-50 pt-2 flex justify-between items-center">
+                    <div class="text-xs text-slate-400 border-t border-slate-50 pt-2 flex justify-between">
                         <span>Origin: <strong class="text-slate-600">${item.origin}</strong></span>
                     </div>
                 `;
@@ -462,17 +285,12 @@
         }
 
         function filterNames() {
-            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+            const query = document.getElementById('searchInput').value.toLowerCase();
             
-            let sourceList = currentTab === 'favorites' ? favorites : babyNames;
-
-            const filtered = sourceList.filter(item => {
+            const filtered = babyNames.filter(item => {
                 const matchesGender = currentGender === 'all' || item.gender === currentGender;
-                const matchesLetter = currentLetter === 'all' || item.name.toUpperCase().startsWith(currentLetter);
-                const matchesSearch = item.name.toLowerCase().includes(query) || 
-                                      item.meaning.toLowerCase().includes(query) || 
-                                      item.origin.toLowerCase().includes(query);
-                return matchesGender && matchesLetter && matchesSearch;
+                const matchesSearch = item.name.toLowerCase().includes(query) || item.meaning.toLowerCase().includes(query) || item.origin.toLowerCase().includes(query);
+                return matchesGender && matchesSearch;
             });
 
             renderNames(filtered);
@@ -481,64 +299,20 @@
         function setGenderFilter(gender) {
             currentGender = gender;
             
-            document.querySelectorAll('.gender-btn').forEach(btn => {
-                if (btn.textContent.toLowerCase().includes(gender.toLowerCase()) || (gender === 'all' && btn.textContent === 'All Genders')) {
-                    btn.className = "gender-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-indigo-50 text-indigo-700 border border-indigo-200 transition-all";
+            // Update button styles
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => {
+                if (btn.textContent.toLowerCase() === gender.toLowerCase() || (gender === 'all' && btn.textContent === 'All')) {
+                    btn.className = "filter-btn px-4 py-2 rounded-lg text-sm font-medium bg-indigo-600 text-white transition-all";
                 } else {
-                    btn.className = "gender-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all";
+                    btn.className = "filter-btn px-4 py-2 rounded-lg text-sm font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all";
                 }
             });
 
             filterNames();
         }
 
-        function filterByLetter(letter) {
-            currentLetter = letter;
-
-            document.querySelectorAll('.letter-btn').forEach(btn => {
-                if (btn.textContent === letter || (letter === 'all' && btn.textContent === 'All')) {
-                    btn.className = "letter-btn px-2.5 py-1 rounded text-xs font-bold bg-indigo-600 text-white transition-all";
-                } else {
-                    btn.className = "letter-btn px-2.5 py-1 rounded text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all";
-                }
-            });
-
-            filterNames();
-        }
-
-        function switchTab(tab) {
-            currentTab = tab;
-            const allBtn = document.getElementById('allTabBtn');
-            const favBtn = document.getElementById('favTabBtn');
-
-            if (tab === 'all') {
-                allBtn.className = "px-4 py-2 rounded-xl text-sm font-semibold bg-indigo-600 text-white shadow-sm transition-all";
-                favBtn.className = "px-4 py-2 rounded-xl text-sm font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all";
-            } else {
-                favBtn.className = "px-4 py-2 rounded-xl text-sm font-semibold bg-indigo-600 text-white shadow-sm transition-all";
-                allBtn.className = "px-4 py-2 rounded-xl text-sm font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all";
-            }
-
-            filterNames();
-        }
-
-        function toggleFavorite(nameString) {
-            const item = babyNames.find(n => n.name === nameString);
-            if (!item) return;
-
-            const index = favorites.findIndex(fav => fav.name === nameString);
-            if (index > -1) {
-                favorites.splice(index, 1);
-            } else {
-                favorites.push(item);
-            }
-
-            localStorage.setItem('baby_favorites', JSON.stringify(favorites));
-            filterNames();
-        }
-
-        // Initialize App on Load
-        initAlphabetBar();
+        // Initial Load
         renderNames(babyNames);
     </script>
 </body>
