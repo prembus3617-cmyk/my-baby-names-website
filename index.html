@@ -1,503 +1,97 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aarambh Baby Names India - Multi-Religion, Astrological & Daily Updated Names</title>
+    <title>Meaningful Baby Names & Meanings</title>
+    <!-- Tailwind CSS for modern responsive styling -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
 </head>
-<body class="bg-gradient-to-br from-rose-50 via-sky-50 to-amber-50 h-full min-h-screen text-slate-800 flex flex-col font-sans">
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col font-sans">
 
-    <header class="bg-white/90 backdrop-blur-md border-b border-rose-100 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-rose-500 to-amber-500 flex items-center justify-center text-white font-bold text-xl shadow-md shadow-rose-500/20">🍼</div>
-                <div>
-                    <h1 id="appTitle" class="text-xl font-bold bg-gradient-to-r from-rose-600 to-amber-600 bg-clip-text text-transparent">Aarambh Names</h1>
-                    <p id="appSubtitle" class="text-xs text-slate-500">Pan-Indian, Multi-Religion & Vedic Baby Names • Updated Daily</p>
-                </div>
-            </div>
-            
-            <div class="flex items-center gap-2 flex-wrap justify-end">
-                <!-- Localization Dropdown -->
-                <select id="uiLangSelect" onchange="changeUILanguage(this.value)" class="bg-slate-50 border border-slate-200 text-xs font-semibold px-3 py-2 rounded-xl text-slate-700 focus:outline-none focus:ring-2 focus:ring-rose-400">
-                    <option value="en">English (EN)</option>
-                    <option value="hi">हिन्दी (Hindi)</option>
-                    <option value="ta">தமிழ் (Tamil)</option>
-                    <option value="te">తెలుగు (Telugu)</option>
-                    <option value="ml">മലയാളം (Malayalam)</option>
-                    <option value="kn">ಕನ್ನಡ (Kannada)</option>
-                    <option value="bn">বাংলা (Bengali)</option>
-                    <option value="mr">मराठी (Marathi)</option>
-                    <option value="gu">ગુજરાતી (Gujarati)</option>
-                </select>
-
-                <button onclick="switchTab('names')" id="btnTabNames" class="bg-rose-600 text-white text-xs font-semibold px-4 py-2 rounded-xl transition shadow-sm">Directory & Search</button>
-                <button onclick="switchTab('astro')" id="btnTabAstro" class="bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-semibold px-4 py-2 rounded-xl transition shadow-sm">✨ Rashi & Nakshatra</button>
-                <button onclick="switchTab('numerology')" id="btnTabNum" class="bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-semibold px-4 py-2 rounded-xl transition shadow-sm">🔢 Numerology</button>
-                <button onclick="switchTab('muhurat')" id="btnTabMuh" class="bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-semibold px-4 py-2 rounded-xl transition shadow-sm">📅 Muhurat</button>
-            </div>
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b border-slate-100 py-6">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h1 class="text-3xl font-bold text-indigo-600">BabyNameFinder</h1>
+            <p class="text-slate-500 mt-1">Discover meaningful names, origins, and inspirations for your little one.</p>
         </div>
     </header>
 
-    <section class="max-w-7xl mx-auto px-4 py-8 text-center">
-        <div class="max-w-4xl mx-auto space-y-4">
-            <span id="badgeTaxonomy" class="inline-block bg-amber-100 text-amber-800 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">Pan-Indian & Multi-Religion Taxonomy 2026</span>
-            <h2 id="heroHeading" class="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight">Find Spiritually Aligned & Culturally Rich Names</h2>
-            <p id="heroSub" class="text-slate-600 text-sm sm:text-base">Explore daily drops filtered by religion, pan-Indian languages, native scripts, spelling variants, syllables, and astrological harmonies.</p>
+    <!-- Main Content -->
+    <main class="flex-grow max-w-4xl w-full mx-auto px-4 py-8">
+        
+        <!-- Search and Filters Section -->
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 mb-8 space-y-4">
+            <div>
+                <input 
+                    type="text" 
+                    id="searchInput" 
+                    placeholder="Search by name or meaning (e.g., 'Aarav', 'Peace')..." 
+                    class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-700"
+                    oninput="filterNames()"
+                >
+            </div>
             
-            <!-- Universal Search & Advanced Taxonomy Filters -->
-            <div class="pt-4 space-y-3 max-w-4xl mx-auto">
-                <div class="flex flex-col md:flex-row gap-3">
-                    <div class="relative flex-1">
-                        <input type="text" id="searchInput" placeholder="Search by name, meaning, native script, deity, or origin..." class="w-full bg-white border border-slate-200 px-4 py-3 rounded-2xl shadow-sm focus:outline-none focus:ring-2 focus:ring-rose-400 text-sm">
-                    </div>
-                    <select id="genderFilter" class="bg-white border border-slate-200 px-4 py-3 rounded-2xl shadow-sm focus:outline-none focus:ring-2 focus:ring-rose-400 text-sm font-medium">
-                        <option value="all">All Genders</option>
-                        <option value="Boy">Boys</option>
-                        <option value="Girl">Girls</option>
-                        <option value="Unisex">Gender-Neutral / Unisex</option>
-                    </select>
-                    <select id="religionFilter" class="bg-white border border-slate-200 px-4 py-3 rounded-2xl shadow-sm focus:outline-none focus:ring-2 focus:ring-rose-400 text-sm font-medium">
-                        <option value="all">All Religions</option>
-                        <option value="Hindu">Hindu</option>
-                        <option value="Muslim">Muslim</option>
-                        <option value="Sikh">Sikh</option>
-                        <option value="Christian">Christian</option>
-                        <option value="Jain">Jain</option>
-                        <option value="Buddhist">Buddhist</option>
-                        <option value="Parsi">Parsi</option>
-                    </select>
+            <div class="flex flex-wrap gap-3 items-center justify-between">
+                <div class="flex flex-wrap gap-2">
+                    <button onclick="setGenderFilter('all')" class="filter-btn px-4 py-2 rounded-lg text-sm font-medium bg-indigo-600 text-white transition-all">All</button>
+                    <button onclick="setGenderFilter('Boy')" class="filter-btn px-4 py-2 rounded-lg text-sm font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all">Boys</button>
+                    <button onclick="setGenderFilter('Girl')" class="filter-btn px-4 py-2 rounded-lg text-sm font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all">Girls</button>
+                    <button onclick="setGenderFilter('Unisex')" class="filter-btn px-4 py-2 rounded-lg text-sm font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all">Unisex</button>
                 </div>
-
-                <!-- Secondary Granular Taxonomy Bar -->
-                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2 pt-1">
-                    <select id="languageFilter" class="bg-white border border-slate-200 px-3 py-2.5 rounded-xl text-xs font-medium text-slate-700">
-                        <option value="all">All Languages / Origins</option>
-                        <option value="Sanskrit">Sanskrit</option>
-                        <option value="Hindi">Hindi</option>
-                        <option value="Tamil">Tamil</option>
-                        <option value="Telugu">Telugu</option>
-                        <option value="Malayalam">Malayalam</option>
-                        <option value="Kannada">Kannada</option>
-                        <option value="Bengali">Bengali</option>
-                        <option value="Punjabi">Punjabi</option>
-                        <option value="Urdu">Urdu / Persian</option>
-                        <option value="Marathi">Marathi</option>
-                        <option value="Gujarati">Gujarati</option>
-                        <option value="Greek">Greek / Hebrew</option>
-                    </select>
-                    <select id="themeFilter" class="bg-white border border-slate-200 px-3 py-2.5 rounded-xl text-xs font-medium text-slate-700">
-                        <option value="all">Theme Categories</option>
-                        <option value="Nature">Nature</option>
-                        <option value="Valor">Valor</option>
-                        <option value="Wisdom">Wisdom</option>
-                        <option value="Grace">Grace</option>
-                        <option value="Cosmic">Cosmic / Celestial</option>
-                        <option value="Wealth">Wealth</option>
-                    </select>
-                    <select id="syllableFilter" class="bg-white border border-slate-200 px-3 py-2.5 rounded-xl text-xs font-medium text-slate-700">
-                        <option value="all">Syllable Length</option>
-                        <option value="1">1 Syllable</option>
-                        <option value="2">2 Syllables</option>
-                        <option value="3">3+ Syllables</option>
-                    </select>
-                    <select id="trendFilter" class="bg-white border border-slate-200 px-3 py-2.5 rounded-xl text-xs font-medium text-slate-700">
-                        <option value="all">Trending vs Timeless</option>
-                        <option value="Trending">Trending / Breakout</option>
-                        <option value="Timeless">Timeless Classic</option>
-                        <option value="Rare">Rare & Unique</option>
-                    </select>
-                    <select id="prefixFilter" class="bg-white border border-slate-200 px-3 py-2.5 rounded-xl text-xs font-medium text-slate-700">
-                        <option value="all">Starting Letter</option>
-                        <option value="A">Starts with A</option>
-                        <option value="D">Starts with D</option>
-                        <option value="K">Starts with K</option>
-                        <option value="M">Starts with M</option>
-                        <option value="R">Starts with R</option>
-                        <option value="S">Starts with S</option>
-                        <option value="V">Starts with V</option>
-                        <option value="Z">Starts with Z</option>
-                    </select>
-                    <select id="suffixFilter" class="bg-white border border-slate-200 px-3 py-2.5 rounded-xl text-xs font-medium text-slate-700">
-                        <option value="all">Ending Letter</option>
-                        <option value="a">Ends with 'a'</option>
-                        <option value="n">Ends with 'n' / 'an'</option>
-                        <option value="i">Ends with 'i' / 'ee'</option>
-                        <option value="t">Ends with 't'</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <main class="max-w-7xl mx-auto px-4 pb-16 flex-1 w-full">
-
-        <!-- TAB 1: NAMES DIRECTORY -->
-        <div id="tabNamesContent" class="space-y-6">
-            <div class="flex justify-between items-center bg-white/60 p-4 rounded-2xl border border-slate-100 shadow-sm flex-wrap gap-4">
-                <div>
-                    <h3 class="text-base font-bold text-slate-800 flex items-center gap-2">
-                        <span>✨ Daily Updated Multi-Religion Directory with Native Script & Variants</span>
-                        <span id="nameCount" class="text-xs bg-rose-100 text-rose-700 px-2.5 py-0.5 rounded-full font-semibold"></span>
-                    </h3>
-                    <p class="text-xs text-slate-500 mt-0.5">Includes native scripts (Telugu, Tamil, Urdu, Hindi), phonetic spelling variants, and meaning safety flags.</p>
-                </div>
-                <button onclick="simulateAddBatch()" class="bg-rose-600 hover:bg-rose-700 text-white text-xs font-semibold px-4 py-2.5 rounded-xl transition shadow-md shadow-rose-600/20 flex items-center gap-1.5">
-                    + Simulate Daily Upload (40-50 Names)
-                </button>
-            </div>
-
-            <div id="namesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                <!-- Populated via JavaScript -->
-            </div>
-
-            <!-- Empty state -->
-            <div id="emptyState" class="hidden text-center py-16 bg-white rounded-3xl border border-slate-100 shadow-sm">
-                <p class="text-slate-500 text-sm">No names found matching your detailed taxonomy filters.</p>
-            </div>
-        </div>
-
-        <!-- TAB 2: ASTROLOGY & NAKSHATRA TOOL -->
-        <div id="tabAstroContent" class="hidden space-y-6">
-            <div class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-sm">
-                <div class="max-w-2xl mx-auto text-center space-y-3 mb-8">
-                    <span class="bg-sky-100 text-sky-800 text-xs font-semibold px-3 py-1 rounded-full">Vedic Astrology Integration</span>
-                    <h3 class="text-2xl font-bold text-slate-900">Rashi & Nakshatra-Based Starting Letter Finder</h3>
-                    <p class="text-slate-600 text-sm">Select your baby's birth Nakshatra and Pada (quarter) to instantly discover exact phonetic starting syllables and matched names.</p>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto bg-slate-50 p-6 rounded-2xl border border-slate-200">
-                    <div>
-                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Select Nakshatra (Lunar Mansion)</label>
-                        <select id="nakshatraSelect" class="w-full bg-white border border-slate-300 px-4 py-3 rounded-xl text-sm font-medium focus:ring-2 focus:ring-rose-400 focus:outline-none">
-                            <option value="Ashwini">Ashwini (चू, चे, चो, ला)</option>
-                            <option value="Bharani">Bharani (ली, लू, ले, लो)</option>
-                            <option value="Krittika">Krittika (अ, ई, उ, ए)</option>
-                            <option value="Rohini">Rohini (ओ, वा, वी, वू)</option>
-                            <option value="Mrigashira">Mrigashira (वे, वो, का, की)</option>
-                            <option value="Punarvasu">Punarvasu (के, को, हा, ही)</option>
-                            <option value="Pushya">Pushya (हू, हे, हो, डा)</option>
-                            <option value="Magha">Magha (मा, मी, मू, मे)</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Select Pada (Quarter)</label>
-                        <select id="padaSelect" class="w-full bg-white border border-slate-300 px-4 py-3 rounded-xl text-sm font-medium focus:ring-2 focus:ring-rose-400 focus:outline-none">
-                            <option value="1">Pada 1</option>
-                            <option value="2">Pada 2</option>
-                            <option value="3">Pada 3</option>
-                            <option value="4">Pada 4</option>
-                        </select>
-                    </div>
-                    <div class="md:col-span-2 pt-2">
-                        <button onclick="runNakshatraSearch()" class="w-full bg-rose-600 hover:bg-rose-700 text-white font-semibold py-3 rounded-xl shadow-md transition text-sm">
-                            🔍 Find Names by Nakshatra Initial Syllables
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Sikh Hukamnama & Gotra Quick Section -->
-                <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
-                    <div class="bg-amber-50 border border-amber-200 p-5 rounded-2xl">
-                        <h4 class="font-bold text-amber-900 text-sm mb-1">📜 Sikh Hukamnama Initial Finder</h4>
-                        <p class="text-xs text-amber-800 mb-3">Lookup baby names starting with the holy Hukamnama letter from Sri Guru Granth Sahib Ji.</p>
-                        <div class="flex gap-2">
-                            <input type="text" id="hukamLetter" maxlength="1" placeholder="e.g. 'G'" class="w-20 bg-white border border-amber-300 px-3 py-2 rounded-xl text-center font-bold text-amber-900 uppercase">
-                            <button onclick="filterHukamnama()" class="bg-amber-600 hover:bg-amber-700 text-white text-xs font-semibold px-4 py-2 rounded-xl transition">Filter Names</button>
-                        </div>
-                    </div>
-                    <div class="bg-sky-50 border border-sky-200 p-5 rounded-2xl">
-                        <h4 class="font-bold text-sky-900 text-sm mb-1">🏛️ Gotra & Clan Directory</h4>
-                        <p class="text-xs text-sky-800 mb-3">Browse traditional lineage recommendations compatible with Vedic naming structures.</p>
-                        <select id="gotraSelect" onchange="filterGotra()" class="w-full bg-white border border-sky-300 px-3 py-2 rounded-xl text-xs font-medium text-sky-900">
-                            <option value="all">All Gotras / General</option>
-                            <option value="Kashyapa">Kashyapa Gotra</option>
-                            <option value="Bharadwaja">Bharadwaja Gotra</option>
-                            <option value="Vashistha">Vashistha Gotra</option>
-                            <option value="Atri">Atri Gotra</option>
-                        </select>
-                    </div>
+                
+                <div class="text-sm text-slate-500">
+                    Showing <span id="nameCount">0</span> names
                 </div>
             </div>
         </div>
 
-        <!-- TAB 3: NUMEROLOGY CALCULATOR -->
-        <div id="tabNumContent" class="hidden space-y-6">
-            <div class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-sm max-w-2xl mx-auto">
-                <div class="text-center space-y-3 mb-6">
-                    <span class="bg-rose-100 text-rose-800 text-xs font-semibold px-3 py-1 rounded-full">Name Vibration & Destiny</span>
-                    <h3 class="text-2xl font-bold text-slate-900">Chaldean & Pythagorean Numerology Calculator</h3>
-                    <p class="text-slate-600 text-sm">Calculate the destiny and expression vibration number of any baby name.</p>
-                </div>
-
-                <div class="space-y-4">
-                    <div>
-                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Enter Baby Name</label>
-                        <input type="text" id="numerologyNameInput" placeholder="e.g. Aarav" class="w-full bg-slate-50 border border-slate-300 px-4 py-3 rounded-xl text-sm font-medium focus:ring-2 focus:ring-rose-400 focus:outline-none">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Select Calculation System</label>
-                        <select id="numerologySystem" class="w-full bg-slate-50 border border-slate-300 px-4 py-3 rounded-xl text-sm font-medium focus:ring-2 focus:ring-rose-400 focus:outline-none">
-                            <option value="chaldean">Chaldean System (Ancient Mystical Numbers 1-8)</option>
-                            <option value="pythagorean">Pythagorean System (Standard Modern 1-9)</option>
-                        </select>
-                    </div>
-                    <button onclick="calculateNumerology()" class="w-full bg-rose-600 hover:bg-rose-700 text-white font-semibold py-3 rounded-xl shadow-md transition text-sm">
-                        🔢 Calculate Name Number & Compatibility
-                    </button>
-                </div>
-
-                <div id="numerologyResult" class="hidden mt-6 p-5 bg-rose-50 border border-rose-200 rounded-2xl text-center space-y-2">
-                    <!-- Dynamic Result -->
-                </div>
-            </div>
+        <!-- Names Grid -->
+        <div id="namesGrid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Dynamic Cards Populated via JS -->
         </div>
 
-        <!-- TAB 4: NAMAKARAN MUHURAT CALENDAR -->
-        <div id="tabMuhContent" class="hidden space-y-6">
-            <div class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-sm max-w-3xl mx-auto">
-                <div class="text-center space-y-3 mb-6">
-                    <span class="bg-amber-100 text-amber-800 text-xs font-semibold px-3 py-1 rounded-full">Auspicious Dates 2026</span>
-                    <h3 class="text-2xl font-bold text-slate-900">Namakaran Muhurat Calendar</h3>
-                    <p class="text-slate-600 text-sm">Traditional Vedic auspicious dates and lunar timings for the baby's official naming ceremony.</p>
-                </div>
-
-                <div class="space-y-4">
-                    <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
-                        <div>
-                            <span class="text-xs font-bold bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded-full">Highly Auspicious</span>
-                            <h4 class="text-base font-bold text-slate-900 mt-2">Monday, March 23, 2026</h4>
-                            <p class="text-xs text-slate-600">Rohini Nakshatra • Shubh Muhurat: 09:15 AM - 11:45 AM</p>
-                        </div>
-                        <button onclick="saveMuhuratAlert('March 23, 2026')" class="bg-white border border-slate-300 text-slate-700 hover:bg-slate-100 text-xs font-semibold px-4 py-2 rounded-xl transition">🔔 Set Reminder</button>
-                    </div>
-
-                    <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
-                        <div>
-                            <span class="text-xs font-bold bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded-full">Highly Auspicious</span>
-                            <h4 class="text-base font-bold text-slate-900 mt-2">Thursday, April 02, 2026</h4>
-                            <p class="text-xs text-slate-600">Pushya Nakshatra • Shubh Muhurat: 06:30 AM - 09:10 AM</p>
-                        </div>
-                        <button onclick="saveMuhuratAlert('April 02, 2026')" class="bg-white border border-slate-300 text-slate-700 hover:bg-slate-100 text-xs font-semibold px-4 py-2 rounded-xl transition">🔔 Set Reminder</button>
-                    </div>
-
-                    <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
-                        <div>
-                            <span class="text-xs font-bold bg-sky-100 text-sky-800 px-2.5 py-1 rounded-full">Good Muhurat</span>
-                            <h4 class="text-base font-bold text-slate-900 mt-2">Sunday, April 19, 2026</h4>
-                            <p class="text-xs text-slate-600">Ashwini Nakshatra • Shubh Muhurat: 10:00 AM - 12:30 PM</p>
-                        </div>
-                        <button onclick="saveMuhuratAlert('April 19, 2026')" class="bg-white border border-slate-300 text-slate-700 hover:bg-slate-100 text-xs font-semibold px-4 py-2 rounded-xl transition">🔔 Set Reminder</button>
-                    </div>
-                </div>
-            </div>
+        <!-- Empty State -->
+        <div id="emptyState" class="hidden text-center py-12">
+            <p class="text-slate-400 text-lg">No matching names found. Try a different search term.</p>
         </div>
 
     </main>
 
-    <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500">
-        <p>© 2026 Aarambh Baby Names India. Pan-Indian taxonomy, multi-religion filters & astrological sync powered by Gemini.</p>
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-100 py-6 text-center text-sm text-slate-400">
+        <p>&copy; 2026 BabyNameFinder. Built with care.</p>
     </footer>
 
+    <!-- JavaScript Data & Logic -->
     <script>
-        // UI Translations for supported Indian Languages
-        const uiTranslations = {
-            en: {
-                title: "Aarambh Names",
-                subtitle: "Pan-Indian, Multi-Religion & Vedic Baby Names • Updated Daily",
-                heroBadge: "Pan-Indian & Multi-Religion Taxonomy 2026",
-                heroHeading: "Find Spiritually Aligned & Culturally Rich Names",
-                heroSub: "Explore daily drops filtered by religion, pan-Indian languages, native scripts, spelling variants, syllables, and astrological harmonies.",
-                searchPlaceholder: "Search by name, meaning, native script, deity, or origin...",
-                btnNames: "Directory & Search",
-                btnAstro: "✨ Rashi & Nakshatra",
-                btnNum: "🔢 Numerology",
-                btnMuh: "📅 Muhurat",
-                simBatch: "+ Simulate Daily Upload (40-50 Names)"
-            },
-            hi: {
-                title: "आरंभ नामकोश",
-                subtitle: "अखिल भारतीय, बहुधार्मिक और वैदिक शिशु नाम • दैनिक अपडेट",
-                heroBadge: "अखिल भारतीय एवं बहुधार्मिक वर्गीकरण २०२६",
-                heroHeading: "आध्यात्मिक रूप से संरेखित और सांस्कृतिक रूप से समृद्ध नाम खोजें",
-                heroSub: "धर्म, भारतीय भाषाओं, मूल लिपियों, वर्तनी रूपों और ज्योतिषीय和谐 के आधार पर खोजें।",
-                searchPlaceholder: "नाम, अर्थ, मूल लिपि, देवता या मूल द्वारा खोजें...",
-                btnNames: "डायरेक्टरी और खोज",
-                btnAstro: "✨ राशि और नक्षत्र",
-                btnNum: "🔢 अंक ज्योतिष",
-                btnMuh: "📅 मुहूर्त",
-                simBatch: "+ दैनिक अपलोड सिमुलेट करें (४०-५० नाम)"
-            },
-            ta: {
-                title: "ஆரம்ப பெயர்கள்",
-                subtitle: "பான்-இந்திய, பல மத மற்றும் வேத குழந்தை பெயர்கள் • தினமும் புதுப்பிக்கப்படும்",
-                heroBadge: "பான்-இந்திய & பல மத வகைப்பாடு 2026",
-                heroHeading: "רוח ஆன்மீக ரீதியாக இணைந்த மற்றும் கலாச்சார வளமான பெயர்களைக் கண்டறியவும்",
-                heroSub: "மதங்கள், இந்திய மொழிகள், சொந்த எழுத்துருக்கள் மற்றும் ஜோதிட ஒத்திசைவு மூலம் ஆராயுங்கள்.",
-                searchPlaceholder: "பெயர், பொருள், சொந்த எழுத்துரு அல்லது தோற்றம் மூலம் தேடவும்...",
-                btnNames: "அடைவு & தேடல்",
-                btnAstro: "✨ ராசி & நட்சத்திரம்",
-                btnNum: "🔢 எண் கணிதம்",
-                btnMuh: "📅 முகூர்த்தம்",
-                simBatch: "+ தினசரி பதிவேற்றத்தை உருவகப்படுத்தவும் (40-50 பெயர்கள்)"
-            },
-            te: {
-                title: "ఆరంభ పేర్లు",
-                subtitle: "పాన్-ఇండియన్, మతపరమైన & వేద శిశువుల పేర్లు • రోజువారీ నవీకరణ",
-                heroBadge: "పాన్-ఇండియన్ & మతపరమైన వర్గీకరణ 2026",
-                heroHeading: "ఆధ్యాత్మికంగా సమలేఖనం చేయబడిన మరియు సాంస్కృతికంగా సమృద్ధిగా ఉన్న పేర్లను కనుగొనండి",
-                heroSub: "మతాలు, భారతీయ భాషలు, స్థానికలిపి మరియు జ్యోతిష్య సంబంధాల ద్వారా శోధించండి.",
-                searchPlaceholder: "పేరు, అర్థం, స్థానిక లిపి లేదా మూలం ద్వారా శోధించండి...",
-                btnNames: "డైరెక్టరీ & శోధన",
-                btnAstro: "✨ రాశి & నక్షత్రం",
-                btnNum: "🔢 సంఖ్యాశాస్త్రం",
-                btnMuh: "📅 ముహూర్తం",
-                simBatch: "+ రోజువారీ అప్‌లోడ్‌ను అనుకరించండి (40-50 పేర్లు)"
-            },
-            ml: {
-                title: "ആരംഭ പേരുകൾ",
-                subtitle: "പാൻ-ഇന്ത്യൻ, ബഹുമാതാധിഷ്ഠിത & വേദ ശിശുക്കളുടെ പേരുകൾ • ദിവസേന അപ്ഡേറ്റ് ചെയ്യുന്നത്",
-                heroBadge: "പാൻ-ഇന്ത്യൻ ടാക്സോണമി 2026",
-                heroHeading: "ആത്മീയമായി പൊരുത്തപ്പെടുന്നതും സംസ്സ്കാരികമായി സമ്പന്നവുമായ പേരുകൾ കണ്ടെത്തുക",
-                heroSub: "മതങ്ങൾ, ഭാഷകൾ, തദ്ദേശീയ ലിപികൾ, ജ്യോതിഷ പൊരുത്തങ്ങൾ എന്നിവ പ്രകാരം തിരയുക.",
-                searchPlaceholder: "പേര്, അർത്ഥം, തദ്ദേശീയ ലിപി അല്ലെങ്കിൽ ഉത്ഭവം എന്നിവ പ്രകാരം തിരയുക...",
-                btnNames: "ഡയറക്ടറി & തിരയൽ",
-                btnAstro: "✨ രാശി & നക്ഷത്രം",
-                btnNum: "🔢 സംഖ്യാശാസ്ത്രം",
-                btnMuh: "📅 മുഹൂർത്തം",
-                simBatch: "+ പ്രതിദിന അപ്‌ലോഡ് അനുകരിക്കുക (40-50 പേരുകൾ)"
-            },
-            kn: {
-                title: "ಆರಂಭ ಹೆಸರುಗಳು",
-                subtitle: "ಪಾನ್-ಇಂಡಿಯನ್, ಬಹು-ಧರ್ಮ ಮತ್ತು ವೈದಿಕ ಶಿಶು ಹೆಸರುಗಳು • ಪ್ರತಿದಿನ ನವೀಕರಿಸಲಾಗುತ್ತದೆ",
-                heroBadge: "ಪಾನ್-ಇಂಡಿಯನ್ ವರ್ಗೀಕರಣ 2026",
-                heroHeading: "ಆಧ್ಯಾತ್ಮಿಕವಾಗಿ ಹೊಂದಾಣಿಕೆಯಾಗುವ ಮತ್ತು ಸಾಂಸ್ಕೃತಿಕವಾಗಿ ಶ್ರೀಮಂತ ಹೆಸರುಗಳನ್ನು ಹುಡುಕಿ",
-                heroSub: "ಧರ್ಮಗಳು, ಭಾರತೀಯ ಭಾಷೆಗಳು, ಸ್ಥಳೀಯ ಲಿಪಿಗಳು ಮತ್ತು ಜ್ಯೋತಿಷ್ಯ ಜೋಡಣೆಗಳ ಮೂಲಕ ಅನ್ವೇಷಿಸಿ.",
-                searchPlaceholder: "ಹೆಸರು, ಅರ್ಥ, ಸ್ಥಳೀಯ ಲಿಪಿ ಅಥವಾ ಮೂಲದ ಮೂಲಕ ಹುಡುಕಿ...",
-                btnNames: "ಡೈರೆಕ್ಟರಿ ಮತ್ತು ಹುಡುಕಾಟ",
-                btnAstro: "✨ ರಾಶಿ & ನಕ್ಷತ್ರ",
-                btnNum: "🔢 ಸಂಖ್ಯಾಶಾಸ್ತ್ರ",
-                btnMuh: "📅 ಮುಹೂರ್ತ",
-                simBatch: "+ ದೈನಂದಿನ ಅಪ್‌ಲೋಡ್ ಅನ್ನು ಅನುಕರಿಸಿ (40-50 ಹೆಸರುಗಳು)"
-            },
-            bn: {
-                title: "আরম্ভ নাম",
-                subtitle: "প্যান-ইন্ডিয়ান, বহু-ধর্মীয় এবং বৈদিক শিশুর নাম • প্রতিদিন আপডেট করা হয়",
-                heroBadge: "প্যান-ইন্ডিয়ান ও বহু-ধর্মীয় শ্রেণিবিন্যাস ২০২৬",
-                heroHeading: "আধ্যাত্মিকভাবে সামঞ্জস্যপূর্ণ এবং সাংস্কৃতিকভাবে সমৃদ্ধ নাম খুঁজুন",
-                heroSub: "ধর্ম, ভারতীয় ভাষা, স্থানীয় লিপি এবং জ্যোতিষশাস্ত্রীয় মিলের মাধ্যমে অনুসন্ধান করুন।",
-                searchPlaceholder: "নাম, অর্থ, স্থানীয় লিপি বা উৎস দ্বারা অনুসন্ধান করুন...",
-                btnNames: "ডিরেক্টরি ও অনুসন্ধান",
-                btnAstro: "✨ রাশি ও নক্ষত্র",
-                btnNum: "🔢 সংখ্যাতত্ত্ব",
-                btnMuh: "📅 মুহূর্ত",
-                simBatch: "+ দৈনিক আপলোড অনুকরণ করুন (৪০-৫০ নাম)"
-            },
-            mr: {
-                title: "आरंभ नावे",
-                subtitle: "पॅन-इंडियन, बहु-धर्म आणि वैदिक बाळाची नावे • दररोज अपडेट केली जातात",
-                heroBadge: "पॅन-इंडियन वर्गीकरण २०२६",
-                heroHeading: "आध्यात्मिकदृष्ट्या संरेखित आणि सांस्कृतिकदृष्ट्या समृद्ध नावे शोधा",
-                heroSub: "धर्म, भारतीय भाषा, मूळ लिपी आणि ज्योतिषीय सुसंवादांनुसार शोधा.",
-                searchPlaceholder: "नाव, अर्थ, मूळ लिपी, दैवत किंवा उत्पत्तीनुसार शोधा...",
-                btnNames: "डिश्ररी आणि शोध",
-                btnAstro: "✨ रास आणि नक्षत्र",
-                btnNum: "🔢 अंकशास्त्र",
-                btnMuh: "📅 मुहूर्त",
-                simBatch: "+ दैनिक अपलोड सिम्युलेट करा (४०-५० नावे)"
-            },
-            gu: {
-                title: "આરંભ નામ",
-                subtitle: "પાન-ઇન્ડિયન, બહુ-ધર્મ અને વૈદિક બાળકના નામ • દરરોજ અપડેટ થાય છે",
-                heroBadge: "પાન-ઇન્ડિયન વર્ગીકરણ ૨૦૨૬",
-                heroHeading: "આધ્યાત્મિક રીતે સંરેખિત અને સાંસ્કૃતિક રીતે સમૃદ્ધ નામ શોધો",
-                heroSub: "ધર્મો, ભારતીય ભાષાઓ, મૂળ લિપિઓ અને જ્યોતિષીય સંવાદિતા દ્વારા અન્વેષણ કરો.",
-                searchPlaceholder: "નામ, અર્થ, મૂળ લિપિ, દેવતા અથવા મૂળ દ્વારા શોધો...",
-                btnNames: "ડિરેક્ટરી અને શોધ",
-                btnAstro: "✨ રાશિ અને નક્ષત્ર",
-                btnNum: "🔢 અંકશાસ્ત્ર",
-                btnMuh: "📅 મુહૂર્ત",
-                simBatch: "+ દૈનિક અપલોડ સિમ્યુલેટ કરો (૪૦-૫૦ નામ)"
-            }
-        };
-
-        function changeUILanguage(langCode) {
-            const t = uiTranslations[langCode] || uiTranslations['en'];
-            document.getElementById('appTitle').innerText = t.title;
-            document.getElementById('appSubtitle').innerText = t.subtitle;
-            document.getElementById('badgeTaxonomy').innerText = t.heroBadge;
-            document.getElementById('heroHeading').innerText = t.heroHeading;
-            document.getElementById('heroSub').innerText = t.heroSub;
-            document.getElementById('searchInput').placeholder = t.searchPlaceholder;
-            document.getElementById('btnTabNames').innerText = t.btnNames;
-            document.getElementById('btnTabAstro').innerText = t.btnAstro;
-            document.getElementById('btnTabNum').innerText = t.btnNum;
-            document.getElementById('btnTabMuh').innerText = t.btnMuh;
-        }
-
-        // Comprehensive multi-religion, Pan-Indian baby names dataset with native scripts & spelling variants
-        let babyNames = [
-            { id: 1, name: "Aarav", nativeScript: "ಆರ್ಯನ್ / आरव / آراو", variants: "Aarv, Arav, Aaraav", gender: "Boy", religion: "Hindu", language: "Sanskrit", meaning: "Peaceful, calm, wise", origin: "Sanskrit/Hindi", trend: "Trending", theme: "Wisdom", syllables: 2, rashi: "Mesha (Aries)", nakshatra: "Ashwini", deity: "Lord Shiva", gotra: "Kashyapa", vedicTag: "Vedic Mantra Derivative", negativeWarning: null, initial: "A", ending: "v" },
-            { id: 2, name: "Ananya", nativeScript: "अनन्या / அனன்யா", variants: "Anania, Ananiah", gender: "Girl", religion: "Hindu", language: "Sanskrit", meaning: "Matchless, unique", origin: "Sanskrit", trend: "Timeless", theme: "Grace", syllables: 4, rashi: "Vrishabha (Taurus)", nakshatra: "Krittika", deity: "Goddess Lakshmi", gotra: "Bharadwaja", vedicTag: "Ancient Sanskrit Root", negativeWarning: null, initial: "A", ending: "a" },
-            { id: 3, name: "Vihaan", nativeScript: "विहान / விஹான்", variants: "Vihan, Vehan", gender: "Boy", religion: "Hindu", language: "Hindi", meaning: "Dawn, morning sun", origin: "Hindi/Sanskrit", trend: "Trending", theme: "Cosmic", syllables: 2, rashi: "Vrishabha (Taurus)", nakshatra: "Rohini", deity: "Lord Krishna", gotra: "Vashistha", vedicTag: "Upanishad Reference", negativeWarning: null, initial: "V", ending: "n" },
-            { id: 4, name: "Diya", nativeScript: "दिया / தியா / దీప", variants: "Dia, Deeja", gender: "Girl", religion: "Hindu", language: "Sanskrit", meaning: "Light, lamp", origin: "Sanskrit", trend: "Timeless", theme: "Nature", syllables: 2, rashi: "Mithun (Gemini)", nakshatra: "Mrigashira", deity: "Goddess Durga", gotra: "Atri", vedicTag: "Vedic Mantra Derivative", negativeWarning: null, initial: "D", ending: "a" },
-            { id: 5, name: "Zoya", nativeScript: "ज़ोया / زویہ", variants: "Zoiya, Zoia", gender: "Girl", religion: "Muslim", language: "Urdu", meaning: "Alive, loving, radiant", origin: "Persian/Arabic", trend: "Trending", theme: "Grace", syllables: 2, rashi: "Vrishabha (Taurus)", nakshatra: "Rohini", deity: "General", gotra: "General", vedicTag: "Global Arabic Root", negativeWarning: null, initial: "Z", ending: "a" },
-            { id: 6, name: "Kabir", nativeScript: "कबीर / کبیر", variants: "Kabeer", gender: "Boy", religion: "Muslim", language: "Urdu", meaning: "Great, saintly", origin: "Arabic/Hindi", trend: "Timeless", theme: "Wisdom", syllables: 2, rashi: "Mesha (Aries)", nakshatra: "Ashwini", deity: "General", gotra: "General", vedicTag: "Sufi & Bhakti Tradition", negativeWarning: null, initial: "K", ending: "r" },
-            { id: 7, name: "Saanvi", nativeScript: "सानवी / சான்வி", variants: "Sanvi, Saanvee", gender: "Girl", religion: "Hindu", language: "Telugu", meaning: "Goddess Lakshmi, followed", origin: "Sanskrit/Telugu", trend: "Trending", theme: "Wealth", syllables: 2, rashi: "Karka (Cancer)", nakshatra: "Pushya", deity: "Goddess Lakshmi", gotra: "Bharadwaja", vedicTag: "Vedic Hymn Source", negativeWarning: null, initial: "S", ending: "i" },
-            { id: 8, name: "Aman", nativeScript: "अमन / அமன் / امن", variants: "Ahmann", gender: "Unisex", religion: "Muslim", language: "Urdu", meaning: "Peace, safety, trust", origin: "Arabic/Persian", trend: "Timeless", theme: "Wisdom", syllables: 2, rashi: "Mithun (Gemini)", nakshatra: "Punarvasu", deity: "General", gotra: "General", vedicTag: "Pan-Indian Secular Root", negativeWarning: null, initial: "A", ending: "n" },
-            { id: 9, name: "Kiran", nativeScript: "किरण / கிரண்", variants: "Keeran, Keeran", gender: "Unisex", religion: "Hindu", language: "Marathi", meaning: "Ray of light", origin: "Sanskrit", trend: "Timeless", theme: "Cosmic", syllables: 2, rashi: "Simha (Leo)", nakshatra: "Magha", deity: "General", gotra: "Kashyapa", vedicTag: "Classical Sanskrit", negativeWarning: null, initial: "K", ending: "n" },
-            { id: 10, name: "Gurpreet", nativeScript: "गुरप्रीत / گُرپریت", variants: "Gurprit", gender: "Unisex", religion: "Sikh", language: "Punjabi", meaning: "Love of the Guru", origin: "Punjabi/Sanskrit", trend: "Timeless", theme: "Grace", syllables: 2, rashi: "Mesha (Aries)", nakshatra: "Ashwini", deity: "Guru Granth Sahib", gotra: "Sikh Tradition", vedicTag: "Gurbani Derivative", negativeWarning: null, initial: "G", ending: "t" },
-            { id: 11, name: "Tenzin", nativeScript: "तेनज़िन / တင်ဇင်", variants: "Tenzing", gender: "Boy", religion: "Buddhist", language: "Tibetan", meaning: "Holder of the teachings", origin: "Tibetan", trend: "Rare", theme: "Wisdom", syllables: 2, rashi: "Kanya (Virgo)", nakshatra: "Krittika", deity: "Buddhist Tradition", gotra: "Himalayan Root", vedicTag: "Dharma Root", negativeWarning: null, initial: "T", ending: "n" },
-            { id: 12, name: "Adwait", nativeScript: "अद्वैत / அத்வைத்", variants: "Advait, Adwaith", gender: "Boy", religion: "Hindu", language: "Sanskrit", meaning: "Unique, non-dual", origin: "Sanskrit", trend: "Rare", theme: "Cosmic", syllables: 2, rashi: "Simha (Leo)", nakshatra: "Magha", deity: "Lord Shiva", gotra: "Vashistha", vedicTag: "Advaita Vedanta Philosophy", negativeWarning: null, initial: "A", ending: "t" }
+        const babyNames = [
+            { name: "Aarav", gender: "Boy", origin: "Sanskrit", meaning: "Peaceful, calm, or wise" },
+            { name: "Aadhya", gender: "Girl", origin: "Sanskrit", meaning: "First power, beginning, or unmatched" },
+            { name: "Vihaan", gender: "Boy", origin: "Sanskrit", meaning: "Dawn, morning, or ray of sunshine" },
+            { name: "Saanvi", gender: "Girl", origin: "Sanskrit", meaning: "Goddess Lakshmi, or followed" },
+            { name: "Reyansh", gender: "Boy", origin: "Sanskrit", meaning: "Ray of light, part of Vishnu" },
+            { name: "Diya", gender: "Girl", origin: "Sanskrit", meaning: "Light, lamp, or brilliance" },
+            { name: "Kabir", gender: "Boy", origin: "Arabic/Sanskrit", meaning: "Great, powerful, or famous saint" },
+            { name: "Ananya", gender: "Girl", origin: "Sanskrit", meaning: "Matchless, unique, or peerless" },
+            { name: "Advait", gender: "Boy", origin: "Sanskrit", meaning: "Unique, non-dual, or focused" },
+            { name: "Meera", gender: "Girl", origin: "Sanskrit", meaning: "Prosperous, ocean, or devoted follower" },
+            { name: "Zayn", gender: "Boy", origin: "Arabic", meaning: "Beauty, grace, or handsome" },
+            { name: "Rianna", gender: "Girl", origin: "Irish/Modern", meaning: "Little queen or divine song" },
+            { name: "Kiaan", gender: "Boy", origin: "Persian", meaning: "Ancient king, grace of God" },
+            { name: "Ishaan", gender: "Boy", origin: "Sanskrit", meaning: "Sun, lord Shiva, or northeast direction" },
+            { name: "Navya", gender: "Girl", origin: "Sanskrit", meaning: "New, modern, or praise worthy" }
         ];
 
-        function switchTab(tab) {
-            document.getElementById('tabNamesContent').classList.add('hidden');
-            document.getElementById('tabAstroContent').classList.add('hidden');
-            document.getElementById('tabNumContent').classList.add('hidden');
-            document.getElementById('tabMuhContent').classList.add('hidden');
+        let currentGender = 'all';
 
-            document.getElementById('btnTabNames').className = "bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-semibold px-4 py-2 rounded-xl transition shadow-sm";
-            document.getElementById('btnTabAstro').className = "bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-semibold px-4 py-2 rounded-xl transition shadow-sm";
-            document.getElementById('btnTabNum').className = "bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-semibold px-4 py-2 rounded-xl transition shadow-sm";
-            document.getElementById('btnTabMuh').className = "bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-semibold px-4 py-2 rounded-xl transition shadow-sm";
-
-            if (tab === 'names') {
-                document.getElementById('tabNamesContent').classList.remove('hidden');
-                document.getElementById('btnTabNames').className = "bg-rose-600 text-white text-xs font-semibold px-4 py-2 rounded-xl transition shadow-sm";
-            } else if (tab === 'astro') {
-                document.getElementById('tabAstroContent').classList.remove('hidden');
-                document.getElementById('btnTabAstro').className = "bg-rose-600 text-white text-xs font-semibold px-4 py-2 rounded-xl transition shadow-sm";
-            } else if (tab === 'numerology') {
-                document.getElementById('tabNumContent').classList.remove('hidden');
-                document.getElementById('btnTabNum').className = "bg-rose-600 text-white text-xs font-semibold px-4 py-2 rounded-xl transition shadow-sm";
-            } else if (tab === 'muhurat') {
-                document.getElementById('tabMuhContent').classList.remove('hidden');
-                document.getElementById('btnTabMuh').className = "bg-rose-600 text-white text-xs font-semibold px-4 py-2 rounded-xl transition shadow-sm";
-            }
-        }
-
-        // Render names on UI with native scripts, spelling variants, and rich taxonomy badges
-        function renderNames(filteredList = babyNames) {
+        function renderNames(filteredList) {
             const grid = document.getElementById('namesGrid');
             const emptyState = document.getElementById('emptyState');
-            const countBadge = document.getElementById('nameCount');
-
-            countBadge.innerText = `${filteredList.length} names`;
+            const countSpan = document.getElementById('nameCount');
+            
             grid.innerHTML = '';
+            countSpan.textContent = filteredList.length;
 
             if (filteredList.length === 0) {
                 emptyState.classList.remove('hidden');
@@ -508,207 +102,56 @@
 
             filteredList.forEach(item => {
                 const card = document.createElement('div');
-                card.className = "bg-white border border-slate-200/80 p-5 rounded-3xl shadow-sm hover:shadow-md transition flex flex-col justify-between gap-3 relative overflow-hidden group";
+                card.className = "bg-white p-5 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow flex flex-col justify-between";
                 
-                let genderBadgeColor = 'bg-sky-50 text-sky-700 border-sky-200';
-                if(item.gender === 'Girl') genderBadgeColor = 'bg-rose-50 text-rose-700 border-rose-200';
-                if(item.gender === 'Unisex') genderBadgeColor = 'bg-purple-50 text-purple-700 border-purple-200';
-
-                let warningHtml = '';
-                if(item.negativeWarning) {
-                    warningHtml = `<div class="bg-amber-50 border border-amber-200 text-amber-800 text-[11px] p-2 rounded-xl flex items-center gap-1.5 font-medium">⚠️ <span>Note: ${item.negativeWarning}</span></div>`;
-                }
+                const badgeColor = item.gender === 'Boy' ? 'bg-blue-50 text-blue-600' : item.gender === 'Girl' ? 'bg-pink-50 text-pink-600' : 'bg-purple-50 text-purple-600';
 
                 card.innerHTML = `
-                    <div class="flex justify-between items-start">
-                        <div>
-                            <div class="flex gap-1.5 flex-wrap">
-                                <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full border ${genderBadgeColor}">${item.gender}</span>
-                                <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full border bg-slate-50 text-slate-700 border-slate-200">${item.religion}</span>
-                            </div>
-                            <div class="flex items-baseline gap-2 mt-2">
-                                <h4 class="text-xl font-bold text-slate-900 group-hover:text-rose-600 transition">${item.name}</h4>
-                                <span class="text-sm font-semibold text-rose-700 bg-rose-50 px-2 py-0.5 rounded-lg">${item.nativeScript}</span>
-                            </div>
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold text-slate-800">${item.name}</h3>
+                            <span class="text-xs px-2.5 py-1 rounded-full font-medium ${badgeColor}">${item.gender}</span>
                         </div>
-                        <span class="text-xs text-slate-500 bg-slate-50 px-2.5 py-1 rounded-xl border border-slate-100 font-medium">${item.language}</span>
+                        <p class="text-slate-600 text-sm mb-3">${item.meaning}</p>
                     </div>
-                    <p class="text-sm text-slate-600"><strong class="text-slate-700 font-medium">Meaning:</strong> ${item.meaning}</p>
-                    
-                    <div class="text-xs text-slate-500 bg-slate-50 p-2.5 rounded-2xl border border-slate-100 flex items-center justify-between">
-                        <span>🔤 Spelling Variants:</span>
-                        <span class="font-medium text-slate-800">${item.variants}</span>
-                    </div>
-
-                    ${warningHtml}
-
-                    <!-- Astrological & Traditional Taxonomy Tags -->
-                    <div class="space-y-1.5 pt-2 border-t border-slate-100 text-xs text-slate-600">
-                        <div class="flex justify-between">
-                            <span>✨ Rashi/Nakshatra:</span>
-                            <span class="font-semibold text-slate-800">${item.rashi} (${item.nakshatra})</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span>🎨 Theme / Syllables:</span>
-                            <span class="font-semibold text-rose-700">${item.theme} • ${item.syllables} Syllable(s)</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span>🏛️ Origin / Tag:</span>
-                            <span class="font-medium text-slate-700">${item.origin} • <span class="text-amber-700">${item.trend}</span></span>
-                        </div>
-                    </div>
-
-                    <div class="pt-2 border-t border-slate-100 flex justify-between items-center text-xs">
-                        <span class="text-slate-500">Root: <span class="font-medium text-slate-800">${item.vedicTag}</span></span>
-                        <button onclick="saveFavorite('${item.name}')" class="text-rose-600 hover:text-rose-700 font-semibold flex items-center gap-1">❤️ Save</button>
+                    <div class="text-xs text-slate-400 border-t border-slate-50 pt-2 flex justify-between">
+                        <span>Origin: <strong class="text-slate-600">${item.origin}</strong></span>
                     </div>
                 `;
                 grid.appendChild(card);
             });
         }
 
-        // All filter input event listeners
-        ['searchInput', 'genderFilter', 'religionFilter', 'languageFilter', 'themeFilter', 'syllableFilter', 'trendFilter', 'prefixFilter', 'suffixFilter'].forEach(id => {
-            document.getElementById(id).addEventListener('input', filterData);
-            document.getElementById(id).addEventListener('change', filterData);
-        });
-
-        function filterData() {
+        function filterNames() {
             const query = document.getElementById('searchInput').value.toLowerCase();
-            const gender = document.getElementById('genderFilter').value;
-            const religion = document.getElementById('religionFilter').value;
-            const language = document.getElementById('languageFilter').value;
-            const theme = document.getElementById('themeFilter').value;
-            const syllable = document.getElementById('syllableFilter').value;
-            const trend = document.getElementById('trendFilter').value;
-            const prefix = document.getElementById('prefixFilter').value;
-            const suffix = document.getElementById('suffixFilter').value;
-
+            
             const filtered = babyNames.filter(item => {
-                const matchesSearch = item.name.toLowerCase().includes(query) || 
-                                      item.meaning.toLowerCase().includes(query) || 
-                                      item.origin.toLowerCase().includes(query) ||
-                                      item.rashi.toLowerCase().includes(query) ||
-                                      item.nakshatra.toLowerCase().includes(query) ||
-                                      item.nativeScript.toLowerCase().includes(query) ||
-                                      item.variants.toLowerCase().includes(query);
-                
-                const matchesGender = gender === 'all' || item.gender === gender;
-                const matchesReligion = religion === 'all' || item.religion === religion;
-                const matchesLanguage = language === 'all' || item.language.toLowerCase().includes(language.toLowerCase()) || item.origin.toLowerCase().includes(language.toLowerCase());
-                const matchesTheme = theme === 'all' || item.theme === theme;
-                const matchesSyllable = syllable === 'all' || (syllable === '3' ? item.syllables >= 3 : item.syllables == syllable);
-                const matchesTrend = trend === 'all' || item.trend.includes(trend);
-                const matchesPrefix = prefix === 'all' || item.initial === prefix;
-                const matchesSuffix = suffix === 'all' || item.ending === suffix;
-
-                return matchesSearch && matchesGender && matchesReligion && matchesLanguage && 
-                       matchesTheme && matchesSyllable && matchesTrend && matchesPrefix && matchesSuffix;
+                const matchesGender = currentGender === 'all' || item.gender === currentGender;
+                const matchesSearch = item.name.toLowerCase().includes(query) || item.meaning.toLowerCase().includes(query) || item.origin.toLowerCase().includes(query);
+                return matchesGender && matchesSearch;
             });
 
             renderNames(filtered);
         }
 
-        function runNakshatraSearch() {
-            const nakshatra = document.getElementById('nakshatraSelect').value;
-            switchTab('names');
-            document.getElementById('searchInput').value = nakshatra;
-            filterData();
+        function setGenderFilter(gender) {
+            currentGender = gender;
+            
+            // Update button styles
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => {
+                if (btn.textContent.toLowerCase() === gender.toLowerCase() || (gender === 'all' && btn.textContent === 'All')) {
+                    btn.className = "filter-btn px-4 py-2 rounded-lg text-sm font-medium bg-indigo-600 text-white transition-all";
+                } else {
+                    btn.className = "filter-btn px-4 py-2 rounded-lg text-sm font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all";
+                }
+            });
+
+            filterNames();
         }
 
-        function filterHukamnama() {
-            const letter = document.getElementById('hukamLetter').value.trim();
-            if(!letter) return;
-            switchTab('names');
-            document.getElementById('searchInput').value = letter;
-            filterData();
-        }
-
-        function filterGotra() {
-            const gotra = document.getElementById('gotraSelect').value;
-            if(gotra === 'all') {
-                renderNames(babyNames);
-                return;
-            }
-            const filtered = babyNames.filter(n => n.gotra === gotra);
-            switchTab('names');
-            renderNames(filtered);
-        }
-
-        function calculateNumerology() {
-            const name = document.getElementById('numerologyNameInput').value.trim();
-            const system = document.getElementById('numerologySystem').value;
-            const resultBox = document.getElementById('numerologyResult');
-
-            if(!name) {
-                resultBox.classList.remove('hidden');
-                resultBox.innerHTML = `<p class="text-rose-700 text-xs font-bold">Please enter a valid name to calculate.</p>`;
-                return;
-            }
-
-            let sum = 0;
-            const upper = name.toUpperCase();
-            for(let i=0; i<upper.length; i++) {
-                sum += (upper.charCodeAt(i) % 9) + 1;
-            }
-            while(sum > 9 && sum !== 11 && sum !== 22 && sum !== 33) {
-                sum = Math.floor(sum / 10) + (sum % 10);
-            }
-
-            resultBox.classList.remove('hidden');
-            resultBox.innerHTML = `
-                <h4 class="font-bold text-rose-900 text-base">✨ Result for "${name}" (${system.toUpperCase()} System)</h4>
-                <p class="text-xl font-extrabold text-rose-600">Expression / Destiny Number: ${sum}</p>
-                <p class="text-xs text-slate-700">Auspicious Harmony Note: Number ${sum} exhibits strong leadership, spiritual intuition, and balanced cosmic vibrations compatible with Vedic astrology.</p>
-            `;
-        }
-
-        function saveFavorite(name) {
-            const notification = document.createElement('div');
-            notification.className = "fixed bottom-5 right-5 bg-slate-900 text-white text-xs px-4 py-3 rounded-xl shadow-xl z-50 transition animate-bounce";
-            notification.innerText = `✨ Saved "${name}" to your favorites!`;
-            document.body.appendChild(notification);
-            setTimeout(() => notification.remove(), 2500);
-        }
-
-        function saveMuhuratAlert(dateStr) {
-            const notification = document.createElement('div');
-            notification.className = "fixed bottom-5 right-5 bg-emerald-600 text-white text-xs font-bold px-4 py-3 rounded-xl shadow-xl z-50";
-            notification.innerText = `🔔 Namakaran Muhurat reminder set for ${dateStr}!`;
-            document.body.appendChild(notification);
-            setTimeout(() => notification.remove(), 3000);
-        }
-
-        // Simulate daily automatic upload of 40-50 names with native scripts & phonetic variants
-        function simulateAddBatch() {
-            const batchPool = [
-                { name: "Armaan", nativeScript: "अरमान / अरमान / آرمان", variants: "Arman, Ahrman", gender: "Boy", religion: "Muslim", language: "Urdu", meaning: "Wish, desire, aspiration", origin: "Persian", trend: "New Drop", theme: "Grace", syllables: 2, rashi: "Mesha (Aries)", nakshatra: "Ashwini", deity: "General", gotra: "General", vedicTag: "Persian Root", negativeWarning: null, initial: "A", ending: "n" },
-                { name: "Kavya", nativeScript: "काव्य / காவ்யா", variants: "Kawia, Kaavya", gender: "Girl", religion: "Hindu", language: "Hindi", meaning: "Poetry in motion", origin: "Sanskrit", trend: "New Drop", theme: "Wisdom", syllables: 2, rashi: "Vrishabha (Taurus)", nakshatra: "Rohini", deity: "Goddess Saraswati", gotra: "Bharadwaja", vedicTag: "Classical Sanskrit", negativeWarning: null, initial: "K", ending: "a" },
-                { name: "Zain", nativeScript: "ज़ैन / زين", variants: "Zayn, Zayne", gender: "Boy", religion: "Muslim", language: "Urdu", meaning: "Grace, beauty", origin: "Arabic", trend: "New Drop", theme: "Grace", syllables: 1, rashi: "Mithun (Gemini)", nakshatra: "Mrigashira", deity: "General", gotra: "General", vedicTag: "Arabic Origin", negativeWarning: null, initial: "Z", ending: "n" },
-                { name: "Anika", nativeScript: "अणिका / அனிகா", variants: "Aneeka, Anica", gender: "Girl", religion: "Hindu", language: "Bengali", meaning: "Grace, splendor", origin: "Sanskrit", trend: "New Drop", theme: "Grace", syllables: 3, rashi: "Karka (Cancer)", nakshatra: "Pushya", deity: "Goddess Durga", gotra: "Atri", vedicTag: "Ancient Root", negativeWarning: "Check regional pronunciation in South dialects.", initial: "A", ending: "a" },
-                { name: "Dev", nativeScript: "देव / தேவ்", variants: "Devesh, Dave", gender: "Boy", religion: "Hindu", language: "Gujarati", meaning: "God, divine", origin: "Sanskrit", trend: "New Drop", theme: "Cosmic", syllables: 1, rashi: "Simha (Leo)", nakshatra: "Magha", deity: "Lord Shiva", gotra: "Kashyapa", vedicTag: "Vedic Pantheon", negativeWarning: null, initial: "D", ending: "v" },
-                { name: "Rayan", nativeScript: "रयान / ரயான்", variants: "Rayhan, Ray", gender: "Boy", religion: "Muslim", language: "Urdu", meaning: "Gates of heaven", origin: "Arabic", trend: "New Drop", theme: "Cosmic", syllables: 2, rashi: "Kanya (Virgo)", nakshatra: "Krittika", deity: "General", gotra: "General", vedicTag: "Global Arabic", negativeWarning: null, initial: "R", ending: "n" }
-            ];
-
-            const newBatch = batchPool.map((item, idx) => ({
-                id: babyNames.length + 1 + idx,
-                ...item
-            }));
-
-            babyNames = [...newBatch, ...babyNames];
-            filterData();
-
-            const notification = document.createElement('div');
-            notification.className = "fixed bottom-5 right-5 bg-rose-600 text-white text-xs font-bold px-4 py-3 rounded-xl shadow-xl z-50";
-            notification.innerText = `🚀 Successfully synced batch of 40+ daily multi-religion names with native scripts!`;
-            document.body.appendChild(notification);
-            setTimeout(() => notification.remove(), 3000);
-        }
-
-        // Initial render on load
-        window.onload = function() {
-            renderNames();
-        };
+        // Initial Load
+        renderNames(babyNames);
     </script>
 </body>
 </html>
