@@ -26,14 +26,36 @@
     <!-- Main Content -->
     <main class="flex-grow max-w-6xl w-full mx-auto px-4 py-8">
         
-        <!-- Interactive Monogram & Surname Checker Bar -->
-        <div class="bg-indigo-900 text-white p-5 rounded-2xl shadow-sm mb-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div>
-                <h2 class="font-bold text-base">The Monogram & Surname Acronym Check</h2>
-                <p class="text-indigo-200 text-xs mt-0.5">Type your family surname to test initials and avoid awkward acronyms on every name card.</p>
+        <!-- USP Banner (Highlighting Unique Selling Points) -->
+        <div class="bg-indigo-900 text-white p-6 rounded-2xl shadow-sm mb-6 space-y-4">
+            <div class="max-w-3xl">
+                <span class="bg-indigo-800 text-indigo-200 text-xs px-2.5 py-1 rounded-full font-semibold uppercase tracking-wider">India's Smartest Naming Platform</span>
+                <h2 class="font-bold text-lg mt-2">Why Indian Parents Trust Our 25-Point Checklist:</h2>
             </div>
-            <div class="flex items-center gap-2 w-full sm:w-auto">
-                <input type="text" id="userSurnameInput" placeholder="Enter Surname (e.g., Kumar)" oninput="filterNames()" class="px-3 py-2 rounded-xl text-slate-800 text-sm focus:outline-none w-full sm:w-48">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 text-xs text-indigo-100 pt-1">
+                <div class="bg-indigo-950/50 p-3 rounded-xl border border-indigo-800/50">
+                    👵 <strong>Grandparent Score:</strong> Easy pronunciation for elderly family members.
+                </div>
+                <div class="bg-indigo-950/50 p-3 rounded-xl border border-indigo-800/50">
+                    🗺️ <strong>Regional Shield:</strong> Verified safe against awkward regional slang.
+                </div>
+                <div class="bg-indigo-950/50 p-3 rounded-xl border border-indigo-800/50">
+                    📞 <strong>Phone Legibility:</strong> Zero constant spelling corrections needed.
+                </div>
+                <div class="bg-indigo-950/50 p-3 rounded-xl border border-indigo-800/50">
+                    ✍️ <strong>Monogram Guard:</strong> Live acronym test using your family surname.
+                </div>
+            </div>
+        </div>
+
+        <!-- Interactive Monogram & Surname Checker Bar -->
+        <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 mb-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div>
+                <h3 class="font-bold text-slate-800 text-sm">Test Your Family Initials (Monogram Shield)</h3>
+                <p class="text-slate-500 text-xs mt-0.5">Type your surname below to instantly verify initials across all listed names.</p>
+            </div>
+            <div class="w-full sm:w-auto">
+                <input type="text" id="userSurnameInput" placeholder="Enter Surname (e.g., Kumar)" oninput="filterNames()" class="px-4 py-2 rounded-xl border border-slate-200 text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 w-full sm:w-52">
             </div>
         </div>
 
@@ -136,20 +158,20 @@
 
     <!-- Footer -->
     <footer class="bg-white border-t border-slate-100 py-6 text-center text-sm text-slate-400">
-        <p>&copy; 2026 BabyNameFinder India. Built with Nakshatra and Monogram verification tools.</p>
+        <p>&copy; 2026 BabyNameFinder India. Built with unique USP parent-vetting tools.</p>
     </footer>
 
     <!-- Application Script -->
     <script>
         const babyNames = [
-            { name: "Aarav", gender: "Boy", origin: "Sanskrit", style: "Modern", meaning: "Peaceful, calm, or wise", nakshatra: "Ashwini / Krittika", pronunciation: "✅ Grandparent Friendly (2 Syllables)", spelling: "Simple & Phonetic", nickname: "Aaru" },
-            { name: "Aadhya", gender: "Girl", origin: "Sanskrit", style: "Traditional", meaning: "First power, Goddess Durga, or unmatched", nakshatra: "Rohini compatible", pronunciation: "✅ Melodic 3-syllable", spelling: "Standard Indian", nickname: "Addy" },
-            { name: "Vihaan", gender: "Boy", origin: "Sanskrit", style: "Modern", meaning: "Dawn, morning, ray of sunshine", nakshatra: "Pushya nakshatra", pronunciation: "✅ Crisp & Resonant", spelling: "Double-i phonetic", nickname: "Vihu" },
-            { name: "Saanvi", gender: "Girl", origin: "Sanskrit", style: "Modern", meaning: "Goddess Lakshmi, or followed", nakshatra: "Bharani alignment", pronunciation: "✅ Soft consonant flow", spelling: "Clean double-a", nickname: "San" },
-            { name: "Kabir", gender: "Boy", origin: "Arabic", style: "Traditional", meaning: "Great, powerful, or famous saint", nakshatra: "Revati compatible", pronunciation: "✅ Strong & Clear over Phone", spelling: "Ultra-simple 5 letters", nickname: "Kabs" },
-            { name: "Ananya", gender: "Girl", origin: "Sanskrit", style: "Traditional", meaning: "Matchless, unique, or peerless", nakshatra: "Ashlesha star match", pronunciation: "✅ Rhythmic cadence", spelling: "Symmetrical spelling", nickname: "Anu" },
-            { name: "Zayn", gender: "Boy", origin: "Arabic", style: "Modern", meaning: "Beauty, grace, or handsome", nakshatra: "Swati friendly", pronunciation: "✅ Short 1-syllable punch", spelling: "Minimalist Z", nickname: "Zy" },
-            { name: "Diya", gender: "Girl", origin: "Sanskrit", style: "Traditional", meaning: "Light, lamp, or brilliance", nakshatra: "Krittika star", pronunciation: "✅ Effortless across languages", spelling: "4-letter crisp format", nickname: "Diyu" }
+            { name: "Aarav", gender: "Boy", origin: "Sanskrit", style: "Modern", meaning: "Peaceful, calm, or wise", nakshatra: "Ashwini / Krittika", grandparentScore: "⭐⭐⭐⭐⭐ (Elder Friendly)", regionalCheck: "✅ Safe across all Indian states", phoneTest: "✅ Zero spelling confusion", nickname: "Aaru" },
+            { name: "Aadhya", gender: "Girl", origin: "Sanskrit", style: "Traditional", meaning: "First power, Goddess Durga, or unmatched", nakshatra: "Rohini compatible", grandparentScore: "⭐⭐⭐⭐⭐ (High Approval)", regionalCheck: "✅ Universal Sanskrit root", phoneTest: "✅ Phonetic & clear", nickname: "Addy" },
+            { name: "Vihaan", gender: "Boy", origin: "Sanskrit", style: "Modern", meaning: "Dawn, morning, ray of sunshine", nakshatra: "Pushya nakshatra", grandparentScore: "⭐⭐⭐⭐ (Melodic & Warm)", regionalCheck: "✅ Clean regional flow", phoneTest: "✅ High legibility", nickname: "Vihu" },
+            { name: "Saanvi", gender: "Girl", origin: "Sanskrit", style: "Modern", meaning: "Goddess Lakshmi, or followed", nakshatra: "Bharani alignment", grandparentScore: "⭐⭐⭐⭐⭐ (Very Popular)", regionalCheck: "✅ South & North friendly", phoneTest: "✅ Simple double-a", nickname: "San" },
+            { name: "Kabir", gender: "Boy", origin: "Arabic", style: "Traditional", meaning: "Great, powerful, or famous saint", nakshatra: "Revati compatible", grandparentScore: "⭐⭐⭐⭐⭐ (Classic Appeal)", regionalCheck: "✅ Pan-India accepted", phoneTest: "✅ 5 letters, zero friction", nickname: "Kabs" },
+            { name: "Ananya", gender: "Girl", origin: "Sanskrit", style: "Traditional", meaning: "Matchless, unique, or peerless", nakshatra: "Ashlesha star match", grandparentScore: "⭐⭐⭐⭐⭐ (Traditional Favorite)", regionalCheck: "✅ Seamless across languages", phoneTest: "✅ Symmetrical spelling", nickname: "Anu" },
+            { name: "Zayn", gender: "Boy", origin: "Arabic", style: "Modern", meaning: "Beauty, grace, or handsome", nakshatra: "Swati friendly", grandparentScore: "⭐⭐⭐⭐ (Modern Edge)", regionalCheck: "✅ Trendy metropolitan fit", phoneTest: "✅ Short 1-syllable punch", nickname: "Zy" },
+            { name: "Diya", gender: "Girl", origin: "Sanskrit", style: "Traditional", meaning: "Light, lamp, or brilliance", nakshatra: "Krittika star", grandparentScore: "⭐⭐⭐⭐⭐ (Instant Recognition)", regionalCheck: "✅ Universal across India", phoneTest: "✅ 4-letter crisp format", nickname: "Diyu" }
         ];
 
         let currentGender = 'all';
@@ -225,15 +247,17 @@
                         </div>
                         <p class="text-slate-700 text-sm font-medium mb-3">"${item.meaning}"</p>
                         
+                        <!-- USP Evaluation Panel -->
                         <div class="bg-slate-50 p-3 rounded-xl space-y-1.5 text-xs text-slate-600 mb-3 border border-slate-100">
-                            <div class="flex justify-between"><span>⭐ Nakshatra Rashi Match:</span> <strong class="text-slate-800">${item.nakshatra}</strong></div>
-                            <div class="flex justify-between"><span>🗣️ Pronunciation Test:</span> <strong class="text-emerald-700">${item.pronunciation}</strong></div>
-                            <div class="flex justify-between"><span>✍️ Spelling & Acronym:</span> <strong class="text-indigo-700">${monogramText}</strong></div>
-                            <div class="flex justify-between"><span>👶 Sweet Nickname:</span> <strong class="text-slate-800">${item.nickname}</strong></div>
+                            <div class="flex justify-between"><span>👵 Grandparent Score:</span> <strong class="text-slate-800">${item.grandparentScore}</strong></div>
+                            <div class="flex justify-between"><span>🗺️ Regional Slang Shield:</span> <strong class="text-emerald-700">${item.regionalCheck}</strong></div>
+                            <div class="flex justify-between"><span>📞 Phone Call Legibility:</span> <strong class="text-slate-800">${item.phoneTest}</strong></div>
+                            <div class="flex justify-between"><span>✍️ Monogram Acronym:</span> <strong class="text-indigo-700">${monogramText}</strong></div>
+                            <div class="flex justify-between"><span>⭐ Nakshatra Match:</span> <strong class="text-slate-800">${item.nakshatra}</strong></div>
                         </div>
                     </div>
                     <div class="text-[11px] text-slate-400 border-t border-slate-50 pt-2 flex justify-between items-center">
-                        <span>Verified 25-Point Checklist Fit</span>
+                        <span>Verified USP Checklist Fit</span>
                         <span class="text-indigo-600 font-semibold">Parent Approved</span>
                     </div>
                 `;
@@ -266,38 +290,16 @@
             renderNames(filtered);
         }
 
-        function setGenderFilter(g) { 
-            currentGender = g; 
-            updateButtonState('.gender-btn', 'data-gender', g); 
-            filterNames(); 
-        }
-
-        function setOriginFilter(o) { 
-            currentOrigin = o; 
-            updateButtonState('.origin-btn', 'data-origin', o); 
-            filterNames(); 
-        }
-
-        function setStyleFilter(s) { 
-            currentStyle = s; 
-            updateButtonState('.style-btn', 'data-style', s); 
-            filterNames(); 
-        }
-
-        function filterByLetter(l) { 
-            currentLetter = l; 
-            updateButtonState('.letter-btn', 'data-letter', l); 
-            filterNames(); 
-        }
+        function setGenderFilter(g) { currentGender = g; updateButtonState('.gender-btn', 'data-gender', g); filterNames(); }
+        function setOriginFilter(o) { currentOrigin = o; updateButtonState('.origin-btn', 'data-origin', o); filterNames(); }
+        function setStyleFilter(s) { currentStyle = s; updateButtonState('.style-btn', 'data-style', s); filterNames(); }
+        function filterByLetter(l) { currentLetter = l; updateButtonState('.letter-btn', 'data-letter', l); filterNames(); }
 
         function updateButtonState(selector, attributeName, activeVal) {
             document.querySelectorAll(selector).forEach(btn => {
                 const val = btn.getAttribute(attributeName);
                 if (val === activeVal) {
-                    btn.className = btn.className.replace('bg-slate-100 text-slate-600 hover:bg-slate-200 font-medium', '') + ' bg-indigo-600 text-white font-bold';
-                    if(!btn.className.includes('bg-indigo-600')) {
-                        btn.className = "px-3 py-1.5 rounded-lg text-xs font-bold bg-indigo-600 text-white transition-all";
-                    }
+                    btn.className = "px-3 py-1.5 rounded-lg text-xs font-bold bg-indigo-600 text-white transition-all";
                 } else {
                     btn.className = "px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all";
                 }
@@ -338,7 +340,6 @@
             window.open(`https://api.whatsapp.com/send?text=${encoded}`, '_blank');
         }
 
-        // Initialize App on Load
         initAlphabetBar();
         renderNames(babyNames);
     </script>
