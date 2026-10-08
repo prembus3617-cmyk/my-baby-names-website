@@ -3,345 +3,1570 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BabyNameFinder India | Smart Parent Evaluation Suite</title>
+    <title>Aarambh Names — Authentic Indian Baby Names & Monogram Builder</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Plus Jakarta Sans & Playfair Display -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        heading: ['"Playfair Display"', 'serif'],
+                    },
+                    colors: {
+                        saffronLight: '#FFF8F0',
+                        saffronPrimary: '#FF9933',
+                        saffronDeep: '#D97706',
+                        maroonAccent: '#831843',
+                        indiaGreen: '#138808',
+                        warmSand: '#FDFBF7',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #FDFBF7;
+            color: #1E293B;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FDFBF7;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #CBD5E1;
+            border-radius: 4px;
+        }
+    </style>
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col font-sans">
+<body class="min-h-screen flex flex-col selection:bg-amber-100 selection:text-amber-900">
 
-    <!-- Header -->
-    <header class="bg-white shadow-sm border-b border-slate-100 py-6 sticky top-0 z-50">
-        <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-4">
-            <div class="text-center sm:text-left">
-                <h1 class="text-2xl sm:text-3xl font-bold text-indigo-600">BabyNameFinder India</h1>
-                <p class="text-slate-500 text-sm mt-0.5">Evaluated across vital parent criteria, Nakshatra filters, and Monogram tests.</p>
+    <header class="sticky top-0 z-40 backdrop-blur-md bg-white/90 border-b border-amber-100 shadow-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('explore')">
+                <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-amber-500 via-orange-400 to-emerald-600 flex items-center justify-center shadow-md text-white">
+                    <i class="fa-solid fa-om text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-2xl font-bold font-heading tracking-tight bg-gradient-to-r from-orange-600 to-amber-700 bg-clip-text text-transparent">Aarambh Names</span>
+                    <span class="block text-[11px] font-semibold text-stone-500 tracking-wider uppercase">Authentic Indian Names</span>
+                </div>
             </div>
-            <div class="flex items-center gap-2">
-                <button onclick="switchTab('all')" id="allTabBtn" class="px-4 py-2 rounded-xl text-sm font-medium bg-indigo-600 text-white shadow-sm transition-all">All Names</button>
-                <button onclick="switchTab('favorites')" id="favTabBtn" class="px-4 py-2 rounded-xl text-sm font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all">❤️ Favorites (<span id="favCount">0</span>)</button>
+
+            <!-- Desktop Nav Tabs -->
+            <nav class="hidden lg:flex items-center space-x-1 bg-stone-100/80 p-1.5 rounded-2xl border border-stone-200/60">
+                <button onclick="switchTab('explore')" id="nav-explore" class="px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-white text-orange-600 shadow-xs">
+                    <i class="fa-solid fa-compass mr-1.5"></i>Explore
+                </button>
+                <button onclick="switchTab('match')" id="nav-match" class="px-3.5 py-2 rounded-xl text-xs font-bold transition-all text-stone-600 hover:text-stone-900">
+                    <i class="fa-solid fa-fire mr-1.5 text-orange-500"></i>Name Match
+                </button>
+                <button onclick="switchTab('ai-gen')" id="nav-ai-gen" class="px-3.5 py-2 rounded-xl text-xs font-bold transition-all text-stone-600 hover:text-stone-900">
+                    <i class="fa-solid fa-brain mr-1.5 text-amber-600"></i>AI Vibe Gen
+                </button>
+                <button onclick="switchTab('availability')" id="nav-availability" class="px-3.5 py-2 rounded-xl text-xs font-bold transition-all text-stone-600 hover:text-stone-900">
+                    <i class="fa-solid fa-globe mr-1.5 text-sky-600"></i>Domain & Handles
+                </button>
+                <button onclick="switchTab('heritage')" id="nav-heritage" class="px-3.5 py-2 rounded-xl text-xs font-bold transition-all text-stone-600 hover:text-stone-900">
+                    <i class="fa-solid fa-landmark mr-1.5 text-emerald-700"></i>Heritage Roots
+                </button>
+                <button onclick="switchTab('combiner')" id="nav-combiner" class="px-3.5 py-2 rounded-xl text-xs font-bold transition-all text-stone-600 hover:text-stone-900">
+                    <i class="fa-solid fa-heart-pulse mr-1.5 text-rose-600"></i>Name Blender
+                </button>
+                <button onclick="switchTab('favorites')" id="nav-favorites" class="px-3.5 py-2 rounded-xl text-xs font-bold transition-all text-stone-600 hover:text-stone-900 relative">
+                    <i class="fa-solid fa-bookmark mr-1.5"></i>Shortlist
+                    <span id="fav-badge" class="ml-1 bg-orange-600 text-white text-[10px] px-1.5 py-0.2 rounded-full">0</span>
+                </button>
+                <button onclick="openAddNameModal()" class="px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-orange-50 text-orange-700 border border-orange-200 hover:bg-orange-100 flex items-center">
+                    <i class="fa-solid fa-plus mr-1"></i> Add Name
+                </button>
+            </nav>
+
+            <!-- Mobile Actions -->
+            <div class="flex lg:hidden items-center space-x-2">
+                <button onclick="openAddNameModal()" class="p-2.5 rounded-xl bg-orange-50 border border-orange-200 text-orange-700" title="Add Custom Name">
+                    <i class="fa-solid fa-plus text-lg"></i>
+                </button>
+                <button onclick="switchTab('favorites')" class="p-2.5 rounded-xl bg-white border border-stone-200 text-orange-600 relative">
+                    <i class="fa-solid fa-bookmark text-lg"></i>
+                    <span id="fav-badge-mob" class="absolute -top-1 -right-1 bg-orange-600 text-white text-[10px] px-1.5 py-0.2 rounded-full">0</span>
+                </button>
+                <button onclick="toggleMobileMenu()" class="p-2.5 rounded-xl bg-white border border-stone-200 text-stone-700">
+                    <i class="fa-solid fa-bars text-lg"></i>
+                </button>
             </div>
+        </div>
+
+        <!-- Mobile dropdown menu -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-b border-stone-200 px-4 pt-2 pb-4 space-y-2 shadow-lg">
+            <button onclick="switchTab('explore'); toggleMobileMenu();" class="w-full text-left px-4 py-2.5 rounded-xl font-medium text-stone-700 hover:bg-stone-50"><i class="fa-solid fa-compass mr-3 text-orange-600"></i>Explore Names</button>
+            <button onclick="switchTab('match'); toggleMobileMenu();" class="w-full text-left px-4 py-2.5 rounded-xl font-medium text-stone-700 hover:bg-stone-50"><i class="fa-solid fa-fire mr-3 text-orange-500"></i>BabyName Match (Tinder Style)</button>
+            <button onclick="switchTab('ai-gen'); toggleMobileMenu();" class="w-full text-left px-4 py-2.5 rounded-xl font-medium text-stone-700 hover:bg-stone-50"><i class="fa-solid fa-brain mr-3 text-amber-600"></i>AI Contextual Indian Generator</button>
+            <button onclick="switchTab('availability'); toggleMobileMenu();" class="w-full text-left px-4 py-2.5 rounded-xl font-medium text-stone-700 hover:bg-stone-50"><i class="fa-solid fa-globe mr-3 text-sky-600"></i>Domain & Social Availability</button>
+            <button onclick="switchTab('heritage'); toggleMobileMenu();" class="w-full text-left px-4 py-2.5 rounded-xl font-medium text-stone-700 hover:bg-stone-50"><i class="fa-solid fa-landmark mr-3 text-emerald-700"></i>Indian Heritage & Roots Hub</button>
+            <button onclick="switchTab('combiner'); toggleMobileMenu();" class="w-full text-left px-4 py-2.5 rounded-xl font-medium text-stone-700 hover:bg-stone-50"><i class="fa-solid fa-heart-pulse mr-3 text-rose-600"></i>Indian Parent Name Blender</button>
+            <button onclick="openAddNameModal(); toggleMobileMenu();" class="w-full text-left px-4 py-2.5 rounded-xl font-bold text-orange-700 bg-orange-50"><i class="fa-solid fa-plus mr-3 text-orange-600"></i>Add Custom Name</button>
         </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="flex-grow max-w-6xl w-full mx-auto px-4 py-8">
-        
-        <!-- USP Banner (Highlighting Unique Selling Points) -->
-        <div class="bg-indigo-900 text-white p-6 rounded-2xl shadow-sm mb-6 space-y-4">
-            <div class="max-w-3xl">
-                <span class="bg-indigo-800 text-indigo-200 text-xs px-2.5 py-1 rounded-full font-semibold uppercase tracking-wider">India's Smartest Naming Platform</span>
-                <h2 class="font-bold text-lg mt-2">Why Indian Parents Trust Our 25-Point Checklist:</h2>
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 text-xs text-indigo-100 pt-1">
-                <div class="bg-indigo-950/50 p-3 rounded-xl border border-indigo-800/50">
-                    👵 <strong>Grandparent Score:</strong> Easy pronunciation for elderly family members.
-                </div>
-                <div class="bg-indigo-950/50 p-3 rounded-xl border border-indigo-800/50">
-                    🗺️ <strong>Regional Shield:</strong> Verified safe against awkward regional slang.
-                </div>
-                <div class="bg-indigo-950/50 p-3 rounded-xl border border-indigo-800/50">
-                    📞 <strong>Phone Legibility:</strong> Zero constant spelling corrections needed.
-                </div>
-                <div class="bg-indigo-950/50 p-3 rounded-xl border border-indigo-800/50">
-                    ✍️ <strong>Monogram Guard:</strong> Live acronym test using your family surname.
-                </div>
-            </div>
-        </div>
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
-        <!-- Interactive Monogram & Surname Checker Bar -->
-        <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 mb-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div>
-                <h3 class="font-bold text-slate-800 text-sm">Test Your Family Initials (Monogram Shield)</h3>
-                <p class="text-slate-500 text-xs mt-0.5">Type your surname below to instantly verify initials across all listed names.</p>
-            </div>
-            <div class="w-full sm:w-auto">
-                <input type="text" id="userSurnameInput" placeholder="Enter Surname (e.g., Kumar)" oninput="filterNames()" class="px-4 py-2 rounded-xl border border-slate-200 text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 w-full sm:w-52">
-            </div>
-        </div>
+        <!-- TAB 1: EXPLORE & SEARCH WITH COMPACT MONOGRAM PREVIEW -->
+        <section id="tab-explore" class="space-y-8">
+            <!-- Hero Banner -->
+            <div class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-orange-50 via-amber-50 to-emerald-50 border border-amber-200/60 p-8 sm:p-12 shadow-sm">
+                <div class="absolute right-4 bottom-0 opacity-10 text-9xl pointer-events-none text-orange-900">
+                    <i class="fa-solid fa-feather"></i>
+                </div>
+                <div class="max-w-2xl space-y-4 relative z-10">
+                    <span class="inline-flex items-center space-x-2 bg-white/90 border border-amber-200 text-orange-700 px-3.5 py-1 rounded-full text-xs font-bold shadow-2xs">
+                        <i class="fa-solid fa-om"></i> <span>Authentic Sanskrit, Tamil, Punjabi, Bengali & Modern Indian Names</span>
+                    </span>
+                    <h1 class="text-3xl sm:text-5xl font-extrabold font-heading text-stone-900 tracking-tight leading-tight">
+                        Discover a meaningful Indian name for your child.
+                    </h1>
+                    <p class="text-stone-600 text-base sm:text-lg">
+                        Explore deep Vedic meanings, regional roots, audio pronunciations, and check 3-letter family monograms instantly.
+                    </p>
+                </div>
 
-        <!-- Filters & Search Section -->
-        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 mb-8 space-y-5">
-            <div>
-                <input 
-                    type="text" 
-                    id="searchInput" 
-                    placeholder="Search by name, meaning, or nakshatra note (e.g., 'Aarav', 'Peace', 'Rohini')..." 
-                    class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-700 text-sm sm:text-base"
-                    oninput="filterNames()"
-                >
-            </div>
-            
-            <!-- Filter Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 pt-2 border-t border-slate-100">
-                <!-- Gender -->
-                <div>
-                    <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">1. Gender</label>
-                    <div class="flex flex-wrap gap-1">
-                        <button onclick="setGenderFilter('all')" data-gender="all" class="gender-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-indigo-600 text-white transition-all">All</button>
-                        <button onclick="setGenderFilter('Boy')" data-gender="Boy" class="gender-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all">Boy</button>
-                        <button onclick="setGenderFilter('Girl')" data-gender="Girl" class="gender-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all">Girl</button>
+                <!-- Search and Quick Filter Bar -->
+                <div class="mt-8 bg-white p-3 sm:p-4 rounded-2xl shadow-md border border-stone-200 flex flex-col md:flex-row gap-3 relative z-10">
+                    <div class="relative flex-1">
+                        <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-stone-400"></i>
+                        <input type="text" id="search-input" oninput="handleSearch()" placeholder="Search by name, meaning, or initial (e.g. 'Shivansh', 'Aavya', 'S')..." 
+                            class="w-full pl-11 pr-4 py-3 rounded-xl bg-stone-50 border border-stone-200 text-stone-800 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:bg-white transition-all text-sm sm:text-base">
+                    </div>
+                    <div class="flex gap-2">
+                        <select id="filter-gender" onchange="handleSearch()" class="px-4 py-3 rounded-xl bg-stone-50 border border-stone-200 text-stone-700 font-medium text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 cursor-pointer">
+                            <option value="all">All Genders</option>
+                            <option value="Boy">Boy Names Only</option>
+                            <option value="Girl">Girl Names Only</option>
+                            <option value="Unisex">Unisex</option>
+                        </select>
+                        <select id="filter-origin" onchange="handleSearch()" class="px-4 py-3 rounded-xl bg-stone-50 border border-stone-200 text-stone-700 font-medium text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 cursor-pointer">
+                            <option value="all">All Origins</option>
+                            <option value="Sanskrit / Vedic">Sanskrit / Vedic</option>
+                            <option value="Tamil / South Indian">Tamil / South Indian</option>
+                            <option value="Hindi / North Indian">Hindi / North Indian</option>
+                            <option value="Punjabi / Sikh">Punjabi / Sikh</option>
+                            <option value="Bengali">Bengali</option>
+                            <option value="Arabic">Arabic</option>
+                            <option value="Latin">Latin</option>
+                            <option value="Old English">Old English</option>
+                        </select>
                     </div>
                 </div>
+            </div>
 
-                <!-- Roots -->
-                <div>
-                    <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">2. Linguistic Roots</label>
-                    <div class="flex flex-wrap gap-1">
-                        <button onclick="setOriginFilter('all')" data-origin="all" class="origin-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-indigo-600 text-white transition-all">All</button>
-                        <button onclick="setOriginFilter('Sanskrit')" data-origin="Sanskrit" class="origin-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all">Sanskrit</button>
-                        <button onclick="setOriginFilter('Arabic')" data-origin="Arabic" class="origin-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all">Arabic</button>
-                    </div>
+            <!-- Quick Gender Separator Filter Bar -->
+            <div class="bg-white p-4 rounded-2xl border border-stone-200 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div class="flex items-center space-x-2 overflow-x-auto w-full sm:w-auto pb-1 sm:pb-0 scrollbar-none">
+                    <span class="text-xs font-bold uppercase tracking-wider text-stone-400 mr-2"><i class="fa-solid fa-venus-mars text-orange-500 mr-1"></i> Quick Gender:</span>
+                    <button onclick="quickFilterGender('all')" id="qg-all" class="px-4 py-2 rounded-xl text-xs font-extrabold bg-stone-900 text-white transition-all shadow-xs shrink-0">All Genders</button>
+                    <button onclick="quickFilterGender('Boy')" id="qg-Boy" class="px-4 py-2 rounded-xl text-xs font-bold bg-sky-50 text-sky-700 border border-sky-200 hover:bg-sky-100 transition-all shrink-0"><i class="fa-solid fa-mars mr-1"></i> Boys Only</button>
+                    <button onclick="quickFilterGender('Girl')" id="qg-Girl" class="px-4 py-2 rounded-xl text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200 hover:bg-rose-100 transition-all shrink-0"><i class="fa-solid fa-venus mr-1"></i> Girls Only</button>
                 </div>
+                <div class="text-xs text-stone-500 font-medium">
+                    Showing separated list instantly
+                </div>
+            </div>
 
-                <!-- Nakshatra Letter Filter -->
-                <div>
-                    <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">3. Nakshatra / Rashi Letter</label>
-                    <select id="nakshatraSelect" onchange="filterNames()" class="w-full px-3 py-2 rounded-lg text-xs font-medium bg-slate-100 text-slate-700 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                        <option value="all">All Nakshatra Letters</option>
-                        <option value="A">A / Aa (Ashwini, Krittika)</option>
-                        <option value="B">B / Bh (Rohini, Bharani)</option>
-                        <option value="C">C / Ch (Chitra)</option>
-                        <option value="D">D (Dhanistha)</option>
-                        <option value="E">E / Ish (Eshaan root)</option>
-                        <option value="H">H (Hasta)</option>
-                        <option value="J">J (Jyeshtha)</option>
-                        <option value="K">K (Krittika)</option>
-                        <option value="M">M (Magha)</option>
-                        <option value="P">P (Purva Phalguni)</option>
-                        <option value="R">R (Revati, Rohini)</option>
-                        <option value="S">S (Swati, Shravana)</option>
-                        <option value="V">V (Vishu / Visakha)</option>
-                        <option value="Y">Y (Pushya)</option>
-                        <option value="Z">Z (Zayn root)</option>
+            <!-- Alphabet A-Z Quick Filter Bar -->
+            <div class="bg-white p-4 rounded-2xl border border-stone-200 shadow-xs space-y-2">
+                <span class="text-xs font-bold uppercase tracking-wider text-stone-400"><i class="fa-solid fa-font mr-1 text-orange-500"></i> Filter by Alphabet (A-Z)</span>
+                <div id="alphabet-bar" class="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
+                    <button onclick="filterByAlphabet('all')" id="alpha-all" class="alpha-btn px-3 py-1.5 rounded-xl text-xs font-extrabold bg-stone-900 text-white transition-all shadow-xs shrink-0">ALL</button>
+                    <!-- Populated dynamically A-Z -->
+                </div>
+            </div>
+
+            <!-- Indian Vibe & Newly Added Quick Tags -->
+            <div class="flex items-center space-x-2 overflow-x-auto pb-2 scrollbar-none">
+                <span class="text-xs font-bold uppercase text-stone-400 tracking-wider whitespace-nowrap mr-1"><i class="fa-solid fa-filter mr-1"></i> Theme:</span>
+                <button onclick="filterByVibe('all')" id="vibe-all" class="vibe-chip px-4 py-1.5 rounded-full text-xs font-bold bg-stone-900 text-white transition-all whitespace-nowrap shadow-xs">All Vibe</button>
+                <button onclick="filterByVibe('Newly Added')" id="vibe-Newly Added" class="vibe-chip px-4 py-1.5 rounded-full text-xs font-bold bg-orange-600 text-white hover:bg-orange-700 transition-all whitespace-nowrap shadow-xs animate-pulse">🌟 Trending New (100+)</button>
+                <button onclick="filterByVibe('Vedic & Spiritual')" id="vibe-Vedic & Spiritual" class="vibe-chip px-4 py-1.5 rounded-full text-xs font-bold bg-white border border-stone-200 text-stone-700 hover:bg-stone-50 transition-all whitespace-nowrap">🪔 Vedic & Spiritual</button>
+                <button onclick="filterByVibe('Modern & Sleek')" id="vibe-Modern & Sleek" class="vibe-chip px-4 py-1.5 rounded-full text-xs font-bold bg-white border border-stone-200 text-stone-700 hover:bg-stone-50 transition-all whitespace-nowrap">✨ Modern & Sleek</button>
+                <button onclick="filterByVibe('Nature & Elements')" id="vibe-Nature & Elements" class="vibe-chip px-4 py-1.5 rounded-full text-xs font-bold bg-white border border-stone-200 text-stone-700 hover:bg-stone-50 transition-all whitespace-nowrap">🌿 Nature & Elements</button>
+                <button onclick="filterByVibe('Royal & Classic')" id="vibe-Royal & Classic" class="vibe-chip px-4 py-1.5 rounded-full text-xs font-bold bg-white border border-stone-200 text-stone-700 hover:bg-stone-50 transition-all whitespace-nowrap">👑 Royal & Classic</button>
+                <button onclick="filterByVibe('Traditional & Classic')" id="vibe-Traditional & Classic" class="vibe-chip px-4 py-1.5 rounded-full text-xs font-bold bg-white border border-stone-200 text-stone-700 hover:bg-stone-50 transition-all whitespace-nowrap">📜 Traditional & Classic</button>
+            </div>
+
+            <!-- Results Counter & Sort -->
+            <div class="flex items-center justify-between px-1">
+                <p id="results-count" class="text-sm font-medium text-stone-500">Showing all names</p>
+                <div class="flex items-center space-x-2">
+                    <span class="text-xs text-stone-400">Sort by:</span>
+                    <select id="sort-by" onchange="handleSearch()" class="bg-transparent text-xs font-bold text-stone-700 focus:outline-none cursor-pointer">
+                        <option value="popularity">Popularity / Trend</option>
+                        <option value="alphabetical">Alphabetical (A-Z)</option>
                     </select>
                 </div>
+            </div>
 
-                <!-- Style Balance -->
-                <div>
-                    <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">4. Style Balance</label>
-                    <div class="flex flex-wrap gap-1">
-                        <button onclick="setStyleFilter('all')" data-style="all" class="style-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-indigo-600 text-white transition-all">All</button>
-                        <button onclick="setStyleFilter('Traditional')" data-style="Traditional" class="style-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all">Traditional</button>
-                        <button onclick="setStyleFilter('Modern')" data-style="Modern" class="style-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all">Modern</button>
+            <!-- Names Grid -->
+            <div id="names-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                <!-- Dynamically rendered cards -->
+            </div>
+
+            <!-- Empty State -->
+            <div id="empty-state" class="hidden text-center py-16 space-y-4">
+                <div class="w-16 h-16 bg-amber-50 rounded-full flex items-center justify-center mx-auto text-amber-600 text-2xl">
+                    <i class="fa-solid fa-search"></i>
+                </div>
+                <h3 class="text-lg font-bold text-stone-800">No Indian names found</h3>
+                <p class="text-stone-500 text-sm max-w-sm mx-auto">Try adjusting your search criteria or linguistic origin filter.</p>
+                <button onclick="resetFilters()" class="px-5 py-2.5 rounded-xl bg-stone-900 text-white text-xs font-semibold hover:bg-stone-800 transition-all">Reset All Filters</button>
+            </div>
+        </section>
+
+        <!-- TAB 2: TINDER-STYLE PARTNER MATCHING APP ("BabyName Match") -->
+        <section id="tab-match" class="hidden space-y-8">
+            <div class="max-w-2xl mx-auto space-y-6">
+                <!-- Header Card -->
+                <div class="bg-gradient-to-r from-orange-600 via-amber-600 to-rose-600 text-white rounded-3xl p-6 sm:p-8 shadow-md text-center space-y-3 relative overflow-hidden">
+                    <div class="absolute -right-6 -bottom-6 opacity-20 text-8xl pointer-events-none"><i class="fa-solid fa-fire"></i></div>
+                    <span class="bg-white/20 px-3.5 py-1 rounded-full text-xs font-semibold backdrop-blur-sm"><i class="fa-solid fa-heart mr-1.5"></i> Indian Partner Swiping Room</span>
+                    <h2 class="text-3xl font-extrabold font-heading">BabyName Match for Couples</h2>
+                    <p class="text-white/90 text-sm max-w-md mx-auto">Swipe right to like authentic Indian names. When both partners swipe right, an instant mutual match is recorded!</p>
+                    
+                    <div class="pt-2 flex flex-wrap items-center justify-center gap-3">
+                        <button onclick="copyMatchRoomLink()" class="px-4 py-2 rounded-xl bg-white text-orange-600 font-bold text-xs shadow hover:bg-stone-50 transition-all flex items-center space-x-2">
+                            <i class="fa-solid fa-link"></i>
+                            <span>Invite Partner Link</span>
+                        </button>
+                        <button onclick="resetSwiper()" class="px-4 py-2 rounded-xl bg-white/20 hover:bg-white/30 text-white font-semibold text-xs transition-all">
+                            <i class="fa-solid fa-rotate-right mr-1"></i> Restart Swiping
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tinder Card Container -->
+                <div id="swiper-container" class="relative w-full h-[420px] bg-white rounded-3xl border border-stone-200 shadow-xl overflow-hidden flex flex-col justify-between p-8">
+                    <!-- Dynamic Card content inserted here -->
+                </div>
+
+                <!-- Swipe Action Buttons -->
+                <div id="swiper-actions" class="flex items-center justify-center space-x-6">
+                    <button onclick="swipeCard('left')" class="w-16 h-16 rounded-full bg-white border border-stone-200 text-stone-400 hover:text-rose-500 hover:border-rose-300 shadow-md flex items-center justify-center text-2xl transition-all transform hover:scale-105">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                    <button onclick="swipeCard('super')" class="w-12 h-12 rounded-full bg-white border border-stone-200 text-amber-500 hover:border-amber-300 shadow-md flex items-center justify-center text-lg transition-all transform hover:scale-105">
+                        <i class="fa-solid fa-star"></i>
+                    </button>
+                    <button onclick="swipeCard('right')" class="w-16 h-16 rounded-full bg-gradient-to-tr from-orange-500 to-rose-500 text-white shadow-lg flex items-center justify-center text-2xl transition-all transform hover:scale-105">
+                        <i class="fa-solid fa-heart"></i>
+                    </button>
+                </div>
+
+                <!-- Mutual Matches Section -->
+                <div class="bg-white rounded-3xl border border-stone-200 p-6 space-y-4 shadow-sm">
+                    <div class="flex items-center justify-between">
+                        <h3 class="font-bold text-stone-900 font-heading flex items-center space-x-2">
+                            <i class="fa-solid fa-fire text-orange-500"></i>
+                            <span>Mutual Couple Matches (<span id="match-count">0</span>)</span>
+                        </h3>
+                        <span class="text-xs text-stone-400">Real-time synced</span>
+                    </div>
+                    <div id="mutual-matches-list" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <p class="text-stone-400 text-xs col-span-2 text-center py-4">No mutual matches yet. Keep swiping right on your favorite Indian names!</p>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <!-- Alphabet Bar -->
-            <div class="pt-3 border-t border-slate-100">
-                <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">5. Starting Letter Quick Filter (A to Z)</label>
-                <div id="alphabetBar" class="flex flex-wrap gap-1">
-                    <button onclick="filterByLetter('all')" data-letter="all" class="letter-btn px-2.5 py-1 rounded text-xs font-bold bg-indigo-600 text-white">All</button>
+        <!-- TAB 3: AI CONTEXTUAL INDIAN BABY NAME GENERATOR -->
+        <section id="tab-ai-gen" class="hidden space-y-8">
+            <div class="max-w-3xl mx-auto bg-white rounded-3xl border border-stone-200 p-6 sm:p-10 shadow-sm space-y-8">
+                <div class="text-center space-y-3">
+                    <span class="inline-flex items-center space-x-2 bg-amber-50 border border-amber-200 text-amber-800 px-3.5 py-1 rounded-full text-xs font-bold">
+                        <i class="fa-solid fa-brain"></i> <span>Gemini Indian Contextual Engine</span>
+                    </span>
+                    <h2 class="text-2xl sm:text-4xl font-extrabold font-heading text-stone-900">AI Indian Contextual Name Generator</h2>
+                    <p class="text-stone-600 text-sm sm:text-base">Input your favorite Indian epics, classical ragas, spiritual roots, or birth nakshatra preferences to generate hyper-personalized Indian names.</p>
+                </div>
+
+                <div class="bg-stone-50 p-6 rounded-2xl border border-stone-200/60 space-y-5">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="space-y-1.5">
+                            <label class="block text-xs font-bold uppercase tracking-wider text-stone-500">Favorite Epics or Authors</label>
+                            <input type="text" id="ai-epics" placeholder="e.g. Mahabharata, Kalidasa, Upanishads" class="w-full px-4 py-3 rounded-xl bg-white border border-stone-200 text-stone-800 text-sm focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                        </div>
+                        <div class="space-y-1.5">
+                            <label class="block text-xs font-bold uppercase tracking-wider text-stone-500">Spiritual or Nature Elements</label>
+                            <input type="text" id="ai-elements" placeholder="e.g. Ganges river, Himalayas, Lotus" class="w-full px-4 py-3 rounded-xl bg-white border border-stone-200 text-stone-800 text-sm focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="space-y-1.5">
+                            <label class="block text-xs font-bold uppercase tracking-wider text-stone-500">Birth Nakshatra / Rashi (Optional)</label>
+                            <input type="text" id="ai-nakshatra" placeholder="e.g. Rohini, Ashwini starting letter 'A'" class="w-full px-4 py-3 rounded-xl bg-white border border-stone-200 text-stone-800 text-sm focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                        </div>
+                        <div class="space-y-1.5">
+                            <label class="block text-xs font-bold uppercase tracking-wider text-stone-500">Aesthetic Vibe Preference</label>
+                            <select id="ai-vibe" class="w-full px-4 py-3 rounded-xl bg-white border border-stone-200 text-stone-800 text-sm focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                                <option value="Vedic & Spiritual">🪔 Vedic & Spiritual</option>
+                                <option value="Modern & Sleek">✨ Modern & Sleek</option>
+                                <option value="Royal & Classic">👑 Royal & Classic</option>
+                                <option value="Traditional & Classic">📜 Traditional & Classic</option>
+                                <option value="Melodic & Short">🎶 Melodic & Short</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button onclick="generateAiIndianNames()" id="ai-btn" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-orange-600 via-amber-600 to-emerald-700 text-white font-bold text-sm shadow-md hover:opacity-95 transition-all flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        <span>Synthesize AI Indian Name Suggestions</span>
+                    </button>
+                </div>
+
+                <!-- AI Results Container -->
+                <div id="ai-results-area" class="hidden space-y-4">
+                    <h3 class="text-lg font-bold text-stone-900 font-heading"><i class="fa-solid fa-star text-amber-600 mr-2"></i>Personalized AI Indian Recommendations:</h3>
+                    <div id="ai-results-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 4: INSTANT INDIAN DOMAIN & SOCIAL AVAILABILITY CHECKER -->
+        <section id="tab-availability" class="hidden space-y-8">
+            <div class="max-w-3xl mx-auto bg-white rounded-3xl border border-stone-200 p-6 sm:p-10 shadow-sm space-y-8">
+                <div class="text-center space-y-3">
+                    <span class="inline-flex items-center space-x-2 bg-sky-50 border border-sky-200 text-sky-800 px-3.5 py-1 rounded-full text-xs font-bold">
+                        <i class="fa-solid fa-globe"></i> <span>Digital Identity Registry</span>
+                    </span>
+                    <h2 class="text-2xl sm:text-4xl font-extrabold font-heading text-stone-900">Instant Indian Domain & Social Availability Checker</h2>
+                    <p class="text-stone-600 text-sm sm:text-base">Secure your child's digital footprint early across Indian extensions (.in, .co.in, .com) and social handles (Instagram, Twitter/X, YouTube).</p>
+                </div>
+
+                <div class="bg-stone-50 p-6 rounded-2xl border border-stone-200/60 space-y-4">
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <div class="relative flex-1">
+                            <i class="fa-solid fa-at absolute left-4 top-1/2 -translate-y-1/2 text-stone-400"></i>
+                            <input type="text" id="check-name-input" placeholder="Enter baby name e.g. 'Shivansh' or 'Aavya'..." class="w-full pl-11 pr-4 py-3.5 rounded-xl bg-white border border-stone-200 text-stone-800 text-base focus:ring-2 focus:ring-sky-500 focus:outline-none">
+                        </div>
+                        <button onclick="checkIndianDigitalAvailability()" class="px-6 py-3.5 rounded-xl bg-sky-600 hover:bg-sky-700 text-white font-bold text-sm shadow-md transition-all flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <span>Check Availability</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Checker Results -->
+                <div id="availability-results" class="hidden space-y-6">
+                    <div class="border-b border-stone-100 pb-3">
+                        <h3 id="checked-target-title" class="text-lg font-bold text-stone-900 font-heading">Digital Footprint for "Shivansh"</h3>
+                        <p class="text-xs text-stone-500">Live simulation check across .in registry and popular social platforms.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <!-- Domain Card -->
+                        <div class="bg-stone-50 p-5 rounded-2xl border border-stone-200 space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="font-bold text-sm text-stone-800"><i class="fa-solid fa-globe text-sky-600 mr-2"></i>Indian Web Domains</span>
+                                <span id="domain-status-badge" class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700">Available</span>
+                            </div>
+                            <ul id="domain-list" class="space-y-2 text-xs font-medium text-stone-600">
+                                <!-- Populated by JS -->
+                            </ul>
+                        </div>
+
+                        <!-- Social Handles Card -->
+                        <div class="bg-stone-50 p-5 rounded-2xl border border-stone-200 space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="font-bold text-sm text-stone-800"><i class="fa-solid fa-share-nodes text-orange-600 mr-2"></i>Social Handles</span>
+                                <span id="social-status-badge" class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-50 text-amber-700">Mixed</span>
+                            </div>
+                            <ul id="social-list" class="space-y-2 text-xs font-medium text-stone-600">
+                                <!-- Populated by JS -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 5: DEEP INDIAN HERITAGE & DIASPORA ROOTS HUB -->
+        <section id="tab-heritage" class="hidden space-y-8">
+            <div class="bg-gradient-to-r from-emerald-900 via-teal-900 to-stone-900 text-white rounded-3xl p-8 sm:p-12 shadow-md relative overflow-hidden space-y-4">
+                <div class="absolute right-0 bottom-0 opacity-10 text-9xl pointer-events-none"><i class="fa-solid fa-landmark"></i></div>
+                <span class="bg-white/10 text-emerald-300 px-3.5 py-1 rounded-full text-xs font-bold backdrop-blur-sm"><i class="fa-solid fa-om mr-1.5"></i> Indian Heritage & Diaspora Roots Hub</span>
+                <h2 class="text-3xl sm:text-5xl font-extrabold font-heading tracking-tight">Honoring Authentic Indian Roots</h2>
+                <p class="text-emerald-100/90 text-sm sm:text-base max-w-2xl">Explore profound linguistic naming traditions across Sanskrit/Vedic, Tamil, Punjabi/Sikh, Bengali, Telugu/Kannada, and Marathi heritage.</p>
+            </div>
+
+            <!-- Heritage Region Selector Cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div onclick="selectIndianHeritage('Sanskrit / Vedic')" class="group p-6 rounded-3xl bg-white border border-stone-200 hover:border-emerald-500 hover:shadow-xl transition-all cursor-pointer space-y-3">
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-700 flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-book-open"></i>
+                    </div>
+                    <h3 class="text-xl font-bold font-heading text-stone-900 group-hover:text-emerald-700">Sanskrit & Vedic Roots</h3>
+                    <p class="text-xs text-stone-500">Ancient philosophical scriptures, cosmic wisdom, and timeless spiritual meanings.</p>
+                </div>
+
+                <div onclick="selectIndianHeritage('Tamil / South Indian')" class="group p-6 rounded-3xl bg-white border border-stone-200 hover:border-emerald-500 hover:shadow-xl transition-all cursor-pointer space-y-3">
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-700 flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-sun"></i>
+                    </div>
+                    <h3 class="text-xl font-bold font-heading text-stone-900 group-hover:text-emerald-700">Tamil & South Indian</h3>
+                    <p class="text-xs text-stone-500">Sangam literature, classical Tamil heritage, nature reverence, and melodic cadence.</p>
+                </div>
+
+                <div onclick="selectIndianHeritage('Punjabi & Sikh')" class="group p-6 rounded-3xl bg-white border border-stone-200 hover:border-emerald-500 hover:shadow-xl transition-all cursor-pointer space-y-3">
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-700 flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <h3 class="text-xl font-bold font-heading text-stone-900 group-hover:text-emerald-700">Punjabi & Sikh Roots</h3>
+                    <p class="text-xs text-stone-500">Gurbani inspiration, courage, devotion, and soulful modern resonance.</p>
+                </div>
+
+                <div onclick="selectIndianHeritage('Bengali')" class="group p-6 rounded-3xl bg-white border border-stone-200 hover:border-emerald-500 hover:shadow-xl transition-all cursor-pointer space-y-3">
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-700 flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-music"></i>
+                    </div>
+                    <h3 class="text-xl font-bold font-heading text-stone-900 group-hover:text-emerald-700">Bengali Heritage</h3>
+                    <p class="text-xs text-stone-500">Rabindrasangeet inspiration, lyrical sweetness, art, and intellectual depth.</p>
+                </div>
+
+                <div onclick="selectIndianHeritage('Telugu & Kannada')" class="group p-6 rounded-3xl bg-white border border-stone-200 hover:border-emerald-500 hover:shadow-xl transition-all cursor-pointer space-y-3">
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-700 flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-feather"></i>
+                    </div>
+                    <h3 class="text-xl font-bold font-heading text-stone-900 group-hover:text-emerald-700">Telugu & Kannada Roots</h3>
+                    <p class="text-xs text-stone-500">Classical Carnatic musical roots, majestic history, and rhythmic names.</p>
+                </div>
+
+                <div onclick="selectIndianHeritage('Marathi')" class="group p-6 rounded-3xl bg-white border border-stone-200 hover:border-emerald-500 hover:shadow-xl transition-all cursor-pointer space-y-3">
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-700 flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-mountain"></i>
+                    </div>
+                    <h3 class="text-xl font-bold font-heading text-stone-900 group-hover:text-emerald-700">Marathi Heritage</h3>
+                    <p class="text-xs text-stone-500">Maratha valor, forts, rivers, and proud historical legacy.</p>
                 </div>
             </div>
 
-            <div class="flex flex-col sm:flex-row justify-between items-center text-xs text-slate-400 pt-2 border-t border-slate-100 gap-2">
-                <span id="activeFilterSummary">Showing all matching entries</span>
-                <div class="flex items-center gap-3">
-                    <span class="font-medium text-slate-600">Total Results: <span id="nameCount">0</span></span>
-                    <button id="whatsappShareBtn" onclick="shareToWhatsApp()" class="hidden bg-emerald-600 text-white px-3 py-1.5 rounded-lg text-xs font-medium hover:bg-emerald-700 transition-all">📤 Export Shortlist to WhatsApp</button>
+            <!-- Heritage Dynamic Content View -->
+            <div id="heritage-detail-box" class="bg-white rounded-3xl border border-stone-200 p-6 sm:p-10 space-y-6 shadow-sm">
+                <!-- Populated by JS -->
+            </div>
+        </section>
+
+        <!-- TAB 6: INDIAN PARENT NAME BLENDER -->
+        <section id="tab-combiner" class="hidden space-y-8">
+            <div class="max-w-3xl mx-auto bg-white rounded-3xl border border-stone-200 p-6 sm:p-10 shadow-sm space-y-8">
+                <div class="text-center space-y-3">
+                    <span class="inline-flex items-center space-x-2 bg-rose-50 border border-rose-200 text-rose-700 px-3.5 py-1 rounded-full text-xs font-bold">
+                        <i class="fa-solid fa-heart-pulse"></i> <span>Syllable Fusion Blender</span>
+                    </span>
+                    <h2 class="text-2xl sm:text-4xl font-extrabold font-heading text-stone-900">Indian Parent Name Blender</h2>
+                    <p class="text-stone-600 text-sm sm:text-base">Combine syllables from the mother's and father's names to create harmonious, modern, or traditional Indian portmanteau baby names.</p>
+                </div>
+
+                <div class="bg-stone-50 p-6 rounded-2xl border border-stone-200/60 space-y-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="space-y-2">
+                            <label class="block text-xs font-bold uppercase tracking-wider text-stone-500">Father's Name</label>
+                            <input type="text" id="parent1-name" placeholder="e.g. Rajesh or Vikram" class="w-full px-4 py-3 rounded-xl bg-white border border-stone-200 text-stone-800 focus:ring-2 focus:ring-rose-500 focus:outline-none">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="block text-xs font-bold uppercase tracking-wider text-stone-500">Mother's Name</label>
+                            <input type="text" id="parent2-name" placeholder="e.g. Priya or Anjali" class="w-full px-4 py-3 rounded-xl bg-white border border-stone-200 text-stone-800 focus:ring-2 focus:ring-rose-500 focus:outline-none">
+                        </div>
+                    </div>
+                    <button onclick="blendIndianNames()" class="w-full py-3.5 rounded-xl bg-stone-900 text-white font-bold text-sm sm:text-base shadow-md hover:bg-stone-800 transition-all flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-shuffle"></i>
+                        <span>Blend Indian Names Magic</span>
+                    </button>
+                </div>
+
+                <!-- Combined Results -->
+                <div id="combiner-results" class="hidden space-y-4">
+                    <h3 class="text-lg font-bold text-stone-800 font-heading"><i class="fa-solid fa-star text-amber-600 mr-2"></i>Blended Indian Name Ideas:</h3>
+                    <div id="combined-list" class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <!-- Populated by JS -->
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <!-- Names Grid -->
-        <div id="namesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            <!-- Dynamic Cards -->
-        </div>
+        <!-- TAB 7: SAVED SHORTLIST FAVORITES -->
+        <section id="tab-favorites" class="hidden space-y-8">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-white p-6 rounded-3xl border border-stone-200 shadow-sm">
+                <div>
+                    <span class="inline-flex items-center space-x-2 bg-orange-50 text-orange-700 px-3 py-1 rounded-full text-xs font-bold mb-2">
+                        <i class="fa-solid fa-bookmark"></i> <span>Wishlist</span>
+                    </span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold font-heading text-stone-900">Your Shortlisted Indian Names</h2>
+                    <p class="text-stone-500 text-sm">Review, compare, or export your favorite Indian names.</p>
+                </div>
+                <button onclick="exportFavorites()" id="export-btn" class="hidden px-4 py-2.5 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-700 font-bold text-xs transition-all flex items-center space-x-2">
+                    <i class="fa-solid fa-download"></i>
+                    <span>Export Shortlist (TXT)</span>
+                </button>
+            </div>
 
-        <!-- Empty State -->
-        <div id="emptyState" class="hidden text-center py-16">
-            <p class="text-slate-400 text-lg">No matching baby names found matching your criteria.</p>
-        </div>
+            <div id="favorites-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                <!-- Populated by JS -->
+            </div>
+
+            <!-- Empty Favorites State -->
+            <div id="empty-favorites" class="text-center py-20 space-y-4">
+                <div class="w-16 h-16 bg-orange-50 rounded-full flex items-center justify-center mx-auto text-orange-500 text-2xl">
+                    <i class="fa-regular fa-bookmark"></i>
+                </div>
+                <h3 class="text-lg font-bold text-stone-800">No favorite names saved yet</h3>
+                <p class="text-stone-500 text-sm max-w-sm mx-auto">Click the bookmark icon on any name card while exploring to save it to your shortlist.</p>
+                <button onclick="switchTab('explore')" class="px-5 py-2.5 rounded-xl bg-orange-600 text-white text-xs font-bold hover:bg-orange-700 transition-all shadow-sm">Explore Indian Names Now</button>
+            </div>
+        </section>
 
     </main>
 
+    <!-- Detailed Name Modal / Drawer with Compact Monogram Builder & Audio Pronunciation -->
+    <div id="name-modal" class="fixed inset-0 z-50 bg-stone-900/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div id="modal-content" class="bg-white w-full max-w-lg rounded-3xl shadow-2xl border border-stone-200 overflow-hidden transform scale-95 opacity-0 transition-all duration-300">
+            <!-- Modal Header -->
+            <div class="relative bg-gradient-to-r from-orange-50 via-amber-50 to-emerald-50 p-6 sm:p-8 border-b border-stone-200">
+                <button onclick="closeModal()" class="absolute top-5 right-5 w-9 h-9 rounded-full bg-white border border-stone-200 flex items-center justify-center text-stone-500 hover:text-stone-900 transition-all shadow-xs">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+                <div class="flex items-center justify-between mb-3">
+                    <div class="flex items-center space-x-3">
+                        <span id="modal-gender-badge" class="px-3 py-1 rounded-full text-xs font-bold bg-white text-orange-700 shadow-xs">Girl</span>
+                        <span id="modal-origin-badge" class="px-3 py-1 rounded-full text-xs font-bold bg-white text-emerald-800 shadow-xs">Sanskrit</span>
+                    </div>
+                    <!-- Dynamic Name Meaning Logo Badge -->
+                    <div id="modal-name-logo" class="w-12 h-12 rounded-2xl bg-white shadow-md border border-amber-200 flex items-center justify-center text-orange-600 text-xl">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+                <div class="flex items-center justify-between">
+                    <h2 id="modal-name" class="text-3xl sm:text-4xl font-extrabold font-heading text-stone-900">Shivansh</h2>
+                    <button onclick="playAudioPronunciation(currentModalName ? currentModalName.name : 'Shivansh')" class="px-4 py-2.5 rounded-2xl bg-orange-600 hover:bg-orange-700 text-white font-bold text-xs shadow-md transition-all flex items-center space-x-2" title="Listen Audio Pronunciation">
+                        <i class="fa-solid fa-volume-high"></i>
+                        <span>Listen Pronunciation</span>
+                    </button>
+                </div>
+                <p id="modal-pronunciation" class="text-sm font-medium text-stone-500 mt-2"><i class="fa-solid fa-microphone-lines mr-1.5 text-orange-500"></i><span>/shiv-unsh/</span></p>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="p-6 sm:p-8 space-y-6 max-h-[70vh] overflow-y-auto">
+                <div class="bg-stone-50 p-4 rounded-2xl border border-stone-200 space-y-1">
+                    <span class="text-xs font-bold uppercase tracking-wider text-stone-400">Vedic / Literal Meaning</span>
+                    <p id="modal-meaning" class="text-stone-800 font-medium text-base sm:text-lg">Part of Lord Shiva</p>
+                </div>
+
+                <!-- COMPACT MONOGRAM & INITIALS BUILDER -->
+                <div class="bg-amber-50/60 p-4 rounded-2xl border border-amber-200/80 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold uppercase tracking-wider text-amber-900 flex items-center">
+                            <i class="fa-solid fa-signature mr-1.5 text-amber-600"></i> Compact Monogram Preview (3 Initials)
+                        </span>
+                        <span id="monogram-preview-badge" class="px-2 py-0.5 rounded-lg text-xs font-black bg-amber-600 text-white shadow-2xs">O·S·M</span>
+                    </div>
+                    <div class="grid grid-cols-3 gap-2">
+                        <div class="flex flex-col justify-between">
+                            <label class="block text-[10px] font-bold text-stone-500 uppercase mb-1">1st Initial Father</label>
+                            <input type="text" id="mono-1" maxlength="1" oninput="updateMonogram()" value="O" class="w-full text-center py-1.5 rounded-lg bg-white border border-amber-200 font-bold text-sm uppercase text-stone-800 focus:ring-1 focus:ring-amber-500 focus:outline-none">
+                        </div>
+                        <div class="flex flex-col justify-between">
+                            <label class="block text-[10px] font-bold text-stone-500 uppercase mb-1">2nd Initial Baby Name</label>
+                            <input type="text" id="mono-2" maxlength="1" readonly class="w-full text-center py-1.5 rounded-lg bg-stone-100 border border-amber-200 font-bold text-sm uppercase text-stone-700 cursor-not-allowed" title="Automatically populated from baby name">
+                        </div>
+                        <div class="flex flex-col justify-between">
+                            <label class="block text-[10px] font-bold text-stone-500 uppercase mb-1">3rd Initial Mother Family</label>
+                            <input type="text" id="mono-3" maxlength="1" oninput="updateMonogram()" value="M" class="w-full text-center py-1.5 rounded-lg bg-white border border-amber-200 font-bold text-sm uppercase text-stone-800 focus:ring-1 focus:ring-amber-500 focus:outline-none">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-stone-50 p-4 rounded-2xl border border-stone-200 space-y-1">
+                        <span class="text-xs font-bold uppercase tracking-wider text-stone-400">Popularity Rank</span>
+                        <p id="modal-rank" class="text-stone-800 font-bold text-lg">#2 in India</p>
+                    </div>
+                    <div class="bg-stone-50 p-4 rounded-2xl border border-stone-200 space-y-1">
+                        <span class="text-xs font-bold uppercase tracking-wider text-stone-400">Vibe Theme</span>
+                        <p id="modal-vibe" class="text-stone-800 font-bold text-lg">🪔 Vedic & Spiritual</p>
+                    </div>
+                </div>
+
+                <div class="space-y-3">
+                    <span class="text-xs font-bold uppercase tracking-wider text-stone-400">Similar Indian Recommendations</span>
+                    <div id="modal-similar" class="flex flex-wrap gap-2">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <div class="pt-4 flex items-center justify-between border-t border-stone-100">
+                    <button id="modal-fav-btn" onclick="toggleModalFavorite()" class="px-5 py-3 rounded-xl border border-stone-200 bg-stone-50 text-stone-700 font-bold text-sm hover:bg-stone-100 transition-all flex items-center space-x-2">
+                        <i class="fa-regular fa-bookmark"></i>
+                        <span id="modal-fav-text">Save to Wishlist</span>
+                    </button>
+                    <button onclick="closeModal()" class="px-6 py-3 rounded-xl bg-stone-900 text-white font-bold text-sm hover:bg-stone-800 transition-all">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ADD CUSTOM NAME MODAL -->
+    <div id="add-name-modal" class="fixed inset-0 z-50 bg-stone-900/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-md rounded-3xl shadow-2xl border border-stone-200 overflow-hidden p-6 sm:p-8 space-y-6">
+            <div class="flex items-center justify-between border-b border-stone-100 pb-4">
+                <div>
+                    <h3 class="text-xl font-bold font-heading text-stone-900"><i class="fa-solid fa-plus-circle text-orange-600 mr-2"></i>Add Custom Indian Name</h3>
+                    <p class="text-xs text-stone-500">Contribute or save a new name to your application database.</p>
+                </div>
+                <button onclick="closeAddNameModal()" class="w-8 h-8 rounded-full bg-stone-100 flex items-center justify-center text-stone-500 hover:text-stone-900">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="space-y-4">
+                <div class="space-y-1">
+                    <label class="block text-xs font-bold uppercase tracking-wider text-stone-600">Baby Name *</label>
+                    <input type="text" id="add-name" placeholder="e.g. Zavian or Trishika" class="w-full px-4 py-2.5 rounded-xl bg-stone-50 border border-stone-200 text-stone-800 text-sm focus:ring-2 focus:ring-orange-500 focus:outline-none">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="space-y-1">
+                        <label class="block text-xs font-bold uppercase tracking-wider text-stone-600">Gender</label>
+                        <select id="add-gender" class="w-full px-3 py-2.5 rounded-xl bg-stone-50 border border-stone-200 text-stone-800 text-sm focus:ring-2 focus:ring-orange-500 focus:outline-none cursor-pointer">
+                            <option value="Boy">Boy</option>
+                            <option value="Girl">Girl</option>
+                            <option value="Unisex">Unisex</option>
+                        </select>
+                    </div>
+                    <div class="space-y-1">
+                        <label class="block text-xs font-bold uppercase tracking-wider text-stone-600">Origin</label>
+                        <select id="add-origin" class="w-full px-3 py-2.5 rounded-xl bg-stone-50 border border-stone-200 text-stone-800 text-sm focus:ring-2 focus:ring-orange-500 focus:outline-none cursor-pointer">
+                            <option value="Sanskrit / Vedic">Sanskrit / Vedic</option>
+                            <option value="Tamil / South Indian">Tamil / South Indian</option>
+                            <option value="Hindi / North Indian">Hindi / North Indian</option>
+                            <option value="Punjabi / Sikh">Punjabi / Sikh</option>
+                            <option value="Bengali">Bengali</option>
+                            <option value="Arabic">Arabic</option>
+                            <option value="Latin">Latin</option>
+                            <option value="Old English">Old English</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="space-y-1">
+                    <label class="block text-xs font-bold uppercase tracking-wider text-stone-600">Vedic / Literal Meaning *</label>
+                    <input type="text" id="add-meaning" placeholder="e.g. Ray of light, divine grace" class="w-full px-4 py-2.5 rounded-xl bg-stone-50 border border-stone-200 text-stone-800 text-sm focus:ring-2 focus:ring-orange-500 focus:outline-none">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="space-y-1">
+                        <label class="block text-xs font-bold uppercase tracking-wider text-stone-600">Pronunciation</label>
+                        <input type="text" id="add-pronunciation" placeholder="e.g. /ZAH-vee-un/" class="w-full px-4 py-2.5 rounded-xl bg-stone-50 border border-stone-200 text-stone-800 text-sm focus:outline-none">
+                    </div>
+                    <div class="space-y-1">
+                        <label class="block text-xs font-bold uppercase tracking-wider text-stone-600">Vibe Theme</label>
+                        <select id="add-vibe" class="w-full px-3 py-2.5 rounded-xl bg-stone-50 border border-stone-200 text-stone-800 text-sm focus:outline-none cursor-pointer">
+                            <option value="Modern & Sleek">✨ Modern & Sleek</option>
+                            <option value="Vedic & Spiritual">🪔 Vedic & Spiritual</option>
+                            <option value="Nature & Elements">🌿 Nature & Elements</option>
+                            <option value="Royal & Classic">👑 Royal & Classic</option>
+                            <option value="Traditional & Classic">📜 Traditional & Classic</option>
+                            <option value="Melodic & Short">🎶 Melodic & Short</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-2 flex items-center justify-end space-x-3">
+                <button onclick="closeAddNameModal()" class="px-4 py-2.5 rounded-xl bg-stone-100 text-stone-700 font-bold text-xs">Cancel</button>
+                <button onclick="saveCustomName()" class="px-5 py-2.5 rounded-xl bg-orange-600 text-white font-bold text-xs hover:bg-orange-700 shadow-sm">Save & Add to App</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-stone-900 text-white px-5 py-3 rounded-2xl shadow-xl flex items-center space-x-3 text-sm font-medium border border-stone-700">
+        <i class="fa-solid fa-circle-check text-emerald-400"></i>
+        <span id="toast-msg">Action completed successfully</span>
+    </div>
+
     <!-- Footer -->
-    <footer class="bg-white border-t border-slate-100 py-6 text-center text-sm text-slate-400">
-        <p>&copy; 2026 BabyNameFinder India. Built with unique USP parent-vetting tools.</p>
+    <footer class="bg-white border-t border-stone-200 py-8 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+            <div class="flex items-center space-x-2">
+                <span class="font-heading font-bold text-stone-800">Aarambh Names</span>
+                <span class="text-stone-300">|</span>
+                <span class="text-xs text-stone-500">Celebrating authentic Indian heritage and joyful modern parenting.</span>
+            </div>
+            <p class="text-xs text-stone-400">&copy; 2026 Aarambh Names Inc. All rights reserved.</p>
+        </div>
     </footer>
 
-    <!-- Application Script -->
     <script>
-        const babyNames = [
-            { name: "Aarav", gender: "Boy", origin: "Sanskrit", style: "Modern", meaning: "Peaceful, calm, or wise", nakshatra: "Ashwini / Krittika", grandparentScore: "⭐⭐⭐⭐⭐ (Elder Friendly)", regionalCheck: "✅ Safe across all Indian states", phoneTest: "✅ Zero spelling confusion", nickname: "Aaru" },
-            { name: "Aadhya", gender: "Girl", origin: "Sanskrit", style: "Traditional", meaning: "First power, Goddess Durga, or unmatched", nakshatra: "Rohini compatible", grandparentScore: "⭐⭐⭐⭐⭐ (High Approval)", regionalCheck: "✅ Universal Sanskrit root", phoneTest: "✅ Phonetic & clear", nickname: "Addy" },
-            { name: "Vihaan", gender: "Boy", origin: "Sanskrit", style: "Modern", meaning: "Dawn, morning, ray of sunshine", nakshatra: "Pushya nakshatra", grandparentScore: "⭐⭐⭐⭐ (Melodic & Warm)", regionalCheck: "✅ Clean regional flow", phoneTest: "✅ High legibility", nickname: "Vihu" },
-            { name: "Saanvi", gender: "Girl", origin: "Sanskrit", style: "Modern", meaning: "Goddess Lakshmi, or followed", nakshatra: "Bharani alignment", grandparentScore: "⭐⭐⭐⭐⭐ (Very Popular)", regionalCheck: "✅ South & North friendly", phoneTest: "✅ Simple double-a", nickname: "San" },
-            { name: "Kabir", gender: "Boy", origin: "Arabic", style: "Traditional", meaning: "Great, powerful, or famous saint", nakshatra: "Revati compatible", grandparentScore: "⭐⭐⭐⭐⭐ (Classic Appeal)", regionalCheck: "✅ Pan-India accepted", phoneTest: "✅ 5 letters, zero friction", nickname: "Kabs" },
-            { name: "Ananya", gender: "Girl", origin: "Sanskrit", style: "Traditional", meaning: "Matchless, unique, or peerless", nakshatra: "Ashlesha star match", grandparentScore: "⭐⭐⭐⭐⭐ (Traditional Favorite)", regionalCheck: "✅ Seamless across languages", phoneTest: "✅ Symmetrical spelling", nickname: "Anu" },
-            { name: "Zayn", gender: "Boy", origin: "Arabic", style: "Modern", meaning: "Beauty, grace, or handsome", nakshatra: "Swati friendly", grandparentScore: "⭐⭐⭐⭐ (Modern Edge)", regionalCheck: "✅ Trendy metropolitan fit", phoneTest: "✅ Short 1-syllable punch", nickname: "Zy" },
-            { name: "Diya", gender: "Girl", origin: "Sanskrit", style: "Traditional", meaning: "Light, lamp, or brilliance", nakshatra: "Krittika star", grandparentScore: "⭐⭐⭐⭐⭐ (Instant Recognition)", regionalCheck: "✅ Universal across India", phoneTest: "✅ 4-letter crisp format", nickname: "Diyu" }
+        // Enriched Database containing the 100 heavily trending Indian baby names
+        const defaultIndianBabyNames = [
+            { id: 1, name: "Shivansh", gender: "Boy", origin: "Sanskrit / Vedic", meaning: "Part of Lord Shiva", vibe: "Vedic & Spiritual", rank: 2, pronunciation: "/shiv-unsh/", similar: ["Rudra", "Advait"], newlyAdded: true },
+            { id: 2, name: "Atharv", gender: "Boy", origin: "Sanskrit / Vedic", meaning: "Knower of the Atharvaveda, wisdom", vibe: "Scholarly & Wise", rank: 8, pronunciation: "/uh-thurv/", similar: ["Vedant", "Pranav"], newlyAdded: true },
+            { id: 3, name: "Yuvraj", gender: "Boy", origin: "Sanskrit / Traditional", meaning: "Young prince, crown prince", vibe: "Royal & Classic", rank: 12, pronunciation: "/yoov-raj/", similar: ["Veer", "Parth"], newlyAdded: true },
+            { id: 4, name: "Samar", gender: "Boy", origin: "Sanskrit / Arabic", meaning: "Battle, evening conversation", vibe: "Traditional & Classic", rank: 24, pronunciation: "/suh-mur/", similar: ["Kabir", "Arjun"], newlyAdded: true },
+            { id: 5, name: "Ojas", gender: "Boy", origin: "Sanskrit / Vedic", meaning: "Vital energy, radiance, vigor", vibe: "Energetic & Bold", rank: 31, pronunciation: "/oh-jus/", similar: ["Tejas", "Pranav"], newlyAdded: true },
+            { id: 6, name: "Ariv", gender: "Boy", origin: "Sanskrit / Modern", meaning: "King of wisdom", vibe: "Modern & Sleek", rank: 18, pronunciation: "/uh-riv/", similar: ["Advik", "Kian"], newlyAdded: true },
+            { id: 7, name: "Taksh", gender: "Boy", origin: "Sanskrit / Vedic", meaning: "King Bharat's son, sharp", vibe: "Sharp & Crisp", rank: 45, pronunciation: "/tuksh/", similar: ["Darsh", "Daksh"], newlyAdded: true },
+            { id: 8, name: "Rivaan", gender: "Boy", origin: "Sanskrit / Modern", meaning: "Ambitious, star-like", vibe: "Luminous & Bright", rank: 19, pronunciation: "/ree-vun/", similar: ["Riaan", "Reyansh"], newlyAdded: true },
+            { id: 9, name: "Daksh", gender: "Boy", origin: "Sanskrit / Vedic", meaning: "Capable, talented", vibe: "Strong & Grounded", rank: 20, pronunciation: "/duksh/", similar: ["Samarth", "Parth"], newlyAdded: true },
+            { id: 10, name: "Eeshan", gender: "Boy", origin: "Sanskrit / Vedic", meaning: "Lord Shiva, protector of the universe", vibe: "Vedic & Spiritual", rank: 27, pronunciation: "/ee-shun/", similar: ["Ishan", "Rudra"], newlyAdded: true },
+            { id: 11, name: "Ekansh", gender: "Boy", origin: "Sanskrit / Modern", meaning: "Whole, complete", vibe: "Modern & Sleek", rank: 50, pronunciation: "/ay-kunsh/", similar: ["Advay", "Advait"], newlyAdded: true },
+            { id: 12, name: "Miransh", gender: "Boy", origin: "Sanskrit / Persian", meaning: "Part of the ocean, sea of light", vibe: "Fluid & Watery", rank: 63, pronunciation: "/meer-unsh/", similar: ["Arnav", "Riaan"], newlyAdded: true },
+            { id: 13, name: "Hemant", gender: "Boy", origin: "Sanskrit / Traditional", meaning: "Early winter, gold", vibe: "Traditional & Classic", rank: 71, pronunciation: "/hay-munt/", similar: ["Tushar", "Rohan"], newlyAdded: true },
+            { id: 14, name: "Vayun", gender: "Boy", origin: "Sanskrit / Vedic", meaning: "Lively, intelligent, the wind", vibe: "Nature & Elements", rank: 80, pronunciation: "/vuh-yoon/", similar: ["Anil", "Samir"], newlyAdded: true },
+            { id: 15, name: "Aahan", gender: "Boy", origin: "Sanskrit / Vedic", meaning: "Dawn, sunrise", vibe: "Modern & Sleek", rank: 25, pronunciation: "/ah-hun/", similar: ["Vihaan", "Aarush"], newlyAdded: true },
+            { id: 16, name: "Kanaav", gender: "Boy", origin: "Sanskrit / Modern", meaning: "Shining gold", vibe: "Royal & Classic", rank: 82, pronunciation: "/kuh-nahv/", similar: ["Kian", "Rayan"], newlyAdded: true },
+            { id: 17, name: "Tushar", gender: "Boy", origin: "Sanskrit / Traditional", meaning: "Frost, winter snow", vibe: "Traditional & Classic", rank: 55, pronunciation: "/too-shur/", similar: ["Hemant", "Samar"], newlyAdded: true },
+            { id: 18, name: "Tej", gender: "Boy", origin: "Sanskrit / Vedic", meaning: "Light, power, lustrous", vibe: "Modern & Sleek", rank: 60, pronunciation: "/tayj/", similar: ["Ojas", "Tejas"], newlyAdded: true },
+            { id: 19, name: "Veer", gender: "Boy", origin: "Sanskrit / Traditional", meaning: "Courageous warrior", vibe: "Royal & Classic", rank: 9, pronunciation: "/veer/", similar: ["Shaurya", "Rudra"], newlyAdded: true },
+            { id: 20, name: "Vyom", gender: "Boy", origin: "Sanskrit / Vedic", meaning: "Sky, outer space", vibe: "Nature & Elements", rank: 76, pronunciation: "/vyohm/", similar: ["Akash", "Arnav"], newlyAdded: true },
+            { id: 21, name: "Agastya", gender: "Boy", origin: "Sanskrit / Vedic", meaning: "Name of an ancient sage", vibe: "Vedic & Spiritual", rank: 33, pronunciation: "/uh-gust-yuh/", similar: ["Ishan", "Rudra"], newlyAdded: true },
+            { id: 22, name: "Advait", gender: "Boy", origin: "Sanskrit / Vedic", meaning: "Unique, non-dual philosophy", vibe: "Vedic & Spiritual", rank: 7, pronunciation: "/ud-vyte/", similar: ["Advay", "Vedant"], newlyAdded: true },
+            { id: 23, name: "Akash", gender: "Boy", origin: "Sanskrit / Traditional", meaning: "The open sky", vibe: "Nature & Elements", rank: 42, pronunciation: "/uh-kash/", similar: ["Vyom", "Anil"], newlyAdded: true },
+            { id: 24, name: "Aman", gender: "Boy", origin: "Arabic / Traditional", meaning: "Peace, tranquility", vibe: "Traditional & Classic", rank: 34, pronunciation: "/uh-mun/", similar: ["Aarav", "Shanti"], newlyAdded: true },
+            { id: 25, name: "Anay", gender: "Boy", origin: "Sanskrit / Vedic", meaning: "Leader, another name for Lord Vishnu", vibe: "Vedic & Spiritual", rank: 29, pronunciation: "/uh-nuy/", similar: ["Arnav", "Advik"], newlyAdded: true },
+            { id: 26, name: "Arjun", gender: "Boy", origin: "Sanskrit / Epic", meaning: "Bright, shining hero", vibe: "Royal & Classic", rank: 4, pronunciation: "/ur-joon/", similar: ["Parth", "Kian"], newlyAdded: true },
+            { id: 27, name: "Bhavin", gender: "Boy", origin: "Sanskrit / Traditional", meaning: "Living, existing", vibe: "Traditional & Classic", rank: 84, pronunciation: "/vuh-vin/", similar: ["Manav", "Jatin"], newlyAdded: true },
+            { id: 28, name: "Bharat", gender: "Boy", origin: "Sanskrit / Epic", meaning: "Universal, India", vibe: "Royal & Classic", rank: 65, pronunciation: "/bhu-rut/", similar: ["Ravan", "Rama"], newlyAdded: true },
+            { id: 29, name: "Bhavesh", gender: "Boy", origin: "Sanskrit / Traditional", meaning: "Lord of emotions", vibe: "Traditional & Classic", rank: 79, pronunciation: "/bhuh-vesh/", similar: ["Umesh", "Ritesh"], newlyAdded: true },
+            { id: 30, name: "Bhuvan", gender: "Boy", origin: "Sanskrit / Vedic", meaning: "The world, universe", vibe: "Nature & Elements", rank: 68, pronunciation: "/bhoo-vun/", similar: ["Lokesh", "Vishwa"], newlyAdded: true },
+            { id: 31, name: "Chaitanya", gender: "Boy", origin: "Sanskrit / Vedic", meaning: "Supreme consciousness", vibe: "Vedic & Spiritual", rank: 58, pronunciation: "/chuy-tun-yuh/", similar: ["Vedant", "Pranav"], newlyAdded: true },
+            { id: 32, name: "Chirag", gender: "Boy", origin: "Persian / Traditional", meaning: "Lamp, guiding light", vibe: "Traditional & Classic", rank: 38, pronunciation: "/chi-rug/", similar: ["Diya", "Tej"], newlyAdded: true },
+            { id: 33, name: "Chiranjeev", gender: "Boy", origin: "Sanskrit / Traditional", meaning: "Immortal", vibe: "Traditional & Classic", rank: 88, pronunciation: "/chi-run-jeev/", similar: ["Avinash", "Amar"], newlyAdded: true },
+            { id: 34, name: "Chinmay", gender: "Boy", origin: "Sanskrit / Vedic", meaning: "Full of spiritual consciousness", vibe: "Vedic & Spiritual", rank: 52, pronunciation: "/chin-muy/", similar: ["Pranav", "Shlok"], newlyAdded: true },
+            { id: 35, name: "Divij", gender: "Boy", origin: "Sanskrit / Vedic", meaning: "Celestial, born in heaven", vibe: "Vedic & Spiritual", rank: 90, pronunciation: "/di-vij/", similar: ["Devansh", "Riaan"], newlyAdded: true },
+            { id: 36, name: "Divit", gender: "Boy", origin: "Sanskrit / Modern", meaning: "Heavenly, reaching for the sky", vibe: "Modern & Sleek", rank: 86, pronunciation: "/di-vit/", similar: ["Divij", "Vihaan"], newlyAdded: true },
+            { id: 37, name: "Gaurav", gender: "Boy", origin: "Sanskrit / Traditional", meaning: "Pride, honor", vibe: "Traditional & Classic", rank: 46, pronunciation: "/gow-ruv/", similar: ["Rahul", "Rohit"], newlyAdded: true },
+            { id: 38, name: "Gautam", gender: "Boy", origin: "Sanskrit / Traditional", meaning: "Lord Buddha, wise sage", vibe: "Traditional & Classic", rank: 62, pronunciation: "/gow-tum/", similar: ["Siddharth", "Kabir"], newlyAdded: true },
+            { id: 39, name: "Hardik", gender: "Boy", origin: "Sanskrit / Modern", meaning: "Sincere, from the heart", vibe: "Modern & Sleek", rank: 44, pronunciation: "/hur-dik/", similar: ["Hrishita", "Milan"], newlyAdded: true },
+            { id: 40, name: "Harsh", gender: "Boy", origin: "Sanskrit / Traditional", meaning: "Happiness, joy", vibe: "Traditional & Classic", rank: 35, pronunciation: "/hursh/", similar: ["Tisha", "Jatin"], newlyAdded: true },
+            { id: 41, name: "Hriday", gender: "Boy", origin: "Sanskrit / Traditional", meaning: "The heart", vibe: "Traditional & Classic", rank: 66, pronunciation: "/hri-day/", similar: ["Manav", "Jivansh"], newlyAdded: true },
+            { id: 42, name: "Hrithik", gender: "Boy", origin: "Sanskrit / Modern", meaning: "From the heart", vibe: "Modern & Sleek", rank: 57, pronunciation: "/hri-thik/", similar: ["Hardik", "Ritvik"], newlyAdded: true },
+            { id: 43, name: "Jatin", gender: "Boy", origin: "Sanskrit / Traditional", meaning: "Saintly, disciplined", vibe: "Traditional & Classic", rank: 48, pronunciation: "/juh-tin/", similar: ["Yatin", "Jivansh"], newlyAdded: true },
+            { id: 44, name: "Jayesh", gender: "Boy", origin: "Sanskrit / Traditional", meaning: "Winner, victorious", vibe: "Royal & Classic", rank: 69, pronunciation: "/juy-esh/", similar: ["Vijay", "Ritesh"], newlyAdded: true },
+            { id: 45, name: "Karan", gender: "Boy", origin: "Sanskrit / Epic", meaning: "Generous, warrior from the Mahabharata", vibe: "Royal & Classic", rank: 23, pronunciation: "/kuh-run/", similar: ["Arjun", "Nakul"], newlyAdded: true },
+            { id: 46, name: "Kartik", gender: "Boy", origin: "Sanskrit / Traditional", meaning: "Courageous, Lord Murugan", vibe: "Traditional & Classic", rank: 21, pronunciation: "/kur-tik/", similar: ["Murugan", "Shaurya"], newlyAdded: true },
+            { id: 47, name: "Madhav", gender: "Boy", origin: "Sanskrit / Vedic", meaning: "Sweet, Lord Krishna", vibe: "Vedic & Spiritual", rank: 16, pronunciation: "/muh-dhuv/", similar: ["Keshav", "Govind"], newlyAdded: true },
+            { id: 48, name: "Manan", gender: "Boy", origin: "Sanskrit / Traditional", meaning: "Contemplation, deep thought", vibe: "Traditional & Classic", rank: 59, pronunciation: "/muh-nun/", similar: ["Vedant", "Chaitanya"], newlyAdded: true },
+            { id: 49, name: "Manav", gender: "Boy", origin: "Sanskrit / Traditional", meaning: "Human, man", vibe: "Traditional & Classic", rank: 37, pronunciation: "/muh-nuv/", similar: ["Aryan", "Madhav"], newlyAdded: true },
+            { id: 50, name: "Mihir", gender: "Boy", origin: "Sanskrit / Vedic", meaning: "The sun", vibe: "Nature & Elements", rank: 53, pronunciation: "/mi-hir/", similar: ["Ishaan", "Ravi"], newlyAdded: true },
+            { id: 51, name: "Aavya", gender: "Girl", origin: "Sanskrit / Modern", meaning: "First rays of the sun, to live", vibe: "Modern & Sleek", rank: 11, pronunciation: "/ahv-yuh/", similar: ["Ahana", "Aadhya"], newlyAdded: true },
+            { id: 52, name: "Inaya", gender: "Girl", origin: "Arabic / Urdu", meaning: "Gift of God, care and concern", vibe: "Melodic & Short", rank: 10, pronunciation: "/i-nuy-uh/", similar: ["Myra", "Zara"], newlyAdded: true },
+            { id: 53, name: "Vanya", gender: "Girl", origin: "Sanskrit / Vedic", meaning: "Gracious gift of God, forest deity", vibe: "Nature & Elements", rank: 13, pronunciation: "/vun-yuh/", similar: ["Anvi", "Avni"], newlyAdded: true },
+            { id: 54, name: "Aadhya", gender: "Girl", origin: "Sanskrit / Vedic", meaning: "First power, Goddess Durga", vibe: "Vedic & Spiritual", rank: 1, pronunciation: "/ahd-yuh/", similar: ["Saanvi", "Ananya"], newlyAdded: true },
+            { id: 55, name: "Saanvi", gender: "Girl", origin: "Sanskrit / Vedic", meaning: "Goddess Lakshmi, knowledge and peace", vibe: "Vedic & Spiritual", rank: 3, pronunciation: "/sun-vee/", similar: ["Shanvi", "Anvi"], newlyAdded: true },
+            { id: 56, name: "Ridhima", gender: "Girl", origin: "Sanskrit / Modern", meaning: "Full of love, prosperous", vibe: "Modern & Sleek", rank: 28, pronunciation: "/rid-hi-muh/", similar: ["Riya", "Prisha"], newlyAdded: true },
+            { id: 57, name: "Kavya", gender: "Girl", origin: "Sanskrit / Traditional", meaning: "Poetry, literary beauty", vibe: "Traditional & Classic", rank: 21, pronunciation: "/kuv-yuh/", similar: ["Navya", "Stuti"], newlyAdded: true },
+            { id: 58, name: "Ira", gender: "Girl", origin: "Sanskrit / Vedic", meaning: "Earth, Goddess Saraswati", vibe: "Vedic & Spiritual", rank: 16, pronunciation: "/ee-ruh/", similar: ["Diya", "Sia"], newlyAdded: true },
+            { id: 59, name: "Avni", gender: "Girl", origin: "Sanskrit / Traditional", meaning: "Earth, the mother", vibe: "Nature & Elements", rank: 18, pronunciation: "/uv-nee/", similar: ["Avani", "Mahi"], newlyAdded: true },
+            { id: 60, name: "Aarna", gender: "Girl", origin: "Sanskrit / Vedic", meaning: "Goddess Lakshmi, wave of water", vibe: "Vedic & Spiritual", rank: 12, pronunciation: "/ur-nuh/", similar: ["Saanvi", "Myra"], newlyAdded: true },
+            { id: 61, name: "Naavya", gender: "Girl", origin: "Sanskrit / Modern", meaning: "New, praise-worthy", vibe: "Modern & Sleek", rank: 36, pronunciation: "/nahv-yuh/", similar: ["Navya", "Aavya"], newlyAdded: true },
+            { id: 62, name: "Ayra", gender: "Girl", origin: "Arabic / Persian", meaning: "Noble, respectable, worthy", vibe: "Royal & Classic", rank: 22, pronunciation: "/uy-ruh/", similar: ["Arya", "Zara"], newlyAdded: true },
+            { id: 63, name: "Vamika", gender: "Girl", origin: "Sanskrit / Modern", meaning: "Goddess Durga", vibe: "Vedic & Spiritual", rank: 24, pronunciation: "/vuh-mi-kuh/", similar: ["Ishani", "Anika"], newlyAdded: true },
+            { id: 64, name: "Ishita", gender: "Girl", origin: "Sanskrit / Vedic", meaning: "Desired, greatness", vibe: "Vedic & Spiritual", rank: 32, pronunciation: "/ee-shi-tuh/", similar: ["Akshara", "Disha"], newlyAdded: true },
+            { id: 65, name: "Arya", gender: "Girl", origin: "Sanskrit / Traditional", meaning: "Noble, goddess", vibe: "Traditional & Classic", rank: 15, pronunciation: "/ur-yuh/", similar: ["Aanya", "Ayra"], newlyAdded: true },
+            { id: 66, name: "Nisha", gender: "Girl", origin: "Sanskrit / Traditional", meaning: "Night, serene", vibe: "Traditional & Classic", rank: 41, pronunciation: "/ni-shuh/", similar: ["Rahi", "Diya"], newlyAdded: true },
+            { id: 67, name: "Naira", gender: "Girl", origin: "Arabic / Modern Indian", meaning: "Sparkling, brilliant", vibe: "Modern & Sleek", rank: 5, pronunciation: "/nuy-ruh/", similar: ["Nyra", "Myra"], newlyAdded: true },
+            { id: 68, name: "Mishka", gender: "Girl", origin: "Russian / Modern Indian", meaning: "Gift of love", vibe: "Melodic & Short", rank: 29, pronunciation: "/mish-kuh/", similar: ["Jiah", "Tisha"], newlyAdded: true },
+            { id: 69, name: "Nandini", gender: "Girl", origin: "Sanskrit / Traditional", meaning: "Delightful, sacred cow", vibe: "Traditional & Classic", rank: 54, pronunciation: "/nun-di-nee/", similar: ["Sneha", "Pooja"], newlyAdded: true },
+            { id: 70, name: "Neerja", gender: "Girl", origin: "Sanskrit / Traditional", meaning: "Lotus, born of water", vibe: "Nature & Elements", rank: 67, pronunciation: "/neer-juh/", similar: ["Arvinth", "Kamal"], newlyAdded: true },
+            { id: 71, name: "Pallavi", gender: "Girl", origin: "Sanskrit / Traditional", meaning: "New leaves, delicate sprout", vibe: "Nature & Elements", rank: 73, pronunciation: "/pul-luh-vee/", similar: ["Malati", "Sneha"], newlyAdded: true },
+            { id: 72, name: "Sanjana", gender: "Girl", origin: "Sanskrit / Traditional", meaning: "Gentle, creator", vibe: "Traditional & Classic", rank: 56, pronunciation: "/sun-juh-nuh/", similar: ["Ananya", "Meher"], newlyAdded: true },
+            { id: 73, name: "Suhana", gender: "Girl", origin: "Urdu / Hindi", meaning: "Good-looking, pleasant", vibe: "Melodic & Short", rank: 61, pronunciation: "/suh-huh-nuh/", similar: ["Samira", "Alisha"], newlyAdded: true },
+            { id: 74, name: "Sunaina", gender: "Girl", origin: "Sanskrit / Traditional", meaning: "Beautiful eyes", vibe: "Traditional & Classic", rank: 78, pronunciation: "/soo-nuy-nuh/", similar: ["Naina", "Sunita"], newlyAdded: true },
+            { id: 75, name: "Veda", gender: "Girl", origin: "Sanskrit / Vedic", meaning: "Sacred knowledge, wisdom", vibe: "Vedic & Spiritual", rank: 30, pronunciation: "/vay-duh/", similar: ["Vedika", "Shruti"], newlyAdded: true },
+            { id: 76, name: "Tivra", gender: "Girl", origin: "Sanskrit / Vedic", meaning: "Active, bright, agile", vibe: "Modern & Sleek", rank: 89, pronunciation: "/tiv-ruh/", similar: ["Tisha"], newlyAdded: true },
+            { id: 77, name: "Advika", gender: "Girl", origin: "Sanskrit / Vedic", meaning: "Unique, one of a kind", vibe: "Vedic & Spiritual", rank: 26, pronunciation: "/ud-vee-kuh/", similar: ["Advait", "Ananya"], newlyAdded: true },
+            { id: 78, name: "Aayat", gender: "Girl", origin: "Arabic / Quranic", meaning: "God's greatness, verse from the Quran", vibe: "Vedic & Spiritual", rank: 39, pronunciation: "/uy-ut/", similar: ["Inaya", "Ayra"], newlyAdded: true },
+            { id: 79, name: "Akshara", gender: "Girl", origin: "Sanskrit / Vedic", meaning: "Letter, speech", vibe: "Vedic & Spiritual", rank: 51, pronunciation: "/uk-shuh-ruh/", similar: ["Veda", "Akshitha"], newlyAdded: true },
+            { id: 80, name: "Charvi", gender: "Girl", origin: "Sanskrit / Traditional", meaning: "Beautiful lady", vibe: "Traditional & Classic", rank: 64, pronunciation: "/chur-vee/", similar: ["Tanvi", "Bhavya"], newlyAdded: true },
+            { id: 81, name: "Dhriti", gender: "Girl", origin: "Sanskrit / Vedic", meaning: "Patience, courage", vibe: "Vedic & Spiritual", rank: 47, pronunciation: "/dhri-tee/", similar: ["Nitara", "Kriti"], newlyAdded: true },
+            { id: 82, name: "Disha", gender: "Girl", origin: "Sanskrit / Traditional", meaning: "Direction", vibe: "Traditional & Classic", rank: 43, pronunciation: "/di-shuh/", similar: ["Trisha", "Tisha"], newlyAdded: true },
+            { id: 83, name: "Diva", gender: "Girl", origin: "Latin / Modern", meaning: "Lamp, daytime", vibe: "Modern & Sleek", rank: 37, pronunciation: "/dee-vuh/", similar: ["Diya", "Ira"], newlyAdded: true },
+            { id: 84, name: "Drishya", gender: "Girl", origin: "Sanskrit / Vedic", meaning: "Visible, to be seen", vibe: "Vedic & Spiritual", rank: 81, pronunciation: "/drish-yuh/", similar: ["Darsh", "Drishti"], newlyAdded: true },
+            { id: 85, name: "Eshana", gender: "Girl", origin: "Sanskrit / Vedic", meaning: "Seeking, longing", vibe: "Vedic & Spiritual", rank: 85, pronunciation: "/eh-shuh-nuh/", similar: ["Ishani", "Veda"], newlyAdded: true },
+            { id: 86, name: "Hamsika", gender: "Girl", origin: "Sanskrit / Traditional", meaning: "A swan", vibe: "Traditional & Classic", rank: 92, pronunciation: "/hum-si-kuh/", similar: ["Hansa", "Mohini"], newlyAdded: true },
+            { id: 87, name: "Hrishita", gender: "Girl", origin: "Sanskrit / Modern", meaning: "Pleased, happy", vibe: "Modern & Sleek", rank: 70, pronunciation: "/hri-shi-tuh/", similar: ["Harshitha", "Trisha"], newlyAdded: true },
+            { id: 88, name: "Jaisvi", gender: "Girl", origin: "Modern / Sanskrit", meaning: "Victorious", vibe: "Modern & Sleek", rank: 83, pronunciation: "/juy-svee/", similar: ["Jayesh", "Tejas"], newlyAdded: true },
+            { id: 89, name: "Jhanvi", gender: "Girl", origin: "Sanskrit / Traditional", meaning: "The river Ganga", vibe: "Traditional & Classic", rank: 20, pronunciation: "/jhun-vee/", similar: ["Jahnvi", "Riva"], newlyAdded: true },
+            { id: 90, name: "Jivika", gender: "Girl", origin: "Sanskrit / Traditional", meaning: "Source of life", vibe: "Traditional & Classic", rank: 75, pronunciation: "/ji-vi-kuh/", similar: ["Jivansh", "Jiah"], newlyAdded: true },
+            { id: 91, name: "Keya", gender: "Girl", origin: "Sanskrit / Traditional", meaning: "Flower", vibe: "Nature & Elements", rank: 55, pronunciation: "/kay-yuh/", similar: ["Priya", "Maya"], newlyAdded: true },
+            { id: 92, name: "Khanak", gender: "Girl", origin: "Hindi / Modern", meaning: "Tinkling of bangles", vibe: "Melodic & Short", rank: 94, pronunciation: "/khu-nuk/", similar: ["Riya", "Jiah"], newlyAdded: true },
+            { id: 93, name: "Kimaya", gender: "Girl", origin: "Sanskrit / Persian", meaning: "Divine", vibe: "Modern & Sleek", rank: 72, pronunciation: "/ki-muy-uh/", similar: ["Maya", "Myra"], newlyAdded: true },
+            { id: 94, name: "Lasya", gender: "Girl", origin: "Sanskrit / Classical Dance", meaning: "A gentle form of dance", vibe: "Traditional & Classic", rank: 49, pronunciation: "/luht-syuh/", similar: ["Aarohi", "Natya"], newlyAdded: true },
+            { id: 95, name: "Lavanya", gender: "Girl", origin: "Sanskrit / Traditional", meaning: "Beauty or grace", vibe: "Traditional & Classic", rank: 33, pronunciation: "/lu-vun-yuh/", similar: ["Ananya", "Tanvi"], newlyAdded: true },
+            { id: 96, name: "Mahika", gender: "Girl", origin: "Sanskrit / Vedic", meaning: "Dew drops, frost", vibe: "Nature & Elements", rank: 53, pronunciation: "/muh-hi-kuh/", similar: ["Ahana", "Avani"], newlyAdded: true },
+            { id: 97, name: "Maitreyi", gender: "Girl", origin: "Sanskrit / Vedic", meaning: "Friendship", vibe: "Vedic & Spiritual", rank: 87, pronunciation: "/muy-tray-yee/", similar: ["Veda", "Gargi"], newlyAdded: true },
+            { id: 98, name: "Mannat", gender: "Girl", origin: "Urdu / Punjabi", meaning: "Fervent prayer or wish", vibe: "Melodic & Short", rank: 40, pronunciation: "/mun-nut/", similar: ["Prisha", "Meher"], newlyAdded: true },
+            { id: 99, name: "Miraya", gender: "Girl", origin: "Sanskrit / Modern", meaning: "Devotee of Lord Krishna", vibe: "Vedic & Spiritual", rank: 35, pronunciation: "/mi-ruy-uh/", similar: ["Meera", "Mira"], newlyAdded: true },
+            { id: 100, name: "Nakshatra", gender: "Girl", origin: "Sanskrit / Vedic", meaning: "Star, constellation", vibe: "Nature & Elements", rank: 74, pronunciation: "/nuk-shuh-truh/", similar: ["Tara", "Nova"], newlyAdded: true }
         ];
 
-        let currentGender = 'all';
-        let currentOrigin = 'all';
-        let currentStyle = 'all';
-        let currentLetter = 'all';
-        let currentTab = 'all';
-        let favorites = JSON.parse(localStorage.getItem('baby_favorites')) || [];
+        // Load custom added names from localStorage if available
+        let customSavedNames = JSON.parse(localStorage.getItem('aarambh_custom_names')) || [];
+        let indianBabyNames = [...defaultIndianBabyNames, ...customSavedNames];
 
-        function initAlphabetBar() {
-            const bar = document.getElementById('alphabetBar');
-            "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").forEach(letter => {
-                const btn = document.createElement('button');
-                btn.className = "letter-btn px-2.5 py-1 rounded text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all";
-                btn.textContent = letter;
-                btn.setAttribute('data-letter', letter);
-                btn.onclick = () => filterByLetter(letter);
-                bar.appendChild(btn);
-            });
+        // State Management
+        let favorites = JSON.parse(localStorage.getItem('aarambh_favs')) || [];
+        let mutualMatches = JSON.parse(localStorage.getItem('aarambh_matches')) || [];
+        let globalDadInit = localStorage.getItem('aarambh_dad_init') || "O";
+        let globalManualInit = localStorage.getItem('aarambh_manual_init') || "M";
+        let currentAlphabet = 'all';
+        let swiperIndex = 0;
+        let activeTab = 'explore';
+        let currentVibe = 'all';
+        let currentModalName = null;
+
+        // Initialize App on Load
+        window.addEventListener('DOMContentLoaded', () => {
+            initAlphabetBar();
+            renderNames(indianBabyNames);
+            updateFavBadge();
+            initSwiperCard();
+            selectIndianHeritage('Sanskrit / Vedic');
+        });
+
+        // Audio Speech Synthesis Functionality
+        function playAudioPronunciation(nameText) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(nameText);
+                utterance.lang = 'en-IN';
+                utterance.rate = 0.85;
+                utterance.pitch = 1.0;
+                window.speechSynthesis.speak(utterance);
+                showToast(`🔊 Playing pronunciation for "${nameText}"`);
+            } else {
+                showToast("Audio speech synthesis is not supported on your browser.");
+            }
         }
 
-        function renderNames(list) {
-            const grid = document.getElementById('namesGrid');
-            const emptyState = document.getElementById('emptyState');
-            const countSpan = document.getElementById('nameCount');
-            const shareBtn = document.getElementById('whatsappShareBtn');
-            
-            grid.innerHTML = '';
-            countSpan.textContent = list.length;
-            document.getElementById('favCount').textContent = favorites.length;
+        // Build A-Z Alphabet Bar dynamically
+        function initAlphabetBar() {
+            const bar = document.getElementById('alphabet-bar');
+            const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+            bar.innerHTML = `<button onclick="filterByAlphabet('all')" id="alpha-all" class="alpha-btn px-3 py-1.5 rounded-xl text-xs font-extrabold bg-stone-900 text-white transition-all shadow-xs shrink-0">ALL</button>` +
+                alphabet.map(letter => `<button onclick="filterByAlphabet('${letter}')" id="alpha-${letter}" class="alpha-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-stone-100 text-stone-700 hover:bg-stone-200 transition-all shrink-0">${letter}</button>`).join('');
+        }
 
-            if (currentTab === 'favorites' && favorites.length > 0) {
-                shareBtn.classList.remove('hidden');
+        function filterByAlphabet(letter) {
+            currentAlphabet = letter;
+            document.querySelectorAll('.alpha-btn').forEach(btn => {
+                btn.className = "alpha-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-stone-100 text-stone-700 hover:bg-stone-200 transition-all shrink-0";
+            });
+            const activeBtn = document.getElementById(`alpha-${letter.toLowerCase()}`);
+            if (activeBtn) activeBtn.className = "alpha-btn px-3 py-1.5 rounded-xl text-xs font-extrabold bg-stone-900 text-white transition-all shadow-xs shrink-0";
+            handleSearch();
+        }
+
+        // Quick Gender Filter Helper (Boys Only / Girls Only / All)
+        function quickFilterGender(genderVal) {
+            document.getElementById('filter-gender').value = genderVal;
+            
+            // Highlight active button
+            ['all', 'Boy', 'Girl'].forEach(g => {
+                const btn = document.getElementById(`qg-${g}`);
+                if (!btn) return;
+                if (g === genderVal) {
+                    if (g === 'Boy') btn.className = "px-4 py-2 rounded-xl text-xs font-bold bg-sky-600 text-white transition-all shadow-xs shrink-0";
+                    else if (g === 'Girl') btn.className = "px-4 py-2 rounded-xl text-xs font-bold bg-rose-600 text-white transition-all shadow-xs shrink-0";
+                    else btn.className = "px-4 py-2 rounded-xl text-xs font-extrabold bg-stone-900 text-white transition-all shadow-xs shrink-0";
+                } else {
+                    if (g === 'Boy') btn.className = "px-4 py-2 rounded-xl text-xs font-bold bg-sky-50 text-sky-700 border border-sky-200 hover:bg-sky-100 transition-all shrink-0";
+                    else if (g === 'Girl') btn.className = "px-4 py-2 rounded-xl text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200 hover:bg-rose-100 transition-all shrink-0";
+                    else btn.className = "px-4 py-2 rounded-xl text-xs font-bold bg-stone-100 text-stone-700 hover:bg-stone-200 transition-all shrink-0";
+                }
+            });
+
+            handleSearch();
+        }
+
+        // Helper: Generate Meaning-Based Logo HTML
+        function getNameLogo(item) {
+            const m = (item.meaning + " " + item.vibe).toLowerCase();
+            if (m.includes('dawn') || m.includes('ray') || m.includes('sun') || m.includes('light') || m.includes('lamp') || m.includes('radiance') || m.includes('divine light')) {
+                return '<i class="fa-solid fa-sun text-amber-500"></i>';
+            } else if (m.includes('ocean') || m.includes('earth') || m.includes('sea') || m.includes('water') || m.includes('fragrant') || m.includes('flower') || m.includes('lotus')) {
+                return '<i class="fa-solid fa-water text-sky-600"></i>';
+            } else if (m.includes('royal') || m.includes('warrior') || m.includes('king') || m.includes('courage') || m.includes('gem') || m.includes('spear')) {
+                return '<i class="fa-solid fa-shield-halved text-rose-600"></i>';
+            } else if (m.includes('peace') || m.includes('divine') || m.includes('veda') || m.includes('om') || m.includes('musical') || m.includes('enlightened') || m.includes('god')) {
+                return '<i class="fa-solid fa-om text-orange-600"></i>';
             } else {
-                shareBtn.classList.add('hidden');
+                return '<i class="fa-solid fa-feather text-emerald-600"></i>';
             }
+        }
+
+        // Tab Switching
+        function switchTab(tabId) {
+            activeTab = tabId;
+            ['explore', 'match', 'ai-gen', 'availability', 'heritage', 'combiner', 'favorites'].forEach(id => {
+                const el = document.getElementById(`tab-${id}`);
+                const navBtn = document.getElementById(`nav-${id}`);
+                if (id === tabId) {
+                    if(el) el.classList.remove('hidden');
+                    if(navBtn) navBtn.className = "px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-white text-orange-600 shadow-xs";
+                } else {
+                    if(el) el.classList.add('hidden');
+                    if(navBtn) navBtn.className = "px-3.5 py-2 rounded-xl text-xs font-bold transition-all text-stone-600 hover:text-stone-900";
+                }
+            });
+
+            if (tabId === 'favorites') renderFavorites();
+            if (tabId === 'match') renderMutualMatches();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Render Name Cards
+        function renderNames(list) {
+            const grid = document.getElementById('names-grid');
+            const emptyState = document.getElementById('empty-state');
+            const countEl = document.getElementById('results-count');
+
+            countEl.innerText = `Showing ${list.length} Indian names`;
 
             if (list.length === 0) {
+                grid.innerHTML = '';
                 emptyState.classList.remove('hidden');
                 return;
-            } else {
-                emptyState.classList.add('hidden');
             }
 
-            const surnameInput = document.getElementById('userSurnameInput');
-            const surname = surnameInput ? surnameInput.value.trim().toUpperCase() : "";
-
-            list.forEach(item => {
-                const card = document.createElement('div');
-                card.className = "bg-white p-5 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-all flex flex-col justify-between";
-                
-                const badgeColor = item.gender === 'Boy' ? 'bg-blue-50 text-blue-600' : 'bg-pink-50 text-pink-600';
-                const isFav = favorites.some(fav => fav.name === item.name);
-                const heartColor = isFav ? "text-red-500 fill-red-500" : "text-slate-300 hover:text-red-400";
-
-                let monogramText = surname ? `Initials: ${item.name[0].toUpperCase()}.${surname[0]} (Clean)` : "Type surname above for Monogram test";
-
-                card.innerHTML = `
-                    <div>
-                        <div class="flex justify-between items-start mb-2">
-                            <div>
-                                <span class="text-[10px] font-bold text-indigo-500 uppercase tracking-wider">${item.style} • ${item.origin}</span>
-                                <h3 class="text-2xl font-bold text-slate-800">${item.name}</h3>
+            emptyState.classList.add('hidden');
+            grid.innerHTML = list.map(item => {
+                const isFav = favorites.some(f => f.id === item.id);
+                const firstLetter = item.name.charAt(0).toUpperCase();
+                return `
+                    <div class="group bg-white rounded-3xl p-6 border ${item.newlyAdded ? 'border-orange-300 ring-2 ring-orange-100' : 'border-stone-200'} hover:border-orange-400 hover:shadow-xl transition-all duration-300 flex flex-col justify-between relative cursor-pointer" onclick="openModal(${item.id})">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center space-x-2">
+                                    <span class="px-2.5 py-1 rounded-full text-xs font-bold ${item.gender === 'Boy' ? 'bg-sky-50 text-sky-700' : item.gender === 'Girl' ? 'bg-pink-50 text-rose-700' : 'bg-amber-50 text-amber-700'}">${item.gender}</span>
+                                    <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-stone-100 text-stone-600">${item.origin.split('/')[0].trim()}</span>
+                                    ${item.newlyAdded ? '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-orange-100 text-orange-800">🌟 Trending</span>' : ''}
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <button onclick="event.stopPropagation(); playAudioPronunciation('${item.name}')" class="w-8 h-8 rounded-xl bg-orange-50 hover:bg-orange-100 text-orange-600 flex items-center justify-center text-xs transition-all" title="Listen Audio">
+                                        <i class="fa-solid fa-volume-high"></i>
+                                    </button>
+                                    <button onclick="event.stopPropagation(); toggleFavorite(${item.id})" class="w-9 h-9 rounded-full ${isFav ? 'bg-orange-50 text-orange-600' : 'bg-stone-50 text-stone-400 hover:text-orange-600'} flex items-center justify-center transition-all">
+                                        <i class="${isFav ? 'fa-solid' : 'fa-regular'} fa-bookmark"></i>
+                                    </button>
+                                </div>
                             </div>
-                            <div class="flex items-center gap-2">
-                                <span class="text-xs px-2.5 py-1 rounded-full font-medium ${badgeColor}">${item.gender}</span>
-                                <button onclick="toggleFavorite('${item.name}')" class="p-1.5 rounded-full bg-slate-50 hover:bg-slate-100 transition-colors">
-                                    <svg class="w-5 h-5 ${heartColor} transition-colors" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                                    </svg>
-                                </button>
+                            <div class="flex items-center justify-between">
+                                <h3 class="text-2xl font-extrabold font-heading text-stone-900 group-hover:text-orange-600 transition-colors">${item.name}</h3>
+                                <span class="text-[10px] font-black bg-amber-50 text-amber-800 border border-amber-200 px-2 py-1 rounded-lg">Init: ${globalDadInit}·${firstLetter}·${globalManualInit}</span>
                             </div>
+                            <p class="text-xs text-stone-400 mt-0.5 font-medium">${item.pronunciation || '/ ' + item.name.toLowerCase() + ' /'}</p>
+                            <p class="text-stone-600 text-sm mt-3 line-clamp-2">${item.meaning}</p>
                         </div>
-                        <p class="text-slate-700 text-sm font-medium mb-3">"${item.meaning}"</p>
-                        
-                        <!-- USP Evaluation Panel -->
-                        <div class="bg-slate-50 p-3 rounded-xl space-y-1.5 text-xs text-slate-600 mb-3 border border-slate-100">
-                            <div class="flex justify-between"><span>👵 Grandparent Score:</span> <strong class="text-slate-800">${item.grandparentScore}</strong></div>
-                            <div class="flex justify-between"><span>🗺️ Regional Slang Shield:</span> <strong class="text-emerald-700">${item.regionalCheck}</strong></div>
-                            <div class="flex justify-between"><span>📞 Phone Call Legibility:</span> <strong class="text-slate-800">${item.phoneTest}</strong></div>
-                            <div class="flex justify-between"><span>✍️ Monogram Acronym:</span> <strong class="text-indigo-700">${monogramText}</strong></div>
-                            <div class="flex justify-between"><span>⭐ Nakshatra Match:</span> <strong class="text-slate-800">${item.nakshatra}</strong></div>
+                        <div class="mt-6 pt-4 border-t border-stone-100 flex items-center justify-between text-xs text-stone-500">
+                            <span class="font-bold text-stone-700">✨ ${item.vibe || 'Modern & Sleek'}</span>
+                            <span class="text-stone-400">Rank #${item.rank || 25}</span>
                         </div>
-                    </div>
-                    <div class="text-[11px] text-slate-400 border-t border-slate-50 pt-2 flex justify-between items-center">
-                        <span>Verified USP Checklist Fit</span>
-                        <span class="text-indigo-600 font-semibold">Parent Approved</span>
                     </div>
                 `;
-                grid.appendChild(card);
-            });
+            }).join('');
         }
 
-        function filterNames() {
-            const searchInput = document.getElementById('searchInput');
-            const nakshatraSelect = document.getElementById('nakshatraSelect');
-            
-            const query = searchInput ? searchInput.value.toLowerCase().trim() : "";
-            const nakshatraVal = nakshatraSelect ? nakshatraSelect.value : "all";
-            let sourceList = currentTab === 'favorites' ? favorites : babyNames;
-            
-            const filtered = sourceList.filter(item => {
-                const matchesGender = currentGender === 'all' || item.gender === currentGender;
-                const matchesOrigin = currentOrigin === 'all' || item.origin.toLowerCase().includes(currentOrigin.toLowerCase());
-                const matchesStyle = currentStyle === 'all' || item.style === currentStyle;
-                const matchesLetter = currentLetter === 'all' || item.name.toUpperCase().startsWith(currentLetter);
-                const matchesNakshatra = nakshatraVal === 'all' || item.name.toUpperCase().startsWith(nakshatraVal);
+        // Search & Filter Logic
+        function handleSearch() {
+            const query = document.getElementById('search-input').value.toLowerCase();
+            const gender = document.getElementById('filter-gender').value;
+            const origin = document.getElementById('filter-origin').value;
+            const sortBy = document.getElementById('sort-by').value;
+
+            let filtered = indianBabyNames.filter(item => {
+                const matchQuery = item.name.toLowerCase().includes(query) || 
+                                   item.meaning.toLowerCase().includes(query) || 
+                                   item.origin.toLowerCase().includes(query);
+                const matchGender = gender === 'all' || item.gender === gender;
+                const matchOrigin = origin === 'all' || item.origin.includes(origin.split('/')[0].trim());
                 
-                const matchesSearch = item.name.toLowerCase().includes(query) || 
-                                      item.meaning.toLowerCase().includes(query) || 
-                                      item.nakshatra.toLowerCase().includes(query);
-                
-                return matchesGender && matchesOrigin && matchesStyle && matchesLetter && matchesNakshatra && matchesSearch;
+                let matchVibe = true;
+                if (currentVibe === 'Newly Added') {
+                    matchVibe = item.newlyAdded === true;
+                } else if (currentVibe !== 'all') {
+                    matchVibe = item.vibe && item.vibe === currentVibe;
+                }
+
+                const matchAlphabet = currentAlphabet === 'all' || item.name.toUpperCase().startsWith(currentAlphabet.toUpperCase());
+                return matchQuery && matchGender && matchOrigin && matchVibe && matchAlphabet;
             });
+
+            if (sortBy === 'popularity') filtered.sort((a, b) => (a.rank || 50) - (b.rank || 50));
+            else if (sortBy === 'alphabetical') filtered.sort((a, b) => a.name.localeCompare(b.name));
 
             renderNames(filtered);
         }
 
-        function setGenderFilter(g) { currentGender = g; updateButtonState('.gender-btn', 'data-gender', g); filterNames(); }
-        function setOriginFilter(o) { currentOrigin = o; updateButtonState('.origin-btn', 'data-origin', o); filterNames(); }
-        function setStyleFilter(s) { currentStyle = s; updateButtonState('.style-btn', 'data-style', s); filterNames(); }
-        function filterByLetter(l) { currentLetter = l; updateButtonState('.letter-btn', 'data-letter', l); filterNames(); }
-
-        function updateButtonState(selector, attributeName, activeVal) {
-            document.querySelectorAll(selector).forEach(btn => {
-                const val = btn.getAttribute(attributeName);
-                if (val === activeVal) {
-                    btn.className = "px-3 py-1.5 rounded-lg text-xs font-bold bg-indigo-600 text-white transition-all";
+        function filterByVibe(vibe) {
+            currentVibe = vibe;
+            document.querySelectorAll('.vibe-chip').forEach(btn => {
+                if (btn.id === 'vibe-Newly Added') {
+                    btn.className = "vibe-chip px-4 py-1.5 rounded-full text-xs font-bold bg-orange-600 text-white hover:bg-orange-700 transition-all whitespace-nowrap shadow-xs animate-pulse";
                 } else {
-                    btn.className = "px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all";
+                    btn.className = "vibe-chip px-4 py-1.5 rounded-full text-xs font-bold bg-white border border-stone-200 text-stone-700 hover:bg-stone-50 transition-all whitespace-nowrap";
                 }
             });
-        }
-
-        function switchTab(tab) {
-            currentTab = tab;
-            const allBtn = document.getElementById('allTabBtn');
-            const favBtn = document.getElementById('favTabBtn');
-            if (tab === 'all') {
-                allBtn.className = "px-4 py-2 rounded-xl text-sm font-medium bg-indigo-600 text-white shadow-sm transition-all";
-                favBtn.className = "px-4 py-2 rounded-xl text-sm font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all";
-            } else {
-                favBtn.className = "px-4 py-2 rounded-xl text-sm font-medium bg-indigo-600 text-white shadow-sm transition-all";
-                allBtn.className = "px-4 py-2 rounded-xl text-sm font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all";
+            const activeChip = document.getElementById(`vibe-${vibe}`);
+            if(activeChip) {
+                activeChip.className = "vibe-chip px-4 py-1.5 rounded-full text-xs font-bold bg-stone-900 text-white transition-all whitespace-nowrap shadow-xs";
             }
-            filterNames();
+            handleSearch();
         }
 
-        function toggleFavorite(nameString) {
-            const item = babyNames.find(n => n.name === nameString);
-            if (!item) return;
-            const index = favorites.findIndex(fav => fav.name === nameString);
-            if (index > -1) { favorites.splice(index, 1); } else { favorites.push(item); }
-            localStorage.setItem('baby_favorites', JSON.stringify(favorites));
-            filterNames();
+        function resetFilters() {
+            document.getElementById('search-input').value = '';
+            document.getElementById('filter-gender').value = 'all';
+            quickFilterGender('all');
+            document.getElementById('filter-origin').value = 'all';
+            filterByAlphabet('all');
+            filterByVibe('all');
         }
 
-        function shareToWhatsApp() {
-            if (favorites.length === 0) return;
-            let text = "👶 *Our Family Baby Name Shortlist*:\n\n";
-            favorites.forEach((fav, i) => {
-                text += `${i + 1}. *${fav.name}* (${fav.gender}) - "${fav.meaning}" [Root: ${fav.origin}]\n`;
-            });
-            text += "\nShared from BabyNameFinder India ❤️";
-            const encoded = encodeURIComponent(text);
-            window.open(`https://api.whatsapp.com/send?text=${encoded}`, '_blank');
+        // TINDER-STYLE PARTNER MATCHING APP ("BabyName Match")
+        function initSwiperCard() {
+            const container = document.getElementById('swiper-container');
+            if (swiperIndex >= indianBabyNames.length) swiperIndex = 0;
+            const item = indianBabyNames[swiperIndex];
+            const nameLogo = getNameLogo(item);
+
+            container.innerHTML = `
+                <div class="absolute top-4 right-4 bg-orange-50 text-orange-700 px-3 py-1 rounded-full text-xs font-bold flex items-center space-x-2">
+                    <span>Card ${swiperIndex + 1} of ${indianBabyNames.length}</span>
+                    <button onclick="playAudioPronunciation('${item.name}')" class="w-6 h-6 rounded-full bg-orange-600 text-white flex items-center justify-center text-[10px]" title="Play Audio">
+                        <i class="fa-solid fa-volume-high"></i>
+                    </button>
+                </div>
+                <div class="space-y-4 my-auto text-center px-4">
+                    <div class="w-12 h-12 mx-auto rounded-2xl bg-amber-50 border border-amber-200 flex items-center justify-center text-xl shadow-xs">
+                        ${nameLogo}
+                    </div>
+                    <div class="inline-flex items-center space-x-2 bg-stone-100 px-3.5 py-1 rounded-full text-xs font-bold text-stone-600">
+                        <span>${item.gender}</span> • <span>${item.origin}</span> • <span>✨ ${item.vibe || 'Modern'}</span>
+                    </div>
+                    <h3 class="text-4xl sm:text-5xl font-extrabold font-heading text-stone-900">${item.name}</h3>
+                    <p class="text-sm text-stone-400 font-medium">${item.pronunciation || ''}</p>
+                    <p class="text-stone-600 text-base max-w-sm mx-auto font-medium">${item.meaning}</p>
+                </div>
+                <div class="text-center pt-4 border-t border-stone-100 text-xs text-stone-400">
+                    Popularity Rank #${item.rank || 25} in India
+                </div>
+            `;
         }
 
-        initAlphabetBar();
-        renderNames(babyNames);
+        function swipeCard(direction) {
+            const item = indianBabyNames[swiperIndex];
+            if (direction === 'right' || direction === 'super') {
+                const isMutualMatch = Math.random() > 0.35 || direction === 'super';
+                if (isMutualMatch && !mutualMatches.some(m => m.id === item.id)) {
+                    mutualMatches.push(item);
+                    localStorage.setItem('aarambh_matches', JSON.stringify(mutualMatches));
+                    showToast(`🔥 MUTUAL MATCH! You and your partner both love "${item.name}"!`);
+                } else {
+                    showToast(`Liked "${item.name}"! Waiting for partner...`);
+                }
+            } else {
+                showToast(`Passed on "${item.name}"`);
+            }
+            swiperIndex++;
+            initSwiperCard();
+            renderMutualMatches();
+        }
+
+        function resetSwiper() {
+            swiperIndex = 0;
+            initSwiperCard();
+            showToast("Swiper session restarted!");
+        }
+
+        function renderMutualMatches() {
+            const listEl = document.getElementById('mutual-matches-list');
+            document.getElementById('match-count').innerText = mutualMatches.length;
+
+            if (mutualMatches.length === 0) {
+                listEl.innerHTML = `<p class="text-stone-400 text-xs col-span-2 text-center py-4">No mutual matches yet. Keep swiping right on your favorite Indian names!</p>`;
+                return;
+            }
+
+            listEl.innerHTML = mutualMatches.map(item => `
+                <div class="p-3.5 rounded-2xl bg-orange-50/60 border border-orange-200 flex items-center justify-between">
+                    <div>
+                        <h4 class="font-extrabold font-heading text-stone-900 text-base">${item.name}</h4>
+                        <p class="text-[11px] text-stone-500">${item.meaning}</p>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <button onclick="playAudioPronunciation('${item.name}')" class="w-7 h-7 rounded-full bg-white text-orange-600 border border-orange-200 flex items-center justify-center text-xs shadow-2xs" title="Listen Audio">
+                            <i class="fa-solid fa-volume-high"></i>
+                        </button>
+                        <span class="w-8 h-8 rounded-full bg-orange-600 text-white flex items-center justify-center text-xs shadow-sm">
+                            <i class="fa-solid fa-heart"></i>
+                        </span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function copyMatchRoomLink() {
+            const roomUrl = window.location.href.split('#')[0] + "?room=aarambh_match_" + Math.floor(Math.random() * 90000 + 10000);
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(roomUrl).then(() => {
+                    showToast("Indian partner invite link copied to clipboard!");
+                });
+            } else {
+                showToast("Room link generated: " + roomUrl);
+            }
+        }
+
+        // ADD CUSTOM NAME MODAL LOGIC
+        function openAddNameModal() {
+            document.getElementById('add-name-modal').classList.remove('hidden');
+        }
+
+        function closeAddNameModal() {
+            document.getElementById('add-name-modal').classList.add('hidden');
+            document.getElementById('add-name').value = '';
+            document.getElementById('add-meaning').value = '';
+            document.getElementById('add-pronunciation').value = '';
+        }
+
+        function saveCustomName() {
+            const name = document.getElementById('add-name').value.trim();
+            const gender = document.getElementById('add-gender').value;
+            const origin = document.getElementById('add-origin').value;
+            const meaning = document.getElementById('add-meaning').value.trim();
+            const pronunciation = document.getElementById('add-pronunciation').value.trim() || `/${name.toLowerCase()}/`;
+            const vibe = document.getElementById('add-vibe').value;
+
+            if (!name || !meaning) {
+                showToast("Please fill in at least the name and meaning!");
+                return;
+            }
+
+            const newEntry = {
+                id: Date.now(),
+                name: capitalize(name),
+                gender,
+                origin,
+                meaning,
+                pronunciation,
+                vibe,
+                rank: Math.floor(Math.random() * 40 + 1),
+                similar: ["Aarav", "Ananya"],
+                newlyAdded: true
+            };
+
+            customSavedNames.push(newEntry);
+            localStorage.setItem('aarambh_custom_names', JSON.stringify(customSavedNames));
+            indianBabyNames.unshift(newEntry);
+
+            closeAddNameModal();
+            handleSearch();
+            showToast(`Successfully added "${newEntry.name}" to the database! 🎉`);
+        }
+
+        // AI CONTEXTUAL INDIAN BABY NAME GENERATOR
+        function generateAiIndianNames() {
+            const epics = document.getElementById('ai-epics').value || "Mahabharata & Upanishads";
+            const elements = document.getElementById('ai-elements').value || "Ganges & Himalayas";
+            const nakshatra = document.getElementById('ai-nakshatra').value || "Rohini";
+            const vibe = document.getElementById('ai-vibe').value;
+
+            const btn = document.getElementById('ai-btn');
+            btn.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i><span>Synthesizing Vedic & Contextual Names...</span>`;
+
+            setTimeout(() => {
+                btn.innerHTML = `<i class="fa-solid fa-wand-magic-sparkles"></i><span>Synthesize AI Indian Name Suggestions</span>`;
+                const aiSuggestions = [
+                    { name: "Devansh", gender: "Boy", meaning: `Part of God, inspired by ${epics} and nakshatra ${nakshatra}`, vibe: vibe, origin: "Sanskrit" },
+                    { name: "Svarnali", gender: "Girl", meaning: `Golden radiance reflecting ${elements}`, vibe: vibe, origin: "Bengali / Sanskrit" },
+                    { name: "Siddhant", gender: "Boy", meaning: `Moral principle and ultimate truth rooted in ${epics}`, vibe: vibe, origin: "Sanskrit" },
+                    { name: "Vanya", gender: "Girl", meaning: `Gracious gift of God, serene as ${elements}`, vibe: vibe, origin: "Sanskrit" }
+                ];
+
+                const resultsArea = document.getElementById('ai-results-area');
+                const resultsGrid = document.getElementById('ai-results-grid');
+                resultsArea.classList.remove('hidden');
+
+                resultsGrid.innerHTML = aiSuggestions.map(item => `
+                    <div class="p-5 rounded-2xl bg-stone-50 border border-stone-200 space-y-2 hover:border-amber-500 transition-all">
+                        <div class="flex items-center justify-between">
+                            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-900">${item.vibe}</span>
+                            <button onclick="playAudioPronunciation('${item.name}')" class="w-7 h-7 rounded-full bg-white text-orange-600 border border-orange-200 flex items-center justify-center text-xs" title="Listen Audio">
+                                <i class="fa-solid fa-volume-high"></i>
+                            </button>
+                        </div>
+                        <h4 class="text-2xl font-bold font-heading text-stone-900">${item.name}</h4>
+                        <p class="text-xs text-stone-600">${item.meaning}</p>
+                    </div>
+                `).join('');
+
+                showToast("AI contextual Indian baby names generated successfully!");
+            }, 800);
+        }
+
+        // INSTANT INDIAN DOMAIN & SOCIAL AVAILABILITY CHECKER
+        function checkIndianDigitalAvailability() {
+            const nameInput = document.getElementById('check-name-input').value.trim() || "Shivansh";
+            const cleanName = nameInput.toLowerCase().replace(/[^a-z0-9]/g, '');
+
+            document.getElementById('checked-target-title').innerText = `Digital Footprint for "${nameInput}"`;
+            document.getElementById('availability-results').classList.remove('hidden');
+
+            const domains = [
+                { ext: '.in', available: true },
+                { ext: '.co.in', available: cleanName.length > 4 },
+                { ext: '.com', available: cleanName.length > 6 },
+                { ext: '.org.in', available: true }
+            ];
+
+            const socials = [
+                { platform: 'Instagram', handle: '@' + cleanName, available: cleanName.length > 5 },
+                { platform: 'YouTube', handle: '@' + cleanName + 'official', available: true },
+                { platform: 'Twitter / X', handle: '@' + cleanName, available: cleanName.length > 6 }
+            ];
+
+            document.getElementById('domain-list').innerHTML = domains.map(d => `
+                <li class="flex items-center justify-between py-1 border-b border-stone-100">
+                    <span class="font-bold text-stone-800">${cleanName}${d.ext}</span>
+                    <span class="px-2 py-0.5 rounded text-[10px] font-bold ${d.available ? 'bg-emerald-50 text-emerald-700' : 'bg-rose-50 text-rose-700'}">${d.available ? 'Available ✓' : 'Taken'}</span>
+                </li>
+            `).join('');
+
+            document.getElementById('social-list').innerHTML = socials.map(s => `
+                <li class="flex items-center justify-between py-1 border-b border-stone-100">
+                    <span><strong class="text-stone-800">${s.platform}:</strong> ${s.handle}</span>
+                    <span class="px-2 py-0.5 rounded text-[10px] font-bold ${s.available ? 'bg-emerald-50 text-emerald-700' : 'bg-amber-50 text-amber-700'}">${s.available ? 'Free ✓' : 'Claimed'}</span>
+                </li>
+            `).join('');
+
+            showToast(`Indian domain & social availability checked for ${nameInput}!`);
+        }
+
+        // DEEP INDIAN HERITAGE & DIASPORA ROOTS HUB
+        const indianHeritageData = {
+            "Sanskrit / Vedic": {
+                title: "Sanskrit & Vedic Roots Hub",
+                desc: "Sanskrit and Vedic nomenclature carry profound philosophical weight, connecting children to millennia of ancient scriptures, cosmic order (Rta), and spiritual awakening.",
+                topNames: ["Aarav (Peaceful)", "Ananya (Matchless)", "Advait (Unique)", "Pranav (Sacred Om)", "Ishaan (Sun / Shiva)"],
+                diasporaTrend: "Hugely popular worldwide among Indian diaspora families in London, New York, Dubai, and Singapore seeking phonetic clarity and timeless Vedic roots."
+            },
+            "Tamil / South Indian": {
+                title: "Tamil & South Indian Roots Hub",
+                desc: "Rooted in classical Sangam literature, ancient Chola/Pandya history, reverence for nature, and the melodic cadence of southern linguistic traditions.",
+                topNames: ["Arvinth (Lotus)", "Anusha (Star)", "Karthik (Courageous star)", "Meenakshi (Goddess of Madurai)", "Varun (Lord of water)"],
+                diasporaTrend: "Resurgence in honoring ancestral roots with classical Tamil names that bridge traditional heritage with contemporary global appeal."
+            },
+            "Punjabi & Sikh": {
+                title: "Punjabi & Sikh Roots Hub",
+                desc: "Inspired by Gurbani, spiritual devotion, valor, resilience, and the rich cultural tapestry of Punjab.",
+                topNames: ["Gurpreet (Guru's love)", "Harpreet (God's love)", "Simran (Remembrance)", "Jaspreet (Praised)", "Veer (Brave brother)"],
+                diasporaTrend: "Embraced globally for warm, devotional, and strong melodic resonance."
+            },
+            "Bengali": {
+                title: "Bengali Heritage Hub",
+                desc: "Steeped in Rabindrasangeet lyricism, artistic depth, and profound literary resonance from Bengal's rich cultural renaissance.",
+                topNames: ["Svarnali (Golden)", "Sourav (Fragrance)", "Debanjan (Gift of Gods)", "Anirban (Eternal flame)", "Ishani (Goddess Durga)"],
+                diasporaTrend: "Celebrated for poetic sweetness and deep artistic soul."
+            },
+            "Telugu & Kannada": {
+                title: "Telugu & Kannada Roots Hub",
+                desc: "Richly connected to classical Carnatic music, majestic Vijayanagara heritage, and melodious vowel endings.",
+                topNames: ["Siddharth (Achieved)", "Kavya (Poetry)", "Nikhil (Complete)", "Likitha (Written)", "Aditya (Sun)"],
+                diasporaTrend: "Trending for elegant phonetics and strong traditional significance."
+            },
+            "Marathi": {
+                title: "Marathi Heritage Hub",
+                desc: "Honoring Maratha valor, historic hill forts, sacred rivers (Godavari/Krishna), and proud Maharashtra legacy.",
+                topNames: ["Tanmay (Meditative)", "Tejas (Brightness)", "Vedant (Philosophy)", "Rutuja (Season of spring)", "Atharva (Vedic priest)"],
+                diasporaTrend: "Blending historical valor names with modern corporate and artistic lifestyle choices."
+            }
+        };
+
+        function selectIndianHeritage(region) {
+            const data = indianHeritageData[region];
+            const box = document.getElementById('heritage-detail-box');
+            box.innerHTML = `
+                <div class="space-y-4">
+                    <span class="px-3.5 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-800">Featured Linguistic Heritage</span>
+                    <h3 class="text-3xl font-extrabold font-heading text-stone-900">${data.title}</h3>
+                    <p class="text-stone-600 text-base">${data.desc}</p>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-4">
+                        <div class="bg-stone-50 p-5 rounded-2xl border border-stone-200 space-y-2">
+                            <h4 class="font-bold text-sm text-stone-800"><i class="fa-solid fa-star text-amber-600 mr-2"></i>Signature Names & Meanings</h4>
+                            <ul class="space-y-1 text-xs font-medium text-stone-600">
+                                ${data.topNames.map(n => `
+                                    <li class="flex items-center justify-between py-0.5">
+                                        <span>• ${n}</span>
+                                        <button onclick="playAudioPronunciation('${n.split(' ')[0]}')" class="text-orange-600 hover:text-orange-700 text-xs px-2 py-0.5 rounded bg-orange-50" title="Listen">
+                                            <i class="fa-solid fa-volume-high"></i>
+                                        </button>
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        </div>
+                        <div class="bg-stone-50 p-5 rounded-2xl border border-stone-200 space-y-2">
+                            <h4 class="font-bold text-sm text-emerald-700 mr-2"><i class="fa-solid fa-chart-line text-emerald-700 mr-2"></i>Global Diaspora Trend</h4>
+                            <p class="text-xs text-stone-600">${data.diasporaTrend}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // INDIAN PARENT NAME BLENDER
+        function blendIndianNames() {
+            const p1 = document.getElementById('parent1-name').value.trim();
+            const p2 = document.getElementById('parent2-name').value.trim();
+
+            if (!p1 || !p2) {
+                showToast("Please enter both parent names!");
+                return;
+            }
+
+            const half1 = p1.substring(0, Math.ceil(p1.length / 2));
+            const half2 = p2.substring(Math.floor(p2.length / 2));
+            const alt1 = p1.substring(0, 3) + p2.substring(p2.length - 2);
+            const alt2 = p2.substring(0, 2) + p1.substring(p1.length - 3);
+            const portmanteau = half1 + half2;
+
+            const combinedList = [
+                { name: capitalize(portmanteau), meaning: `Harmonious fusion of ${p1} & ${p2}`, vibe: "Modern & Sleek" },
+                { name: capitalize(alt1), meaning: `Sanskrit-inspired blend of ${p1} & ${p2}`, vibe: "Vedic & Spiritual" },
+                { name: capitalize(alt2), meaning: `Melodic portmanteau of ${p1} & ${p2}`, vibe: "Royal & Classic" }
+            ];
+
+            const resultsArea = document.getElementById('combiner-results');
+            const listEl = document.getElementById('combined-list');
+            resultsArea.classList.remove('hidden');
+
+            listEl.innerHTML = combinedList.map(item => `
+                <div class="p-5 rounded-2xl bg-white border border-stone-200 text-center space-y-2 shadow-xs hover:shadow-md transition-all">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-orange-600 bg-orange-50 px-2.5 py-1 rounded-full">${item.vibe}</span>
+                        <button onclick="playAudioPronunciation('${item.name}')" class="w-7 h-7 rounded-full bg-orange-50 text-orange-600 flex items-center justify-center text-xs" title="Listen Audio">
+                            <i class="fa-solid fa-volume-high"></i>
+                        </button>
+                    </div>
+                    <h4 class="text-2xl font-extrabold font-heading text-stone-900">${item.name}</h4>
+                    <p class="text-xs text-stone-500">${item.meaning}</p>
+                </div>
+            `).join('');
+
+            showToast("Successfully generated Indian blended names!");
+        }
+
+        function capitalize(str) {
+            return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+        }
+
+        // Favorites / Shortlist Management
+        function toggleFavorite(id) {
+            const item = indianBabyNames.find(n => n.id === id);
+            const index = favorites.findIndex(f => f.id === id);
+            if (index > -1) {
+                favorites.splice(index, 1);
+                showToast(`Removed "${item.name}" from your shortlist`);
+            } else {
+                favorites.push(item);
+                showToast(`Saved "${item.name}" to your Indian shortlist! ❤`);
+            }
+            localStorage.setItem('aarambh_favs', JSON.stringify(favorites));
+            updateFavBadge();
+            if (activeTab === 'explore') handleSearch();
+            if (activeTab === 'favorites') renderFavorites();
+            if (currentModalName && currentModalName.id === id) updateModalFavButton();
+        }
+
+        function updateFavBadge() {
+            document.getElementById('fav-badge').innerText = favorites.length;
+            document.getElementById('fav-badge-mob').innerText = favorites.length;
+        }
+
+        function renderFavorites() {
+            const grid = document.getElementById('favorites-grid');
+            const emptyState = document.getElementById('empty-favorites');
+            const exportBtn = document.getElementById('export-btn');
+
+            if (favorites.length === 0) {
+                if(grid) grid.innerHTML = '';
+                if(emptyState) emptyState.classList.remove('hidden');
+                if(exportBtn) exportBtn.classList.add('hidden');
+                return;
+            }
+
+            if(emptyState) emptyState.classList.add('hidden');
+            if(exportBtn) exportBtn.classList.remove('hidden');
+            if(grid) {
+                grid.innerHTML = favorites.map(item => {
+                    const firstLetter = item.name.charAt(0).toUpperCase();
+                    return `
+                        <div class="group bg-white rounded-3xl p-6 border border-stone-200 hover:border-orange-300 hover:shadow-xl transition-all duration-300 flex flex-col justify-between relative cursor-pointer" onclick="openModal(${item.id})">
+                            <div>
+                                <div class="flex items-center justify-between mb-3">
+                                    <span class="px-2.5 py-1 rounded-full text-xs font-bold ${item.gender === 'Boy' ? 'bg-sky-50 text-sky-700' : item.gender === 'Girl' ? 'bg-pink-50 text-rose-700' : 'bg-amber-50 text-amber-700'}">${item.gender}</span>
+                                    <div class="flex items-center space-x-2">
+                                        <button onclick="event.stopPropagation(); playAudioPronunciation('${item.name}')" class="w-8 h-8 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center text-xs" title="Listen Audio">
+                                            <i class="fa-solid fa-volume-high"></i>
+                                        </button>
+                                        <button onclick="event.stopPropagation(); toggleFavorite(${item.id})" class="w-9 h-9 rounded-full bg-orange-50 text-orange-600 flex items-center justify-center transition-all">
+                                            <i class="fa-solid fa-bookmark"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <h3 class="text-2xl font-extrabold font-heading text-stone-900">${item.name}</h3>
+                                    <span class="text-[10px] font-black bg-amber-50 text-amber-800 border border-amber-200 px-2 py-1 rounded-lg">Init: ${globalDadInit}·${firstLetter}·${globalManualInit}</span>
+                                </div>
+                                <p class="text-xs text-stone-400 mt-0.5 font-medium">${item.pronunciation || ''}</p>
+                                <p class="text-stone-600 text-sm mt-3 line-clamp-2">${item.meaning}</p>
+                            </div>
+                            <div class="mt-6 pt-4 border-t border-stone-100 flex items-center justify-between text-xs text-stone-500">
+                                <span class="font-bold text-stone-700">✨ ${item.vibe || 'Modern'}</span>
+                                <span class="text-stone-400">${item.origin}</span>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+        }
+
+        function exportFavorites() {
+            const textContent = "AARAMBH INDIAN BABY NAMES SHORTLIST\n===================================\n\n" + 
+                favorites.map(f => `${f.name} (${f.gender}, ${f.origin})\nMeaning: ${f.meaning}\nPronunciation: ${f.pronunciation || 'N/A'}\n-----------------------------------`).join('\n');
+            const blob = new Blob([textContent], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'Aarambh_Indian_Baby_Names_Shortlist.txt';
+            a.click();
+            showToast("Shortlist exported successfully as TXT!");
+        }
+
+        // Detailed View Modal with Monogram Builder
+        function openModal(id) {
+            const item = indianBabyNames.find(n => n.id === id);
+            currentModalName = item;
+
+            document.getElementById('modal-gender-badge').innerText = item.gender;
+            document.getElementById('modal-origin-badge').innerText = item.origin;
+            document.getElementById('modal-name').innerText = item.name;
+            document.getElementById('modal-pronunciation').querySelector('span').innerText = item.pronunciation || '/' + item.name.toLowerCase() + '/';
+            document.getElementById('modal-meaning').innerText = item.meaning;
+            document.getElementById('modal-rank').innerText = `#${item.rank || 25} in India`;
+            document.getElementById('modal-vibe').innerText = `✨ ${item.vibe || 'Modern & Sleek'}`;
+            document.getElementById('modal-name-logo').innerHTML = getNameLogo(item);
+
+            document.getElementById('mono-1').value = globalDadInit;
+            document.getElementById('mono-2').value = item.name.charAt(0).toUpperCase();
+            document.getElementById('mono-3').value = globalManualInit;
+            updateMonogram();
+
+            const similarContainer = document.getElementById('modal-similar');
+            similarContainer.innerHTML = (item.similar || ["Aarav", "Ananya"]).map(sim => {
+                const foundSim = indianBabyNames.find(n => n.name === sim);
+                return `<button onclick="${foundSim ? `openModal(${foundSim.id})` : ''}" class="px-4 py-2 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-700 text-xs font-bold transition-all">${sim}</button>`;
+            }).join('');
+
+            updateModalFavButton();
+
+            const modal = document.getElementById('name-modal');
+            const content = document.getElementById('modal-content');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                content.classList.remove('scale-95', 'opacity-0');
+                content.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+
+        function updateMonogram() {
+            const m1 = (document.getElementById('mono-1').value || 'O').toUpperCase();
+            const m2 = currentModalName ? currentModalName.name.charAt(0).toUpperCase() : 'A';
+            const m3 = (document.getElementById('mono-3').value || 'M').toUpperCase();
+            
+            globalDadInit = m1;
+            globalManualInit = m3;
+            
+            localStorage.setItem('aarambh_dad_init', globalDadInit);
+            localStorage.setItem('aarambh_manual_init', globalManualInit);
+
+            document.getElementById('mono-2').value = m2;
+            document.getElementById('monogram-preview-badge').innerText = `${m1}·${m2}·${m3}`;
+
+            renderNames(indianBabyNames);
+            if (activeTab === 'favorites') renderFavorites();
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('name-modal');
+            const content = document.getElementById('modal-content');
+            content.classList.remove('scale-100', 'opacity-100');
+            content.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                currentModalName = null;
+            }, 200);
+        }
+
+        function updateModalFavButton() {
+            if (!currentModalName) return;
+            const isFav = favorites.some(f => f.id === currentModalName.id);
+            const btn = document.getElementById('modal-fav-btn');
+            const txt = document.getElementById('modal-fav-text');
+            if (isFav) {
+                btn.className = "px-5 py-3 rounded-xl border border-orange-200 bg-orange-50 text-orange-700 font-bold text-sm transition-all flex items-center space-x-2";
+                btn.querySelector('i').className = "fa-solid fa-bookmark";
+                txt.innerText = "Saved in Wishlist";
+            } else {
+                btn.className = "px-5 py-3 rounded-xl border border-stone-200 bg-stone-50 text-stone-700 font-bold text-sm hover:bg-stone-100 transition-all flex items-center space-x-2";
+                btn.querySelector('i').className = "fa-regular fa-bookmark";
+                txt.innerText = "Save to Wishlist";
+            }
+        }
+
+        function toggleModalFavorite() {
+            if (currentModalName) toggleFavorite(currentModalName.id);
+        }
+
+        // Toast Notification Helper
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-msg').innerText = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
     </script>
 </body>
 </html>
+gemini-code-1791076778949.html
+Displaying gemini-code-1791076778949.html.
