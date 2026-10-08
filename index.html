@@ -1,3 +1,8 @@
+// Initialize Supabase Connection with your new Publishable Key & Project URL
+const SUPABASE_URL = 'https://YOUR_PROJECT_ID.supabase.co';
+const SUPABASE_ANON_KEY = 'YOUR_PUBLISHABLE_KEY_HERE';
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
